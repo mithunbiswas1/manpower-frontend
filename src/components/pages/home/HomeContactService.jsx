@@ -17,7 +17,7 @@ export const HomeContactService = () => {
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="w-full bg-black/40 text-white">
+      <div className="w-full bg-black/60 text-white">
         <div className="max-w-screen-xl mx-auto py-16 px-4">
           <motion.div>
             <SectionSubHeading
