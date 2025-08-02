@@ -3,7 +3,7 @@ import { Sparkles, Building2, Car } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
 import Image from "next/image";
-import image1 from "@/resource/banner_image_1.jpg";
+import image1 from "@/resource/service1.jpg";
 import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { SectionTitle } from "@/components/custom/SectionTitle";
@@ -43,12 +43,12 @@ export const SharedAbout = () => {
   const { image, mainContent, highlightServices } = aboutSectionData;
 
   return (
-    <div className="max-w-[1240px] mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 py-20 px-4 md:px-6 lg:px-8 justify-center items-center">
+    <div className="_max_width grid grid-cols-1 lg:grid-cols-2 gap-8 py-20 px-4 lg:!px-10 justify-center items-center">
       <motion.div
         variants={fadeIn("right", 0.2)}
         initial="hidden"
         whileInView="show"
-        className="relative group perspective mt-10"
+        className="relative group perspective"
       >
         <Image
           src={image1.src}

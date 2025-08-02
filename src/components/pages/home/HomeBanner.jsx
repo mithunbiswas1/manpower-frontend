@@ -51,7 +51,7 @@ export const HomeBanner = () => {
   const swiperRef = useRef(null);
 
   return (
-    <div className="relative h-screen w-full flex mt-8">
+    <div className="relative h-screen w-full flex mt-8 ">
       {/* Left-side bullets */}
       <div className="absolute left-8 top-1/2 transform -translate-y-1/2 z-10 flex flex-col items-center space-y-4">
         <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-transparent to-white" />
