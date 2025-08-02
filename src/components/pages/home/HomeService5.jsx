@@ -104,8 +104,8 @@ export const HomeService = () => {
           {services.map(({ id, title, imageUrl, link }, index) => (
             <SwiperSlide key={id}>
               <motion.div
-                variants={fadeIn("up", 0.1 + index * 0.0)}
-                initial="hidden"
+                variants={fadeIn("up", 0.0 + index * 0.0)}
+                initial="show"
                 whileInView="show"
               >
                 <Link

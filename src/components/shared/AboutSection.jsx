@@ -10,7 +10,7 @@ import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Paragraph } from "@/components/custom/Paragraph";
 import { HighlightServiceCard } from "@/components/custom/HighlightServiceCard";
 
-export const SectionModel1 = () => {
+export const AboutSection = () => {
   const aboutSectionData = {
     image: {
       src: image1,
@@ -66,19 +66,50 @@ export const SectionModel1 = () => {
 
       <div>
         <div className="">
-          <SectionSubHeading icon={Sparkles} className="my-2">
-            {mainContent.subHeading}
-          </SectionSubHeading>
-          <SectionTitle className="mb-2">{mainContent.title}</SectionTitle>
-          <Paragraph>{mainContent.paragraph}</Paragraph>
-        </div>
+          <motion.div
+            variants={fadeIn("left", 0.2)}
+            initial="hidden"
+            whileInView="show"
+          >
+            <SectionSubHeading icon={Sparkles} className="my-2 ">
+              {mainContent.subHeading}
+            </SectionSubHeading>
+          </motion.div>
+          <motion.div
+            variants={fadeIn("left", 0.3)}
+            initial="hidden"
+            whileInView="show"
+          >
+            <SectionTitle className="mb-4">{mainContent.title}</SectionTitle>
+          </motion.div>
 
+          <motion.div
+            variants={fadeIn("left", 0.4)}
+            initial="hidden"
+            whileInView="show"
+          >
+            <Paragraph className="mb-10">{mainContent.paragraph}</Paragraph>
+          </motion.div>
+        </div>
         <div className="space-y-4 mb-6">
-          {highlightServices.map((service) => (
-            <HighlightServiceCard key={service.id} service={service} />
+          {highlightServices.map((service, index) => (
+            <motion.div
+              key={service.id}
+              variants={fadeIn("left", 0.5 + index * 0.1)}
+              initial="hidden"
+              whileInView="show"
+            >
+              <HighlightServiceCard service={service} />
+            </motion.div>
           ))}
         </div>
-        <ButtonPrimary>Know more</ButtonPrimary>
+        <motion.div
+          variants={fadeIn("left", 0.8)}
+          initial="hidden"
+          whileInView="show"
+        >
+          <ButtonPrimary>Know more</ButtonPrimary>
+        </motion.div>
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ const slides = [
   },
 ];
 
-const HomeBanner = () => {
+export const HomeBanner = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   // This state will force the image motion.div to re-render and restart animation
   const [animationKey, setAnimationKey] = useState(0);
@@ -160,5 +160,3 @@ const HomeBanner = () => {
     </div>
   );
 };
-
-export default HomeBanner;

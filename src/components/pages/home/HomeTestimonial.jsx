@@ -15,7 +15,7 @@ import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Sparkles } from "lucide-react";
 import { Paragraph } from "@/components/custom/Paragraph";
 
-export default function HomeTestimonial() {
+export const HomeTestimonial = () => {
   const [swiper, setSwiper] = useState(null);
 
   // Static testimonial data
@@ -145,4 +145,4 @@ export default function HomeTestimonial() {
       </div>
     </section>
   );
-}
+};
