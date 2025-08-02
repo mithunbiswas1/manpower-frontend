@@ -10,14 +10,14 @@ import "swiper/css";
 import image3 from "@/resource/banner_image_1.jpg";
 import image4 from "@/resource/banner_image_2.jpg";
 import image2 from "@/resource/banner_image_3.jpg";
-import image1 from "@/resource/banner_image_4.png";
+import image1 from "@/resource/service3.jpg";
 import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
 
 const slides = [
   {
     id: 1,
     image: image1,
-    title: "Your Health, Our Priority",
+    title: "Your Job, Our Priority",
     description: "We provide world-class healthcare tailored just for you.",
     buttonText: "Learn More",
   },
