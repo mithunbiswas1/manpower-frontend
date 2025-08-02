@@ -95,9 +95,10 @@ export const CardSection = () => {
                 <p className="text-gray-600 leading-relaxed mb-6 text-base">
                   {item.description}
                 </p>
-                <Link href={item.href} passHref>
-                  <ButtonPrimary className="">{item.buttonText}</ButtonPrimary>
-                </Link>
+
+                <ButtonPrimary link={item.href} className="">
+                  {item.buttonText}
+                </ButtonPrimary>
               </div>
             </motion.div>
           ))}

@@ -128,7 +128,7 @@ export const HomeDifference = () => {
                 const Icon = item.icon;
                 return (
                   <motion.div
-                    variants={fadeIn("fade", 0.1 * (index + 1))}
+                    variants={fadeIn("fade", 0.1 * (index + 0.5))}
                     initial="hidden"
                     whileInView="show"
                     key={index}
