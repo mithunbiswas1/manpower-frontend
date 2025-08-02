@@ -43,7 +43,7 @@ export const SharedAbout = () => {
   const { image, mainContent, highlightServices } = aboutSectionData;
 
   return (
-    <div className="_max_width grid grid-cols-1 lg:grid-cols-2 gap-8 py-20 px-4 md:px-6 lg:px-8 justify-center items-center">
+    <div className="max-w-[1240px] mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 py-20 px-4 md:px-6 lg:px-8 justify-center items-center">
       <motion.div
         variants={fadeIn("right", 0.2)}
         initial="hidden"
