@@ -1,0 +1,122 @@
+/* src/app/globals.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Exo:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  /* --primary: #c69952; */
+  --primary: #b28949;
+  --secondary: #dc2c2e;
+  --black: #000000;
+  --white: #ffffff;
+  --gray-50: #f9f9f9;
+  --gray-100: #e5e5e5;
+  --gray-200: #cccccc;
+  --gray-300: #b3b3b3;
+  --gray-400: #999999;
+  --gray-500: #808080;
+  --gray-600: #666666;
+  --gray-700: #4d4d4d;
+  --gray-800: #333333;
+  --gray-900: #1a1a1a;
+
+  --background: var(--white);
+  --foreground: var(--black);
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-black: var(--black);
+  --color-white: var(--white);
+  --color-gray: var(--gray);
+
+  --font-sans: "Exo", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+
+  --animate-shine-infinite: shine 2s infinite linear;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animate-delay-200 {
+  animation-delay: 0.2s;
+}
+
+/* Custom pagination bullets */
+.swiper-pagination-bullet {
+  height: 4px;
+  background: white;
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: white;
+}
+
+/* Custom CSS */
+
+._max_width {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+._h1 {
+  @apply text-5xl md:text-6xl lg:text-7xl 2xl:text-8xl font-bold;
+}
+
+._h2 {
+  @apply text-3xl lg:text-4xl font-semibold;
+}
+
+._h3 {
+  @apply text-2xl lg:text-3xl font-bold;
+}
+
+._h4 {
+  @apply text-xl lg:text-2xl font-semibold;
+}
+
+._h5 {
+  @apply text-lg lg:text-xl font-medium;
+}
+
+._h6 {
+  @apply text-base font-medium;
+}
+
+._p {
+  @apply text-sm font-normal;
+}
