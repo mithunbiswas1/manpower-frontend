@@ -1,19 +1,17 @@
 // src/app/layout.js
-
+import "@/app/globals.css";
 import Footer from "@/components/common/Footer";
-import "./globals.css";
 import Navbar from "@/components/common/Navbar";
 
 export const metadata = {
-  title: "MyClinic - Comprehensive Healthcare",
+  title: "Al Shahara Group",
   description:
-    "Your trusted partner for dental, cardiology, pediatrics, and more. Book your appointment today!",
+    "Al Shahara Group offers expert medical care in dentistry, cardiology, pediatrics, and more. Experience compassionate, specialized healthcare tailored to your needs. Book your appointment today with trusted professionals.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* Ensure cz-shortcut-listen="true" is removed if it's currently there in your file */}
       <body cz-shortcut-listen="true" className="antialiased">
         <Navbar />
         {children}

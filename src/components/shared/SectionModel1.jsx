@@ -65,7 +65,7 @@ export const SectionModel1 = () => {
       </motion.div>
 
       <div>
-        <div className="mb-6">
+        <div className="">
           <SectionSubHeading icon={Sparkles} className="my-2">
             {mainContent.subHeading}
           </SectionSubHeading>
@@ -73,12 +73,12 @@ export const SectionModel1 = () => {
           <Paragraph>{mainContent.paragraph}</Paragraph>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 mb-6">
           {highlightServices.map((service) => (
             <HighlightServiceCard key={service.id} service={service} />
           ))}
         </div>
-        <ButtonPrimary className="mt-4">Know more</ButtonPrimary>
+        <ButtonPrimary>Know more</ButtonPrimary>
       </div>
     </div>
   );

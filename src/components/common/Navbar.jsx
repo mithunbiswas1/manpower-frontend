@@ -23,7 +23,7 @@ const navItems = [
   },
   { name: "Projects", path: "/projects" },
   { name: "Clients", path: "/clients" },
-  { name: "Reach Us", path: "/contact" },
+  { name: "Reach Us", path: "/reach-us" },
 ];
 
 const Navbar = () => {
@@ -114,7 +114,7 @@ const Navbar = () => {
 
             {/* Right: Appointment (Desktop) */}
             <div className="hidden md:block">
-              <ButtonPrimary>Make Appointment</ButtonPrimary>
+              <ButtonPrimary link="/about-us">Make Appointment</ButtonPrimary>
             </div>
 
             {/* Hamburger (Mobile) */}
