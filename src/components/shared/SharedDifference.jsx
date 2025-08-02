@@ -95,7 +95,7 @@ const data = [
   },
 ];
 
-export const HomeDifference = () => {
+export const SharedDifference = () => {
   return (
     <section>
       <div className="w-full">
@@ -132,7 +132,7 @@ export const HomeDifference = () => {
                     initial="hidden"
                     whileInView="show"
                     key={index}
-                    className="flex flex-col md:flex-row gap-4 items-center md:items-start text-center md:text-left group bg-primary rounded-lg p-4 hover:shadow-md"
+                    className="flex flex-col md:flex-row gap-4 items-center md:items-start text-center md:text-left group bg-primary rounded-lg p-8 hover:shadow-md"
                   >
                     <div className="h-20 w-20 text-white p-4 rounded-lg flex items-center justify-center text-3xl mt-1 border-2 border-white group-hover:border-transparent transition-all duration-300 group-hover:bg-transparent animate-flicker group-hover:bg-white">
                       <Icon className="h-20 w-20 text-white group-hover:text-primary transition-all duration-200" />

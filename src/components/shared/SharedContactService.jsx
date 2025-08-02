@@ -1,13 +1,12 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
-import mission_vision from "@/resource/banner_image_1.jpg";
 import { PhoneCall, Mail, FileText, Sparkles } from "lucide-react";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 
-export const HomeContactService = () => {
+import mission_vision from "@/resource/banner_image_1.jpg";
+
+export const SharedContactService = () => {
   return (
     <section
       style={{
@@ -26,7 +25,7 @@ export const HomeContactService = () => {
               icon={Sparkles}
               className="my-2 justify-center"
             >
-              We are Honest & our work make you Satisified
+              We are Honest & our work.
             </SectionSubHeading>
           </motion.div>
 

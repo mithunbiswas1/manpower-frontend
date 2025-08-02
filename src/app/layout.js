@@ -4,9 +4,9 @@ import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
 
 export const metadata = {
-  title: "Al Shahara Group",
+  title: "AL Shahara Group",
   description:
-    "Al Shahara Group offers expert medical care in dentistry, cardiology, pediatrics, and more. Experience compassionate, specialized healthcare tailored to your needs. Book your appointment today with trusted professionals.",
+    "AL Shahara Group offers expert medical care in dentistry, cardiology, pediatrics, and more. Experience compassionate, specialized healthcare tailored to your needs. Book your appointment today with trusted professionals.",
 };
 
 export default function RootLayout({ children }) {

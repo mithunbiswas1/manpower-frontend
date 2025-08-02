@@ -17,6 +17,7 @@ import {
   Briefcase,
   Phone,
 } from "lucide-react";
+import { SharedContactService } from "../shared/SharedContactService";
 
 // Social with Lucide icons
 const Social = [
@@ -104,94 +105,97 @@ const footerSections = [
 
 const Footer = () => {
   return (
-    <footer className="bg-[linear-gradient(to_bottom,_#13151B,_#13151B)] text-white py-12 px-6">
-      <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-        {footerSections.map((section, index) => (
-          <div key={index} className="lg:mx-auto">
-            <motion.h3
-              variants={fadeIn("up", 0.2)}
-              initial="hidden"
-              whileInView="show"
-              className="text-xl font-semibold mb-4 text-center md:text-left"
-            >
-              {section.title}
-            </motion.h3>
-
-            {section.content && (
-              <motion.div
-                variants={fadeIn("up", 0.3)}
+    <footer className="">
+      <SharedContactService />
+      <div className="bg-[linear-gradient(to_bottom,_#13151B,_#13151B)] text-white py-12 px-6">
+        <div className="_max_width grid grid-cols-1 md:grid-cols-4 gap-8">
+          {footerSections.map((section, index) => (
+            <div key={index} className="lg:mx-auto">
+              <motion.h3
+                variants={fadeIn("up", 0.2)}
                 initial="hidden"
                 whileInView="show"
-                className="text-center md:text-left"
+                className="text-xl font-semibold mb-4 text-center md:text-left"
               >
-                <p className="mt-4 text-gray-400">
-                  {section.content.description}
-                </p>
-                <div className="mt-4">
-                  <span className="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-semibold">
-                    {section.content.badge}
-                  </span>
-                </div>
-              </motion.div>
-            )}
+                {section.title}
+              </motion.h3>
 
-            {!section.isSocial && section.links && (
-              <motion.ul
-                variants={fadeIn("up", 0.3)}
-                initial="hidden"
-                whileInView="show"
-                className="space-y-2 text-gray-400 flex flex-col items-center md:items-start"
-              >
-                {section.links.map((link, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-center gap-2 hover:text-white transition-all"
-                  >
-                    {link.icon}
-                    <Link href={link.href}>{link.name}</Link>
-                  </li>
-                ))}
-              </motion.ul>
-            )}
+              {section.content && (
+                <motion.div
+                  variants={fadeIn("up", 0.3)}
+                  initial="hidden"
+                  whileInView="show"
+                  className="text-center md:text-left"
+                >
+                  <p className="mt-4 text-gray-400">
+                    {section.content.description}
+                  </p>
+                  <div className="mt-4">
+                    <span className="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-semibold">
+                      {section.content.badge}
+                    </span>
+                  </div>
+                </motion.div>
+              )}
 
-            {section.isSocial && (
-              <motion.div
-                variants={fadeIn("up", 0.3)}
-                initial="hidden"
-                whileInView="show"
-                className="flex gap-4 justify-center md:justify-start mt-2"
-              >
-                {Social.map((social, idx) => {
-                  const Icon = social.icon;
-                  return (
-                    <Link
+              {!section.isSocial && section.links && (
+                <motion.ul
+                  variants={fadeIn("up", 0.3)}
+                  initial="hidden"
+                  whileInView="show"
+                  className="space-y-2 text-gray-400 flex flex-col items-center md:items-start"
+                >
+                  {section.links.map((link, idx) => (
+                    <li
                       key={idx}
-                      href={social.href}
-                      target="_blank"
-                      aria-label={social.label}
+                      className="flex items-center gap-2 hover:text-white transition-all"
                     >
-                      <Icon className="w-6 h-6 text-white hover:text-yellow-400 transition-colors duration-200" />
-                    </Link>
-                  );
-                })}
-              </motion.div>
-            )}
-          </div>
-        ))}
-      </div>
+                      {link.icon}
+                      <Link href={link.href}>{link.name}</Link>
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
 
-      <motion.div
-        variants={fadeIn("up", 0.3)}
-        initial="hidden"
-        whileInView="show"
-        className="mt-12 text-center text-gray-500 text-sm"
-      >
-        &copy; {new Date().getFullYear()} Al Shahara Group. All rights reserved.
-        | Design and Developed by{" "}
-        <a href="#" className="underline">
-          Anik Group Of Companines
-        </a>
-      </motion.div>
+              {section.isSocial && (
+                <motion.div
+                  variants={fadeIn("up", 0.3)}
+                  initial="hidden"
+                  whileInView="show"
+                  className="flex gap-4 justify-center md:justify-start mt-2"
+                >
+                  {Social.map((social, idx) => {
+                    const Icon = social.icon;
+                    return (
+                      <Link
+                        key={idx}
+                        href={social.href}
+                        target="_blank"
+                        aria-label={social.label}
+                      >
+                        <Icon className="w-6 h-6 text-white hover:text-yellow-400 transition-colors duration-200" />
+                      </Link>
+                    );
+                  })}
+                </motion.div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <motion.div
+          variants={fadeIn("up", 0.3)}
+          initial="hidden"
+          whileInView="show"
+          className="mt-12 text-center text-gray-500 text-sm"
+        >
+          &copy; {new Date().getFullYear()} Al Shahara Group. All rights
+          reserved. | Powered by{" "}
+          <a href="#" className="underline">
+            TechKnowGram Limited
+          </a>
+        </motion.div>
+      </div>
     </footer>
   );
 };

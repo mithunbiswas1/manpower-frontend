@@ -61,7 +61,7 @@ export const HomeTestimonial = () => {
               >
                 <SectionSubHeading
                   icon={Sparkles}
-                  className="my-2"
+                  className="my-2 justify-center md:justify-start"
                   iconClass="text-white"
                   titleClass="text-white"
                 >

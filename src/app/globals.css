@@ -94,7 +94,7 @@ body {
 }
 
 ._h1 {
-  @apply text-5xl md:text-6xl lg:text-7xl 2xl:text-8xl font-bold;
+  @apply text-4xl md:text-6xl lg:text-7xl 2xl:text-8xl font-bold;
 }
 
 ._h2 {
