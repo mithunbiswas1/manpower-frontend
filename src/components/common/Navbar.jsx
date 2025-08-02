@@ -16,8 +16,9 @@ const navItems = [
     name: "Services",
     subMenu: [
       { name: "Demo 1", path: "#" },
-      { name: "Demo 1", path: "#" },
-      { name: "Demo 1", path: "#" },
+      { name: "Demo 2", path: "#" },
+      { name: "Demo 3", path: "#" },
+      { name: "Demo 4", path: "#" },
     ],
   },
   { name: "Projects", path: "/projects" },
