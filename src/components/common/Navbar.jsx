@@ -114,7 +114,7 @@ const Navbar = () => {
 
             {/* Right: Appointment (Desktop) */}
             <div className="hidden md:block">
-              <ButtonPrimary link="/about-us">Make Appointment</ButtonPrimary>
+              <ButtonPrimary link="/reach-us">Make Appointment</ButtonPrimary>
             </div>
 
             {/* Hamburger (Mobile) */}

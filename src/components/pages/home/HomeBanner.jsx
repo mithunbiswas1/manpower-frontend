@@ -148,7 +148,7 @@ const HomeBanner = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.7 }}
                     >
-                      <ButtonPrimary>Book Now</ButtonPrimary>
+                      <ButtonPrimary link="/reach-us">Book Now</ButtonPrimary>
                     </motion.div>
                   </div>
                 </div>
