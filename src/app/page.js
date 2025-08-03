@@ -5,7 +5,6 @@ import { SharedDifference } from "@/components/shared/SharedDifference";
 import { CardSection } from "@/components/pages/home/CardSection";
 import { HomeTestimonial } from "@/components/pages/home/HomeTestimonial";
 import { HomeFaqSection } from "@/components/pages/home/HomeFaqSection";
-import { SharedClients } from "@/components/shared/SharedClients";
 
 export default function Home() {
   return (

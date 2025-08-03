@@ -150,7 +150,7 @@ export const HomeBanner = () => {
               </motion.div>
 
               {/* Overlay with motion text */}
-              <div className="absolute inset-0 bg-black/60 flex items-center">
+              <div className="absolute inset-0 bg-black/50 flex items-center">
                 <div className="container mx-auto pl-0 pr-4 md:px-4 lg:px-6 2xl:px-8">
                   <div className="max-w-2xl 2xl:max-w-4xl ml-20">
                     <motion.p
