@@ -19,19 +19,19 @@ import flexible_temporary_staffing from "@/resource/home_banner/flexible_tempora
 const slides = [
   {
     id: 1,
-    image: expert_factory_workforce,
-    title: "Expert Factory Workforce",
+    image: certified_safety_officers,
+    title: "Certified Safety Officers",
     description:
-      "From machine operators to general helpers, we provide reliable manpower for all factory needs.",
-    buttonText: "Hire Factory Staff",
+      "We provide trained safety officers to help you meet compliance and safety standards.",
+    buttonText: "Ensure Safety",
   },
   {
     id: 2,
-    image: professional_leaning_services,
-    title: "Professional Cleaning Services",
+    image: flexible_temporary_staffing,
+    title: "Flexible Temporary Staffing",
     description:
-      "Keep your workspace spotless with our routine and specialized cleaning teams.",
-    buttonText: "Book Cleaning",
+      "Scale your workforce efficiently during peak periods with our short-term staffing options.",
+    buttonText: "Hire Temporarily",
   },
   {
     id: 3,
@@ -51,11 +51,11 @@ const slides = [
   },
   {
     id: 5,
-    image: certified_safety_officers,
-    title: "Certified Safety Officers",
+    image: expert_factory_workforce,
+    title: "Expert Factory Workforce",
     description:
-      "We provide trained safety officers to help you meet compliance and safety standards.",
-    buttonText: "Ensure Safety",
+      "From machine operators to general helpers, we provide reliable manpower for all factory needs.",
+    buttonText: "Hire Factory Staff",
   },
   {
     id: 6,
@@ -67,11 +67,11 @@ const slides = [
   },
   {
     id: 7,
-    image: flexible_temporary_staffing,
-    title: "Flexible Temporary Staffing",
+    image: professional_leaning_services,
+    title: "Professional Cleaning Services",
     description:
-      "Scale your workforce efficiently during peak periods with our short-term staffing options.",
-    buttonText: "Hire Temporarily",
+      "Keep your workspace spotless with our routine and specialized cleaning teams.",
+    buttonText: "Book Cleaning",
   },
 ];
 

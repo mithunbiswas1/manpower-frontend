@@ -4,9 +4,9 @@ import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
 
 export const metadata = {
-  title: "AL Shahara Group",
+  title: "Box Craft Packing Service, Concern of AL Shahara Group",
   description:
-    "AL Shahara Group offers expert medical care in dentistry, cardiology, pediatrics, and more. Experience compassionate, specialized healthcare tailored to your needs. Book your appointment today with trusted professionals.",
+    "Box Craft Packing Service provides reliable manpower and expert packing solutions across the UAE. From residential to corporate needs, we ensure safe, efficient, and hassle-free moving and logistics support tailored to your satisfaction.",
 };
 
 export default function RootLayout({ children }) {
