@@ -21,6 +21,7 @@ import {
 import { SharedBanner } from "@/components/shared/SharedBanner";
 import { jobListings } from "@/data/jobListings"; // Ensure this path is correct
 import { ApplyModal } from "@/components/pages/career/ApplyModal";
+import { ButtonDefault } from "@/components/custom/ButtonDefault";
 
 export default function JobDetailsPage({ params }) {
   // Unwrap the params promise using use()
@@ -173,12 +174,11 @@ export default function JobDetailsPage({ params }) {
           <div className="mt-10 flex justify-center">
             {/* The ButtonPrimary now opens the modal */}
             {/* Make sure this is your custom ButtonPrimary component */}
-            <button
+            <ButtonDefault
               onClick={() => setIsModalOpen(true)} // Set state to open modal
-              className="px-8 py-3 text-lg"
             >
               Apply Now
-            </button>
+            </ButtonDefault>
           </div>
         </div>
       </section>

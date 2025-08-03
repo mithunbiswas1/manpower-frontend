@@ -113,19 +113,20 @@ export const ApplyModal = ({ isOpen, onClose, jobTitle }) => {
             isOpen ? "scale-100" : "scale-95"
           }`}
         >
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition-colors"
-            aria-label="Close"
-          >
-            <X size={24} />
-          </button>
-
-          <div className="p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+          <div className="flex justify-between items-center p-4 lg:px-6">
+            <h2 className="text-2xl font-bold text-gray-900 text-center">
               Apply for {jobTitle}
             </h2>
+            <button
+              onClick={onClose}
+              className="absolute right-4 text-gray-500 hover:text-gray-800 transition-colors"
+              aria-label="Close"
+            >
+              <X size={24} />
+            </button>
+          </div>
 
+          <div className="p-4 md:p-6">
             <form onSubmit={formik.handleSubmit} className="space-y-6">
               {/* Form fields remain the same as your original */}
               <div>
