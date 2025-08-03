@@ -12,7 +12,7 @@ import icon_testimonial from "@/resource/icon_testimonial.webp";
 import { useState } from "react";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { SectionTitle } from "@/components/custom/SectionTitle";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Quote } from "lucide-react";
 import { Paragraph } from "@/components/custom/Paragraph";
 
 export const HomeTestimonial = () => {
@@ -22,26 +22,50 @@ export const HomeTestimonial = () => {
   const testimonials = [
     {
       id: 1,
-      title: "John Doe",
-      sub_title: "Happy Customer",
+      title: "Mohammed Al Farsi",
+      sub_title: "Factory Manager, Al Noor Textiles",
       short_description:
-        "This service was amazing! I would definitely recommend it to all my friends and family. This service was amazing! I would definitely recommend it to all my friends and family.",
+        "Box Craft delivered skilled packing staff during our production peak. Their team was punctual, hardworking, and required minimal training. A truly professional service we’ll continue to use.",
       image: bgImage,
     },
     {
       id: 2,
-      title: "Jane Smith",
-      sub_title: "Satisfied Client",
+      title: "Sarah Khalid",
+      sub_title: "Operations Head, CleanSpace Co.",
       short_description:
-        "The quality exceeded my expectations. Will be using this service again in the future! This service was amazing! I would definitely recommend it to all my friends and family.",
+        "We hired Box Craft for commercial cleaning, and the results were fantastic. The team followed strict hygiene protocols and exceeded our expectations in both quality and professionalism.",
       image: bgImage,
     },
     {
       id: 3,
-      title: "Robert Johnson",
-      sub_title: "Returning Customer",
+      title: "Imran Sheikh",
+      sub_title: "Security Supervisor, Silver Tower",
       short_description:
-        "Excellent customer service and top-notch products. Very impressed with my experience. This service was amazing! I would definitely recommend it to all my friends and family.",
+        "The security personnel provided by Box Craft were trained, alert, and courteous. We’ve noticed a clear improvement in safety and professionalism since hiring them.",
+      image: bgImage,
+    },
+    {
+      id: 4,
+      title: "Fatima Al Mansoori",
+      sub_title: "HR Director, Gulf Catering Services",
+      short_description:
+        "Our hospitality staffing needs were met quickly and efficiently. The staff from Box Craft were well-presented, courteous, and adapted seamlessly to our work environment.",
+      image: bgImage,
+    },
+    {
+      id: 5,
+      title: "Ahmed Raza",
+      sub_title: "Project Lead, BuildPro Logistics",
+      short_description:
+        "The laborers provided by Box Craft for our warehouse operations were reliable and fast. Their attention to detail helped us complete projects on time with zero issues.",
+      image: bgImage,
+    },
+    {
+      id: 6,
+      title: "Noura Hossain",
+      sub_title: "Admin Manager, Sunrise Hospitality",
+      short_description:
+        "We’ve been using Box Craft for multiple hospitality events. Their service staff are always on time, well-trained, and presentable. Guests frequently compliment their professionalism.",
       image: bgImage,
     },
   ];
@@ -84,14 +108,7 @@ export const HomeTestimonial = () => {
               whileInView="show"
               className="flex flex-col md:flex-row gap-4 items-center md:items-start"
             >
-              <Image
-                src={icon_testimonial}
-                alt=""
-                className="w-10 h-10 group-hover:scale-105 transition-all duration-200 mt-2"
-                width={40}
-                height={40}
-                loading="lazy"
-              />
+              <Quote className="size-12 text-white" />
               <Swiper
                 modules={[Autoplay]}
                 spaceBetween={30}
@@ -116,7 +133,9 @@ export const HomeTestimonial = () => {
                             className="rounded-full object-cover object-center h-12 w-12"
                           />
                           <div>
-                            <h3 className="cl-h4">{testimonial.title}</h3>
+                            <h3 className="cl-h4 font-semibold">
+                              {testimonial.title}
+                            </h3>
                             <p className="cl-p text-gray-200">
                               {testimonial.sub_title}
                             </p>

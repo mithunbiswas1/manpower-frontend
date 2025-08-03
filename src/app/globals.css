@@ -120,5 +120,5 @@ body {
 }
 
 ._p {
-  @apply text-sm font-normal;
+  @apply text-sm lg:text-base font-normal;
 }
