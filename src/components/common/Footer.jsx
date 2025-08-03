@@ -173,7 +173,7 @@ const Footer = () => {
                         target="_blank"
                         aria-label={social.label}
                       >
-                        <Icon className="w-6 h-6 text-white hover:text-yellow-400 transition-colors duration-200" />
+                        <Icon className="w-6 h-6 text-white hover:text-secondary transition-colors duration-200" />
                       </Link>
                     );
                   })}
