@@ -3,65 +3,62 @@
 import Link from "next/link";
 import { Sparkles, Plus } from "lucide-react";
 import { motion } from "framer-motion";
-import { fadeIn, slideIn, textVariant } from "@/ultils/motion";
+import { fadeIn } from "@/ultils/motion";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-import image1 from "@/resource/service_img1.jpg";
-import image2 from "@/resource/service_img2.jpg";
-import image3 from "@/resource/service_img3.jpg";
-import image4 from "@/resource/service_img4.jpg";
+import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
+import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
+import trusted_security_personnel from "@/resource/home_banner/trusted_security_personnel.jpg";
+import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffing.jpg";
+import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
+import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
+import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
 
 const services = [
   {
     id: 1,
-    title: "Commercial Man Power Excellence",
-    imageUrl: image1,
+    title: "Factory & Industrial Staffing",
+    imageUrl: expert_factory_workforce,
     link: "#",
   },
   {
     id: 2,
-    title: "Residential Man Power Solutions",
-    imageUrl: image2,
+    title: "Professional Cleaning Services",
+    imageUrl: professional_leaning_services,
     link: "#",
   },
   {
     id: 3,
-    title: "Window Man Power Solutions",
-    imageUrl: image3,
+    title: "Licensed Security Personnel",
+    imageUrl: trusted_security_personnel,
     link: "#",
   },
   {
     id: 4,
-    title: "Carpet & Upholstery Man Power",
-    imageUrl: image4,
+    title: "Hotel & Catering Staff",
+    imageUrl: hotel_catering_taffing,
     link: "#",
   },
   {
     id: 5,
-    title: "Carpet & Upholstery Man Power",
-    imageUrl: image1,
+    title: "Certified Safety Officers",
+    imageUrl: certified_safety_officers,
     link: "#",
   },
   {
     id: 6,
-    title: "Carpet & Upholstery Man Power",
-    imageUrl: image2,
+    title: "Permanent Staffing Solutions",
+    imageUrl: permanent_staffing_solutions,
     link: "#",
   },
   {
     id: 7,
-    title: "Commercial Man Power Excellence",
-    imageUrl: image1,
-    link: "#",
-  },
-  {
-    id: 8,
-    title: "Residential Man Power Solutions",
-    imageUrl: image2,
+    title: "Temporary Staffing Services",
+    imageUrl: flexible_temporary_staffing,
     link: "#",
   },
 ];
@@ -118,6 +115,7 @@ export const HomeService = () => {
                     style={{ backgroundImage: `url(${imageUrl.src})` }}
                     aria-hidden="true"
                   />
+                  <div className="absolute inset-0 bg-primary/30 group-hover:bg-primary/0 transition-all duration-300"></div>
 
                   {/* Overlay with flip animation */}
                   <div className="w-full h-0 group-hover:h-full bg-black/30 text-white transition-all duration-500 ease-in-out transform origin-bottom group-hover:rotate-x-0"></div>

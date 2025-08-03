@@ -5,42 +5,73 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
 import "swiper/css";
 
-import image3 from "@/resource/banner_image_1.jpg";
-import image4 from "@/resource/banner_image_2.jpg";
-import image2 from "@/resource/banner_image_3.jpg";
-import image1 from "@/resource/service3.jpg";
-import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
+import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
+import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
+import trusted_security_personnel from "@/resource/home_banner/trusted_security_personnel.jpg";
+import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffing.jpg";
+import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
+import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
+import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
 
 const slides = [
   {
     id: 1,
-    image: image1,
-    title: "Your Job, Our Priority",
-    description: "We provide world-class healthcare tailored just for you.",
-    buttonText: "Learn More",
+    image: expert_factory_workforce,
+    title: "Expert Factory Workforce",
+    description:
+      "From machine operators to general helpers, we provide reliable manpower for all factory needs.",
+    buttonText: "Hire Factory Staff",
   },
   {
     id: 2,
-    image: image2,
-    title: "Book Appointments Online",
-    description: "Easily schedule visits with our expert doctors.",
-    buttonText: "Book Now",
+    image: professional_leaning_services,
+    title: "Professional Cleaning Services",
+    description:
+      "Keep your workspace spotless with our routine and specialized cleaning teams.",
+    buttonText: "Book Cleaning",
   },
   {
     id: 3,
-    image: image3,
-    title: "Modern Facilities",
-    description: "State-of-the-art equipment for better diagnosis and care.",
-    buttonText: "Our Services",
+    image: trusted_security_personnel,
+    title: "Trusted Security Personnel",
+    description:
+      "Ensure the safety of your premises with our trained and licensed security guards.",
+    buttonText: "Request Security",
   },
   {
     id: 4,
-    image: image4,
-    title: "Book Appointments Online",
-    description: "Easily schedule visits with our expert doctors.",
-    buttonText: "Book Now",
+    image: hotel_catering_taffing,
+    title: "Hotel & Catering Staffing",
+    description:
+      "Deliver excellent guest experiences with our professional hospitality staff.",
+    buttonText: "Get Hospitality Staff",
+  },
+  {
+    id: 5,
+    image: certified_safety_officers,
+    title: "Certified Safety Officers",
+    description:
+      "We provide trained safety officers to help you meet compliance and safety standards.",
+    buttonText: "Ensure Safety",
+  },
+  {
+    id: 6,
+    image: permanent_staffing_solutions,
+    title: "Permanent Staffing Solutions",
+    description:
+      "Hire long-term packing and cleaning professionals tailored to your business culture.",
+    buttonText: "Find Candidates",
+  },
+  {
+    id: 7,
+    image: flexible_temporary_staffing,
+    title: "Flexible Temporary Staffing",
+    description:
+      "Scale your workforce efficiently during peak periods with our short-term staffing options.",
+    buttonText: "Hire Temporarily",
   },
 ];
 
@@ -62,7 +93,7 @@ export const HomeBanner = () => {
               if (swiperRef.current && swiperRef.current.swiper) {
                 swiperRef.current.swiper.slideTo(index);
                 setActiveIndex(index);
-                setAnimationKey(index); // Update animation key on manual click
+                setAnimationKey(index);
               }
             }}
             className={`size-3 border-2 rounded-full transition-all duration-300 ${
@@ -119,7 +150,7 @@ export const HomeBanner = () => {
               </motion.div>
 
               {/* Overlay with motion text */}
-              <div className="absolute inset-0 bg-black/50 flex items-center">
+              <div className="absolute inset-0 bg-black/60 flex items-center">
                 <div className="container mx-auto pl-0 pr-4 md:px-4 lg:px-6 2xl:px-8">
                   <div className="max-w-2xl 2xl:max-w-4xl ml-20">
                     <motion.p

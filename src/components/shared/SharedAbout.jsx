@@ -1,5 +1,5 @@
 "use client";
-import { Sparkles, Building2, Car } from "lucide-react";
+import { Factory, BoomBox, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
 import Image from "next/image";
@@ -14,28 +14,28 @@ export const SharedAbout = () => {
   const aboutSectionData = {
     image: {
       src: image1,
-      alt: "About AL-SAHARA GROUP",
+      alt: "About BOX CRAFT PACKING SERVICES",
     },
     mainContent: {
-      subHeading: "About AL-SAHARA GROUP",
-      title: "We Are A Highly Experienced Man Power Service Company",
+      subHeading: "About BOX CRAFT PACKING SERVICES",
+      title: "Your Trusted Partner in Skilled Manpower Solutions",
       paragraph:
-        "At AL-SAHARA GROUP, we pride ourselves on being a highly experienced and dedicated team providing top-tier Man Power services. Our commitment to excellence ensures that every space we touch is transformed into a spotless and refreshing environment. ",
+        "At BOX CRAFT, we take pride in delivering reliable and skilled manpower across various industries. From packing and cleaning to security and staffing, our experienced team ensures professional support that enhances your operational efficiency.",
     },
     highlightServices: [
       {
         id: 1,
-        iconComponent: Building2,
-        title: "Commercial Man Power Excellence",
+        iconComponent: Factory,
+        title: "Industrial & Factory Staffing",
         paragraph:
-          "AL-SAHARA GROUP specializes in comprehensive commercial Man Power solutions tailored to businesses of all sizes. From office spaces to retail environments.",
+          "We provide well-trained workers including machine operators, helpers, and packers for factories of any size and trade, ensuring smooth production processes.",
       },
       {
         id: 2,
-        iconComponent: Car,
-        title: "Residential Man Power Solutions",
+        iconComponent: BoomBox,
+        title: "Cleaning & Facility Management",
         paragraph:
-          "For homes and apartments, AL-SAHARA GROUP offers meticulous residential Man Power. We handle everything from deep cleans to regular maintenance.",
+          "Our manpower excels in maintaining hygienic environments across commercial, industrial, and residential properties—offering routine and specialized cleaning services.",
       },
     ],
   };
