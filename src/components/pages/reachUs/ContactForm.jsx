@@ -1,6 +1,6 @@
 "use client";
 
-import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
+import { ButtonSubmit } from "@/components/custom/ButtonSubmit";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -107,7 +107,7 @@ export default function ContactForm() {
           </div>
 
           <div className="flex justify-center">
-            <ButtonPrimary className="bg-white">Sent</ButtonPrimary>
+            <ButtonSubmit>Sent</ButtonSubmit>
           </div>
         </form>
       </div>

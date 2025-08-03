@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
 import mission_vision from "@/resource/banner_image_1.jpg";
 import { PhoneCall, Mail, MessageCircle, Sparkles } from "lucide-react";
-import { ButtonLink } from "@/components/custom/ButtonLink";
+import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 
@@ -46,14 +46,14 @@ export const HomeContactService = () => {
             whileInView="show"
             className="flex flex-col md:flex-row items-center justify-center gap-4"
           >
-            <ButtonLink
+            <ButtonPrimary
               text="02 8530 7148"
               href="tel:02 8530 7148"
               width="w-64"
               icon={<PhoneCall />}
             />
-            <ButtonLink text="test@gmail.com" href="#" icon={<Mail />} />
-            <ButtonLink
+            <ButtonPrimary text="test@gmail.com" href="#" icon={<Mail />} />
+            <ButtonPrimary
               text="Get a Quote"
               href="contact-us"
               width="w-64"

@@ -4,10 +4,54 @@ import { useState } from "react";
 import Link from "next/link"; // Import Link
 import { Menu, X, ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ButtonPrimary } from "../custom/ButtonPrimary";
 
 import logo from "@/resource/logo.jpeg";
 import Image from "next/image";
+import ContactForm from "../pages/reachUs/ContactForm";
+import { ButtonDefault } from "../custom/ButtonDefault";
+
+// --- New Modal Component ---
+const AppointmentModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          onClick={onClose} // Close modal when clicking outside
+        >
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-lg shadow-xl w-5/6 md:w-4/6 max-w-5xl mx-4"
+            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
+          >
+            <div className="flex justify-between items-center p-6">
+              <h2 className="text-xl font-bold text-primary">
+                Make an Appointment
+              </h2>
+              <ButtonDefault
+                onClick={onClose}
+                className="text-gray-500 cursor-pointer hover:bg-secondary rounded-sm hover:text-white transition-all duration-200"
+              >
+                <X size={24} />
+              </ButtonDefault>
+            </div>
+
+            <ContactForm />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -30,16 +74,27 @@ const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(null);
   const [desktopSubmenuOpen, setDesktopSubmenuOpen] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for the modal
 
   const closeAllMenus = () => {
     setDrawerOpen(false);
     setSubmenuOpen(null);
     setDesktopSubmenuOpen(null);
+    // Don't close the modal here unless you explicitly want to
   };
 
   const toggleDrawer = () => {
     setDrawerOpen((prev) => !prev);
     setSubmenuOpen(null);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    closeAllMenus(); // Close drawer/menus when opening modal from mobile
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -114,7 +169,10 @@ const Navbar = () => {
 
             {/* Right: Appointment (Desktop) */}
             <div className="hidden md:block">
-              <ButtonPrimary link="/reach-us">Make Appointment</ButtonPrimary>
+              {/* Change this ButtonPrimary to trigger the modal */}
+              <ButtonDefault onClick={openModal}>
+                Make Appointment
+              </ButtonDefault>
             </div>
 
             {/* Hamburger (Mobile) */}
@@ -199,12 +257,19 @@ const Navbar = () => {
                   )}
                 </li>
               ))}
-
-              <ButtonPrimary className="w-full">Know more</ButtonPrimary>
+              {/* Change this ButtonPrimary to trigger the modal from mobile drawer */}
+              <li>
+                <button onClick={openModal} className="w-full">
+                  Make Appointment
+                </button>
+              </li>
             </ul>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Render the Appointment Modal */}
+      <AppointmentModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 };
