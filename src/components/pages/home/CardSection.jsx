@@ -66,7 +66,7 @@ export const CardSection = () => {
           whileInView="show"
         >
           <SectionTitle className="mb-16 text-center text-gray-800">
-            Our Most Popular Cleaning Services For You
+            Our Most Popular Man Power Services For You
           </SectionTitle>
         </motion.div>
         <motion.div

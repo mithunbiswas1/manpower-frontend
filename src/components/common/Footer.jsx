@@ -23,22 +23,22 @@ import { SharedContactService } from "../shared/SharedContactService";
 const Social = [
   {
     icon: Facebook,
-    href: "https://www.facebook.com/profile.php?id=61577258648302",
+    href: "#",
     label: "Facebook",
   },
   {
     icon: Linkedin,
-    href: "https://www.linkedin.com/company/aussie-hvac",
+    href: "#",
     label: "LinkedIn",
   },
   {
     icon: Youtube,
-    href: "https://www.youtube.com/@aussiehvaccleaning",
+    href: "#",
     label: "YouTube",
   },
   {
     icon: Instagram,
-    href: "https://www.instagram.com/aussie_hvac_services/",
+    href: "#",
     label: "Instagram",
   },
 ];

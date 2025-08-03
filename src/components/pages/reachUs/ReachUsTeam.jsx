@@ -20,7 +20,7 @@ export const ReachUsTeam = () => {
     {
       id: 2,
       title: "Sarah Johnson",
-      sub_title: "Cleaning Technician",
+      sub_title: "Man Power Technician",
       image: about,
     },
     {

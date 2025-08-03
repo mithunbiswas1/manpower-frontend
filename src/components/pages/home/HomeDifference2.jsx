@@ -29,9 +29,9 @@ const data = [
     icon: Handshake,
   },
   {
-    title: "Advanced Cleaning Tools",
+    title: "Advanced Man Power Tools",
     description:
-      "Our equipment is the best. We can help to perform the in-depth cleaning of ducts, vents, coils and exhaust systems.",
+      "Our equipment is the best. We can help to perform the in-depth Man Power of ducts, vents, coils and exhaust systems.",
     icon: Award,
   },
   {
@@ -49,7 +49,7 @@ const data = [
   {
     title: "Safe for Families and Pets",
     description:
-      "The cleaning methods we employ are environmentally friendly and safe. Your home, air, and loved ones are provided protection.",
+      "The Man Power methods we employ are environmentally friendly and safe. Your home, air, and loved ones are provided protection.",
     icon: Home,
   },
   {
@@ -93,7 +93,7 @@ export const HomeDifference = () => {
               whileInView="show"
               className="_h2 mt-3 pb-12 text-center "
             >
-              Why Choose Aussie HVAC Cleaning Services?
+              Why Choose Aussie HVAC Man Power Services?
             </motion.h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

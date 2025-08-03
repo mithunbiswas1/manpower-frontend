@@ -18,24 +18,24 @@ export const SharedAbout = () => {
     },
     mainContent: {
       subHeading: "About AL-SAHARA GROUP",
-      title: "We Are A Highly Experienced Cleaning Service Company",
+      title: "We Are A Highly Experienced Man Power Service Company",
       paragraph:
-        "At AL-SAHARA GROUP, we pride ourselves on being a highly experienced and dedicated team providing top-tier cleaning services. Our commitment to excellence ensures that every space we touch is transformed into a spotless and refreshing environment. ",
+        "At AL-SAHARA GROUP, we pride ourselves on being a highly experienced and dedicated team providing top-tier Man Power services. Our commitment to excellence ensures that every space we touch is transformed into a spotless and refreshing environment. ",
     },
     highlightServices: [
       {
         id: 1,
         iconComponent: Building2,
-        title: "Commercial Cleaning Excellence",
+        title: "Commercial Man Power Excellence",
         paragraph:
-          "AL-SAHARA GROUP specializes in comprehensive commercial cleaning solutions tailored to businesses of all sizes. From office spaces to retail environments.",
+          "AL-SAHARA GROUP specializes in comprehensive commercial Man Power solutions tailored to businesses of all sizes. From office spaces to retail environments.",
       },
       {
         id: 2,
         iconComponent: Car,
-        title: "Residential Cleaning Solutions",
+        title: "Residential Man Power Solutions",
         paragraph:
-          "For homes and apartments, AL-SAHARA GROUP offers meticulous residential cleaning. We handle everything from deep cleans to regular maintenance.",
+          "For homes and apartments, AL-SAHARA GROUP offers meticulous residential Man Power. We handle everything from deep cleans to regular maintenance.",
       },
     ],
   };

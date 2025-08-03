@@ -119,7 +119,7 @@ export const SharedDifference = () => {
               whileInView="show"
             >
               <SectionTitle className="mb-10 text-center">
-                Our Most Popular Cleaning Services For You
+                Our Most Popular Man Power Services For You
               </SectionTitle>
             </motion.div>
 

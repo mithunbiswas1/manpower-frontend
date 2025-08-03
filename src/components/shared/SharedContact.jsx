@@ -51,7 +51,7 @@ export const SharedContact = () => {
             whileInView="show"
           >
             <SectionSubHeading icon={Sparkles} className="my-2 justify-center">
-              Are you ready to start your cleaning journey?
+              Are you ready to start your Man Power journey?
             </SectionSubHeading>
           </motion.div>
           <motion.div

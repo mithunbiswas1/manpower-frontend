@@ -18,49 +18,49 @@ import image4 from "@/resource/service_img4.jpg";
 const services = [
   {
     id: 1,
-    title: "Commercial Cleaning Excellence",
+    title: "Commercial Man Power Excellence",
     imageUrl: image1,
     link: "#",
   },
   {
     id: 2,
-    title: "Residential Cleaning Solutions",
+    title: "Residential Man Power Solutions",
     imageUrl: image2,
     link: "#",
   },
   {
     id: 3,
-    title: "Window Cleaning Solutions",
+    title: "Window Man Power Solutions",
     imageUrl: image3,
     link: "#",
   },
   {
     id: 4,
-    title: "Carpet & Upholstery Cleaning",
+    title: "Carpet & Upholstery Man Power",
     imageUrl: image4,
     link: "#",
   },
   {
     id: 5,
-    title: "Carpet & Upholstery Cleaning",
+    title: "Carpet & Upholstery Man Power",
     imageUrl: image1,
     link: "#",
   },
   {
     id: 6,
-    title: "Carpet & Upholstery Cleaning",
+    title: "Carpet & Upholstery Man Power",
     imageUrl: image2,
     link: "#",
   },
   {
     id: 7,
-    title: "Commercial Cleaning Excellence",
+    title: "Commercial Man Power Excellence",
     imageUrl: image1,
     link: "#",
   },
   {
     id: 8,
-    title: "Residential Cleaning Solutions",
+    title: "Residential Man Power Solutions",
     imageUrl: image2,
     link: "#",
   },
@@ -85,7 +85,7 @@ export const HomeService = () => {
           whileInView="show"
         >
           <SectionTitle className="mb-10 text-center">
-            Our Most Popular Cleaning Services For You
+            Our Most Popular Man Power Services For You
           </SectionTitle>
         </motion.div>
 
