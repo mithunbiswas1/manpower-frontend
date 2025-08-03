@@ -22,7 +22,7 @@ const navItems = [
     ],
   },
   { name: "Projects", path: "/projects" },
-  { name: "Clients", path: "/clients" },
+  { name: "Career", path: "/career" },
   { name: "Reach Us", path: "/reach-us" },
 ];
 

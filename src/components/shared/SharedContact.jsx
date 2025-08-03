@@ -44,7 +44,7 @@ export const SharedContact = () => {
       }}
     >
       <div className="w-full text-se-white bg-white">
-        <div className="max-w-screen-xl mx-auto pb-16 px-4">
+        <div className="max-w-screen-xl mx-auto py-16 px-4">
           <motion.div
             variants={fadeIn("left", 0.2)}
             initial="hidden"

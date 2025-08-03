@@ -1,7 +1,7 @@
 export const SharedBanner = ({ title, description, bgImage }) => {
   return (
     <div
-      className="relative bg-white h-screen flex flex-col justify-center items-center"
+      className="relative bg-white h-screen max-h-[600px] flex flex-col justify-center items-center"
       style={{
         backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",

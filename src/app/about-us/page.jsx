@@ -3,6 +3,7 @@
 import { ReachUsTeam } from "@/components/pages/reachUs/ReachUsTeam";
 import { SharedAbout } from "@/components/shared/SharedAbout";
 import { SharedBanner } from "@/components/shared/SharedBanner";
+import { SharedClients } from "@/components/shared/SharedClients";
 import { SharedContact } from "@/components/shared/SharedContact";
 import { SharedDifference } from "@/components/shared/SharedDifference";
 import banner_image from "@/resource/banner_image_3.jpg";
@@ -24,6 +25,7 @@ export default function AboutUsPage() {
       />
       <SharedAbout />
       <SharedDifference />
+      <SharedClients />
       <SharedContact />
       <ReachUsTeam />
     </div>
