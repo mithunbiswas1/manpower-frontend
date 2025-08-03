@@ -5,7 +5,7 @@ import Link from "next/link"; // Import Link
 import { Menu, X, ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import logo from "@/resource/logo.jpeg";
+import logo from "@/resource/logo.jpg";
 import Image from "next/image";
 import ContactForm from "../pages/reachUs/ContactForm";
 import { ButtonDefault } from "../custom/ButtonDefault";
