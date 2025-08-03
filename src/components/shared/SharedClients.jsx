@@ -5,18 +5,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { motion } from "framer-motion";
-import { fadeIn, slideIn, textVariant } from "@/ultils/motion";
+import { fadeIn } from "@/ultils/motion";
 import bgImage from "@/resource/service_img1.jpg";
-import daikin from "@/resource/service_img1.jpg";
-import mitsubishi_electric from "@/resource/service_img1.jpg";
-import mitsubishi_heavy_industries from "@/resource/service_img1.jpg";
-import fujitsu from "@/resource/service_img1.jpg";
-import panasonic from "@/resource/service_img1.jpg";
-import hitachi from "@/resource/service_img1.jpg";
-import air_smart from "@/resource/service_img1.jpg";
-import samsung from "@/resource/service_img1.jpg";
-import hisense from "@/resource/service_img1.jpg";
-import lg from "@/resource/service_img1.jpg";
+
+import al_naboodah_group_enterprises from "@/resource/about_client/al_naboodah_group_enterprises.jpg";
+import dulsco from "@/resource/about_client/dulsco.jpg";
+import efs_facilities_services from "@/resource/about_client/efs_facilities_services.jpg";
+import emrill_services from "@/resource/about_client/emrill_services.jpg";
+import farnek_services from "@/resource/about_client/farnek_services.jpg";
+import khidmah_llc from "@/resource/about_client/khidmah_llc.jpg";
+import raq_contracting from "@/resource/about_client/raq_contracting.jpg";
+import transguard_group from "@/resource/about_client/transguard_group.jpg";
+
 import { Sparkles } from "lucide-react";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { SectionTitle } from "@/components/custom/SectionTitle";
@@ -26,16 +26,22 @@ export const SharedClients = () => {
     {
       title: "Our Partners",
       logos: [
-        daikin,
-        mitsubishi_electric,
-        mitsubishi_heavy_industries,
-        fujitsu,
-        panasonic,
-        hitachi,
-        air_smart,
-        samsung,
-        hisense,
-        lg,
+        al_naboodah_group_enterprises,
+        dulsco,
+        efs_facilities_services,
+        emrill_services,
+        farnek_services,
+        khidmah_llc,
+        raq_contracting,
+        transguard_group,
+        al_naboodah_group_enterprises,
+        dulsco,
+        efs_facilities_services,
+        emrill_services,
+        farnek_services,
+        khidmah_llc,
+        raq_contracting,
+        transguard_group,
       ],
     },
   ];
@@ -59,20 +65,9 @@ export const SharedClients = () => {
   };
 
   return (
-    <section
-      className="relative bg-white py-12 pb-8"
-      style={{
-        backgroundImage: `url(${bgImage.src})`,
-        backgroundAttachment: "fixed",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-primary "></div>
-
+    <section className="relative bg-primary py-12 pb-8">
       {/* Content */}
-      <div className="relative w-full max-w-screen-xl mx-auto px-4 mb-12">
+      <div className="relative _max_width mb-12">
         <motion.div
           variants={fadeIn("top", 0.1)}
           initial="hidden"
@@ -93,7 +88,7 @@ export const SharedClients = () => {
           whileInView="show"
         >
           <SectionTitle className="mb-10 text-center text-white">
-            Popular Aircon Brands
+            Popular Brands Od Our Product
           </SectionTitle>
         </motion.div>
 

@@ -35,16 +35,9 @@ export const SharedContact = () => {
   ];
 
   return (
-    <section
-      style={{
-        backgroundImage: `url(${about.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
-    >
-      <div className="w-full text-se-white bg-white">
-        <div className="max-w-screen-xl mx-auto py-16 px-4">
+    <section>
+      <div className="_max_width py-16">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             variants={fadeIn("left", 0.2)}
             initial="hidden"
@@ -63,40 +56,40 @@ export const SharedContact = () => {
               Contact With Us
             </SectionTitle>
           </motion.div>
+        </div>
 
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-2/5 py-6">
-              <ContactDetails />
-            </div>
-            <div className="py-1 text-white w-full md:w-3/5">
-              <ContactForm />
-            </div>
+        <div className="flex flex-col md:flex-row items-center">
+          <div className="w-full md:w-2/5 py-6">
+            <ContactDetails />
           </div>
+          <div className="py-1 text-white w-full md:w-3/5">
+            <ContactForm />
+          </div>
+        </div>
 
-          <div className="block md:hidden">
-            <h3 className="text-primary _h3 my-2 pt-10 text-center">
-              Connect with us
-            </h3>
-            <motion.div
-              variants={fadeIn("up", 0.3)}
-              initial="hidden"
-              whileInView="show"
-              className="flex gap-4 w-full justify-center"
-            >
-              {SocialIcons.map((social, idx) => {
-                const Icon = social.icon;
-                return (
-                  <Link
-                    key={idx}
-                    href={social.href}
-                    className="p-2 rounded-full bg-primary hover:bg-primary transition-colors duration-300"
-                  >
-                    <Icon className="w-6 h-6 text-white" />
-                  </Link>
-                );
-              })}
-            </motion.div>
-          </div>
+        <div className="block md:hidden">
+          <h3 className="text-primary _h3 my-2 pt-10 text-center">
+            Connect with us
+          </h3>
+          <motion.div
+            variants={fadeIn("up", 0.3)}
+            initial="hidden"
+            whileInView="show"
+            className="flex gap-4 w-full justify-center"
+          >
+            {SocialIcons.map((social, idx) => {
+              const Icon = social.icon;
+              return (
+                <Link
+                  key={idx}
+                  href={social.href}
+                  className="p-2 rounded-full bg-primary hover:bg-primary transition-colors duration-300"
+                >
+                  <Icon className="w-6 h-6 text-white" />
+                </Link>
+              );
+            })}
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,18 +1,19 @@
 // app/about-us/page.jsx
 
-import { ReachUsTeam } from "@/components/pages/reachUs/ReachUsTeam";
+import { AboutMissionVision } from "@/components/pages/about/AboutMissionVision";
+import { AboutTeam } from "@/components/pages/about/AboutTeam";
 import { SharedAbout } from "@/components/shared/SharedAbout";
 import { SharedBanner } from "@/components/shared/SharedBanner";
 import { SharedClients } from "@/components/shared/SharedClients";
 import { SharedContact } from "@/components/shared/SharedContact";
 import { SharedDifference } from "@/components/shared/SharedDifference";
-import banner_image from "@/resource/banner_image_3.jpg";
+import banner_image from "@/resource/home_banner/flexible_temporary_staffing.jpg";
 
 export default function AboutUsPage() {
   const bannerData = {
     title: "About Us",
     description:
-      "Learn more about our company's vision, mission, and the team behind our success.",
+      "Discover how Box Craft Packing Services delivers professional manpower and packing solutions across the UAE with excellence and reliability.",
     image: banner_image,
   };
 
@@ -24,10 +25,11 @@ export default function AboutUsPage() {
         bgImage={bannerData.image.src}
       />
       <SharedAbout />
+      <AboutMissionVision />
       <SharedDifference />
       <SharedClients />
       <SharedContact />
-      <ReachUsTeam />
+      <AboutTeam />
     </div>
   );
 }

@@ -4,94 +4,94 @@ import { fadeIn } from "@/ultils/motion";
 
 // Lucide icons
 import {
-  BarChart3,
-  Home,
-  Timer,
-  BriefcaseBusiness,
+  PackageCheck,
   Users,
-  CalendarCheck2,
-  ShieldCheck,
-  HeartHandshake,
-  MoveRight,
-  ClipboardList,
-  BadgeCheck,
   Sparkles,
+  ShieldCheck,
+  Clock3,
+  Handshake,
+  BadgeCheck,
+  ClipboardList,
+  FileCheck2,
+  UserCheck2,
+  Building2,
+  Smile,
 } from "lucide-react";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 
 const data = [
   {
-    title: "Best ROI",
+    title: "Specialized Packing Experts",
     description:
-      "We deliver optimal return on investment through efficient manpower deployment and strategic planning.",
-    icon: BarChart3,
+      "Our team is trained to handle all types of packing operations with precision, ensuring safe and secure handling every time.",
+    icon: PackageCheck,
   },
   {
-    title: "Home Grown",
+    title: "Skilled & Reliable Workforce",
     description:
-      "A proudly home-grown company, we understand the local workforce and business environment inside-out.",
-    icon: Home,
-  },
-  {
-    title: "Speedy Deployment",
-    description:
-      "We ensure the fastest possible turnaround in placing skilled manpower to meet urgent client needs.",
-    icon: Timer,
-  },
-  {
-    title: "Professional Management",
-    description:
-      "Managed by experts with deep industry knowledge, we offer structured and scalable staffing solutions.",
-    icon: BriefcaseBusiness,
-  },
-  {
-    title: "Trained Workforce",
-    description:
-      "Our workforce is well-trained, skilled, and ready to contribute from day one on the job.",
+      "We provide highly trained, dedicated manpower ready to deliver excellence across packing, cleaning, and logistics.",
     icon: Users,
   },
   {
-    title: "Est. In 2004",
+    title: "Custom Manpower Solutions",
     description:
-      "With over two decades of experience, Tabasco is a pioneer in delivering reliable manpower solutions.",
-    icon: CalendarCheck2,
+      "Whether it's short-term or long-term, we tailor our staffing to your unique business needs and scale.",
+    icon: Sparkles,
   },
   {
-    title: "Safety Driven",
+    title: "Safety-First Operations",
     description:
-      "Safety is at the core of our operations. We strictly follow protocols and prioritize worker well-being.",
+      "Our personnel follow strict safety and hygiene standards to protect your workforce, property, and peace of mind.",
     icon: ShieldCheck,
   },
   {
-    title: "Welfare Culture",
+    title: "Fast Deployment",
     description:
-      "We promote a culture of welfare, ensuring the physical, emotional, and social well-being of workers.",
-    icon: HeartHandshake,
+      "Need urgent staffing? We ensure quick mobilization to keep your operations running without delays.",
+    icon: Clock3,
   },
   {
-    title: "Rapid Onboarding",
+    title: "Client-Focused Approach",
     description:
-      "Our onboarding process is streamlined and efficient, ensuring minimal downtime for new hires.",
-    icon: MoveRight,
+      "We prioritize long-term partnerships by understanding your needs and consistently exceeding expectations.",
+    icon: Handshake,
   },
   {
-    title: "Robust Workforce Management",
+    title: "Certified & Compliant",
     description:
-      "We use advanced tools and systems for efficient tracking, reporting, and workforce optimization.",
+      "Fully compliant with UAE labor laws and ISO-certified practices for reliable, hassle-free manpower delivery.",
+    icon: BadgeCheck,
+  },
+  {
+    title: "Transparent Reporting",
+    description:
+      "We offer clear documentation, attendance tracking, and real-time workforce updates to keep you informed.",
     icon: ClipboardList,
   },
   {
-    title: "Recruitment Expertise",
+    title: "Pre-Screened & Verified",
     description:
-      "Our recruitment process is rigorous and data-driven, ensuring only the best fit for your needs.",
-    icon: BadgeCheck,
+      "All our staff are thoroughly vetted, interviewed, and screened before deployment for quality assurance.",
+    icon: FileCheck2,
   },
   {
-    title: "ISO Certified",
+    title: "Cultural Fit Recruitment",
     description:
-      "We maintain the highest standards of quality and compliance, as demonstrated by our ISO certification.",
-    icon: BadgeCheck,
+      "We match candidates not only based on skills but on values and behavior that align with your company culture.",
+    icon: UserCheck2,
+  },
+  {
+    title: "Serving All Industries",
+    description:
+      "From factories and warehouses to hotels and offices—we have the manpower for every industry and scale.",
+    icon: Building2,
+  },
+  {
+    title: "Satisfaction Guaranteed",
+    description:
+      "Your satisfaction is our mission. We go the extra mile to maintain trust and long-lasting collaboration.",
+    icon: Smile,
   },
 ];
 
@@ -99,7 +99,7 @@ export const SharedDifference = () => {
   return (
     <section>
       <div className="w-full">
-        <div className="max-w-screen-xl mx-auto py-16 px-4">
+        <div className="_max_width py-16 ">
           <div className="pb-2">
             <motion.div
               variants={fadeIn("right", 0.2)}

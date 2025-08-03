@@ -9,7 +9,7 @@ import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Sparkles } from "lucide-react";
 
-export const ReachUsTeam = () => {
+export const AboutTeam = () => {
   const teamData = [
     {
       id: 1,
@@ -39,31 +39,33 @@ export const ReachUsTeam = () => {
 
   return (
     <section>
-      <div className="w-full text-se-white bg-primary">
-        <div className="max-w-screen-xl mx-auto py-16 px-4">
-          <motion.div
-            variants={fadeIn("left", 0.2)}
-            initial="hidden"
-            whileInView="show"
-          >
-            <SectionSubHeading
-              icon={Sparkles}
-              className="my-2 justify-center"
-              titleClass="text-white"
-              iconClass="text-white"
+      <div className="w-full bg-primary">
+        <div className="py-16 _max_width">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              variants={fadeIn("left", 0.2)}
+              initial="hidden"
+              whileInView="show"
             >
-              Our team of professionals is skilled
-            </SectionSubHeading>
-          </motion.div>
-          <motion.div
-            variants={fadeIn("left", 0.3)}
-            initial="hidden"
-            whileInView="show"
-          >
-            <SectionTitle className="mb-4 text-center text-white">
-              Meet Our Team
-            </SectionTitle>
-          </motion.div>
+              <SectionSubHeading
+                icon={Sparkles}
+                className="my-2 justify-center"
+                titleClass="text-white"
+                iconClass="text-white"
+              >
+                Our team of professionals is skilled
+              </SectionSubHeading>
+            </motion.div>
+            <motion.div
+              variants={fadeIn("left", 0.3)}
+              initial="hidden"
+              whileInView="show"
+            >
+              <SectionTitle className="mb-4 text-center text-white">
+                Meet Our Team
+              </SectionTitle>
+            </motion.div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
             {teamData.map((member, index) => (
               <div key={member.id} className="group">

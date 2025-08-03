@@ -16,7 +16,7 @@ const cardData = [
     description:
       "Our factory workforce is trained to handle packing, machine operation, and support roles — reducing downtime and increasing productivity.",
     buttonText: "Get Factory Help",
-    href: "/contact",
+    href: "/services",
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const cardData = [
     description:
       "Let your staff and customers enjoy a spotless environment with our reliable and well-trained cleaning personnel.",
     buttonText: "Book Cleaning Service",
-    href: "/contact",
+    href: "/services",
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const cardData = [
     description:
       "Our licensed guards provide around-the-clock protection, enhancing safety across your residential, retail, or industrial property.",
     buttonText: "Request Security",
-    href: "/contact",
+    href: "/services",
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const cardData = [
     description:
       "From front desk to kitchen support, we supply staff who elevate service standards and leave lasting impressions.",
     buttonText: "Hire Hospitality Staff",
-    href: "/contact",
+    href: "/services",
   },
 ];
 
