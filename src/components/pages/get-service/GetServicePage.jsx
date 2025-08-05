@@ -50,7 +50,7 @@ export const GetServicePage = () => {
   };
 
   return (
-    <>
+    <div className="pb-16">
       <BookingStepper />
 
       <div className="_max_width bg-white grid grid-cols-1 md:grid-cols-11">
@@ -78,7 +78,7 @@ export const GetServicePage = () => {
           <BookingSummary booking={booking} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
