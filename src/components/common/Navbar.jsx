@@ -57,7 +57,8 @@ const navItems = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about-us" },
   {
-    name: "Services",
+    name: "Service",
+    path: "/service",
     subMenu: [
       { name: "Demo 1", path: "#" },
       { name: "Demo 2", path: "#" },
@@ -131,10 +132,14 @@ const Navbar = () => {
                 >
                   {item.subMenu ? (
                     <>
-                      <button className="flex items-center gap-1">
+                      <Link
+                        href={item.path}
+                        className="flex items-center gap-1"
+                        onClick={closeAllMenus}
+                      >
                         {item.name}
                         <ChevronDown size={16} />
-                      </button>
+                      </Link>
                       <AnimatePresence>
                         {desktopSubmenuOpen === idx && (
                           <motion.div
