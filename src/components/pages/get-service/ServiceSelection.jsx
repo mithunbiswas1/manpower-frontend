@@ -13,9 +13,9 @@ import {
 // Map your service names to icons
 const serviceIcons = {
   "Factory Workers": Factory,
-  "Cleaning Services": Brush, // Replaced Broom with Brush
+  "Cleaning Services": Brush,
   "Security Guard": Shield,
-  "Hotel & Catering Staff": Hotel,
+  "Hotel & Catering": Hotel,
   "Safety Officer": LifeBuoy,
   "Permanent Staffing": Users,
   "Temporary Staffing": Clock,
@@ -35,13 +35,13 @@ export const ServiceSelection = ({
             <li
               key={serviceName}
               onClick={() => onSelectService(serviceName)}
-              className={`p-4 mb-2 flex flex-col items-center cursor-pointer transition-colors duration-300 rounded-lg ${
+              className={`p-2 mb-2 flex gap-2 items-center cursor-pointer transition-colors duration-300 rounded-lg ${
                 selectedService === serviceName
                   ? "bg-primary text-white"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               }`}
             >
-              {Icon && <Icon size={32} className="mb-1" />}
+              {Icon && <Icon size={24} className="mb-1" />}
               <span className="text-sm font-semibold">{serviceName}</span>
             </li>
           );

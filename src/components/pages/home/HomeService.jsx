@@ -39,7 +39,7 @@ const services = [
   },
   {
     id: 4,
-    title: "Hotel & Catering Staff",
+    title: "Hotel & Catering",
     imageUrl: hotel_catering_taffing,
     link: "#",
   },

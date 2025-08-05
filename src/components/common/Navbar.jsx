@@ -57,17 +57,18 @@ const navItems = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about-us" },
   {
-    name: "Service",
+    name: "Services",
     path: "/service",
-    subMenu: [
-      { name: "Demo 1", path: "#" },
-      { name: "Demo 2", path: "#" },
-      { name: "Demo 3", path: "#" },
-      { name: "Demo 4", path: "#" },
-    ],
+    // subMenu: [
+    //   { name: "Demo 1", path: "#" },
+    //   { name: "Demo 2", path: "#" },
+    //   { name: "Demo 3", path: "#" },
+    //   { name: "Demo 4", path: "#" },
+    // ],
   },
   { name: "Projects", path: "/projects" },
   { name: "Career", path: "/career" },
+  { name: "Book Service", path: "/get-service" },
   { name: "Reach Us", path: "/reach-us" },
 ];
 
@@ -118,7 +119,7 @@ const Navbar = () => {
             </div>
 
             {/* Center: Nav Items (Desktop) */}
-            <div className="hidden md:flex space-x-8 text-gray-700 font-semibold">
+            <div className="hidden lg:flex space-x-8 text-gray-700 font-semibold">
               {navItems.map((item, idx) => (
                 <div
                   key={idx}
@@ -173,7 +174,7 @@ const Navbar = () => {
             </div>
 
             {/* Right: Appointment (Desktop) */}
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               {/* Change this ButtonPrimary to trigger the modal */}
               <ButtonDefault onClick={openModal}>
                 Make Appointment
@@ -181,7 +182,7 @@ const Navbar = () => {
             </div>
 
             {/* Hamburger (Mobile) */}
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <button onClick={toggleDrawer} className="text-primary">
                 {drawerOpen ? <X size={28} /> : <Menu size={28} />}
               </button>

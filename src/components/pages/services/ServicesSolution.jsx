@@ -5,88 +5,12 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
-import {
-  Sparkles,
-  Factory,
-  ShieldCheck,
-  Brush, // Changed from Dumbbell to Brush
-  Hotel,
-  User,
-  Clock,
-  FileBadge,
-} from "lucide-react";
+import { Sparkles } from "lucide-react";
 import Image from "next/image";
-
-// Import all service images (ensure these paths are correct in your project)
-import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
-import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
-import trusted_security_personnel from "@/resource/home_banner/trusted_security_personnel.jpg";
-import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffing.jpg";
-import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
-import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
-import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
 
 import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
 import { Paragraph } from "@/components/custom/Paragraph";
-
-const services = [
-  {
-    id: 1,
-    title: "Factory Workers",
-    description:
-      "We provide skilled and highly qualified personnel for factories of any magnitude, trade, or type. Our workforce includes machine operators, goods packers, and general helpers to ensure smooth production.",
-    icon: Factory,
-    image: expert_factory_workforce,
-  },
-  {
-    id: 2,
-    title: "Cleaning Services",
-    description:
-      "Our cleaning services maintain a pristine and hygienic workplace. We offer routine and specialized cleaning solutions tailored to the specific needs of your commercial, industrial, or residential facility.",
-    icon: Brush, // Changed icon here
-    image: professional_leaning_services,
-  },
-  {
-    id: 3,
-    title: "Security Guard",
-    description:
-      "Our licensed and highly trained security professionals ensure the safety and peace of mind of our clients. We provide top-tier security solutions for residential, commercial, and industrial properties.",
-    icon: ShieldCheck,
-    image: trusted_security_personnel,
-  },
-  {
-    id: 4,
-    title: "Hotel & Catering Staff",
-    description:
-      "With an extensive repository of expertise, our service-oriented staff can help maintain the high-quality standards of hotels and restaurants, ensuring excellent customer satisfaction.",
-    icon: Hotel,
-    image: hotel_catering_taffing,
-  },
-  {
-    id: 5,
-    title: "Safety Officer",
-    description:
-      "Safety is paramount. We provide trained safety officers who are well-versed in the latest safety and hygiene protocols, helping your business maintain a secure and compliant work environment.",
-    icon: FileBadge,
-    image: certified_safety_officers,
-  },
-  {
-    id: 6,
-    title: "Permanent Staffing",
-    description:
-      "For long-term needs, we offer a thorough selection process to find the best candidates for your packing and cleaning operations, ensuring a perfect fit with your organizational culture.",
-    icon: User,
-    image: permanent_staffing_solutions,
-  },
-  {
-    id: 7,
-    title: "Temporary Staffing",
-    description:
-      "Whether you need short-term manpower for peak periods or specific projects, our flexible and cost-effective temporary staffing solutions keep your operations running smoothly without delays.",
-    icon: Clock,
-    image: flexible_temporary_staffing,
-  },
-];
+import { services } from "@/data/services"; // Import from the new data file
 
 export default function ServicesSolution() {
   return (
@@ -145,14 +69,22 @@ export default function ServicesSolution() {
                   <Paragraph className="text-gray-600 mb-4 line-clamp-3">
                     {service.description}
                   </Paragraph>
-                  <ButtonPrimary
-                    link={`/get-service?service=${encodeURIComponent(
-                      service.title
-                    )}`}
-                    className="w-full"
-                  >
-                    Get Services
-                  </ButtonPrimary>
+                  <div className="flex gap-4">
+                    <ButtonPrimary
+                      link={`/get-service?service=${encodeURIComponent(
+                        service.title
+                      )}`}
+                      className="w-full flex-1"
+                    >
+                      Get Services
+                    </ButtonPrimary>
+                    <a
+                      href={`/service/${service.id}`}
+                      className="w-full flex-1 text-center py-3 px-6 rounded-md border border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 font-semibold"
+                    >
+                      See More
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             );

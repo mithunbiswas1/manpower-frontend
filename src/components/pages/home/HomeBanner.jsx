@@ -44,7 +44,7 @@ const slides = [
   {
     id: 4,
     image: hotel_catering_taffing,
-    title: "Hotel & Catering Staffing",
+    title: "Hotel & Catering",
     description:
       "Deliver excellent guest experiences with our professional hospitality staff.",
     buttonText: "Get Hospitality Staff",

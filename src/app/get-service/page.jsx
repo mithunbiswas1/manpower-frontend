@@ -1,5 +1,6 @@
 // app/get-service/page.jsx
 
+import { Suspense } from "react";
 import { GetServicePage } from "@/components/pages/get-service/GetServicePage";
 import { SharedBanner } from "@/components/shared/SharedBanner";
 import banner_image from "@/resource/banner_image_3.jpg";
@@ -19,8 +20,10 @@ export default function Page() {
         description={bannerData.description}
         bgImage={bannerData.image.src}
       />
-      {/* This component contains all the state and booking logic */}
-      <GetServicePage />
+
+      <Suspense fallback={<div>Loading services...</div>}>
+        <GetServicePage />
+      </Suspense>
     </div>
   );
 }

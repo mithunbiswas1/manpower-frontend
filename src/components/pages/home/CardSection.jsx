@@ -39,7 +39,7 @@ const cardData = [
   {
     id: 4,
     title: "Deliver Outstanding Experiences",
-    subtitle: "Skilled Hotel & Catering Staff",
+    subtitle: "Skilled Hotel & Catering",
     description:
       "From front desk to kitchen support, we supply staff who elevate service standards and leave lasting impressions.",
     buttonText: "Hire Hospitality Staff",
