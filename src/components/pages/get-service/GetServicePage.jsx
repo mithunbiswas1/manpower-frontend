@@ -1,4 +1,4 @@
-// components/pages/get-service/GetServicePage.jsx
+// components /pages /get-service / GetServicePage.jsx
 "use client";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
