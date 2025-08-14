@@ -106,7 +106,7 @@ const footerSections = [
 const Footer = () => {
   return (
     <footer className="">
-      <SharedContactService />
+      {/* <SharedContactService /> */}
       <div className="bg-[linear-gradient(to_bottom,_#13151B,_#13151B)] text-white py-12 px-6">
         <div className="_max_width grid grid-cols-1 md:grid-cols-4 gap-8">
           {footerSections.map((section, index) => (

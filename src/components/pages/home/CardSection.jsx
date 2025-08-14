@@ -51,29 +51,15 @@ export const CardSection = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-screen-xl mx-auto px-4">
-        <motion.div
-          variants={fadeIn("top", 0.1)}
-          initial="hidden"
-          whileInView="show"
-        >
-          <SectionSubHeading icon={Sparkle} className="my-2 justify-center">
-            What We Do
-          </SectionSubHeading>
-        </motion.div>
-        <motion.div
-          variants={fadeIn("top", 0.2)}
-          initial="hidden"
-          whileInView="show"
-        >
-          <SectionTitle className="mb-16 text-center text-gray-800">
-            Our Most Popular Man Power Services For You
-          </SectionTitle>
-        </motion.div>
+        <SectionTitle className=" text-center mb-2">Feature</SectionTitle>
+        <SectionSubHeading className="mb-8 justify-center">
+          What we provide you
+        </SectionSubHeading>
         <motion.div
           variants={fadeIn("up", 0.2)}
           initial="hidden"
           whileInView="show"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 2xl:gap-8"
         >
           {cardData.map((item, index) => (
             <motion.div

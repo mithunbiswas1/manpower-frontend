@@ -1,167 +1,221 @@
 "use client";
+
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
+import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
+import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
+import { Quote, X } from "lucide-react";
 
-import bgImage from "@/resource/banner_image_1.jpg";
-import icon_testimonial from "@/resource/icon_testimonial.webp";
-import { useState } from "react";
-import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
-import { SectionTitle } from "@/components/custom/SectionTitle";
-import { Sparkles, Quote } from "lucide-react";
+import MichelDibHanna from "@/resource/home_banner/expert_factory_workforce.jpg";
+import LiuChangjun from "@/resource/home_banner/expert_factory_workforce.jpg";
+import DimitriPapakonstantinou from "@/resource/home_banner/expert_factory_workforce.jpg";
+import YazanAboshi from "@/resource/home_banner/expert_factory_workforce.jpg";
+import { ButtonDefault } from "@/components/custom/ButtonDefault";
 import { Paragraph } from "@/components/custom/Paragraph";
 
-export const HomeTestimonial = () => {
-  const [swiper, setSwiper] = useState(null);
+const testimonials = [
+  {
+    id: 1,
+    name: "Michel Dib Hanna",
+    position: "Group General Manager",
+    company: "Speed House Group of companies",
+    text: "Speed House Group of companies Speed House Group of companies",
+    imageUrl: MichelDibHanna,
+  },
+  {
+    id: 2,
+    name: "Liu Changjun",
+    position: "Deputy General Manager",
+    company: "China Railway 18th Bureau Group LLC",
+    text: "Speed House Group of companies Speed House Group of companies",
+    imageUrl: LiuChangjun,
+  },
+  {
+    id: 3,
+    name: "Dimitri Papakonstantinou",
+    position: "Managing Director",
+    company: "Al Shafar Interiors Co, LLC",
+    video: "https://youtu.be/SCoC3ZCX7VM?si=Y0dA6FlpGuaPtjVJ",
+    imageUrl: DimitriPapakonstantinou,
+  },
+  {
+    id: 4,
+    name: "Yazan Aboshi",
+    position: "Projects Director",
+    company: "Was Electromechanical",
+    video: "https://youtu.be/SCoC3ZCX7VM?si=Y0dA6FlpGuaPtjVJ",
+    imageUrl: YazanAboshi,
+  },
+  {
+    id: 5,
+    name: "Michel Dib Hanna",
+    position: "Group General Manager",
+    company: "Speed House Group of companies",
+    video: "https://youtu.be/SCoC3ZCX7VM?si=Y0dA6FlpGuaPtjVJ",
+    imageUrl: MichelDibHanna,
+  },
+  {
+    id: 6,
+    name: "Liu Changjun",
+    position: "Deputy General Manager",
+    company: "China Railway 18th Bureau Group LLC",
+    video: "https://youtu.be/SCoC3ZCX7VM?si=Y0dA6FlpGuaPtjVJ",
+    imageUrl: LiuChangjun,
+  },
+];
 
-  // Static testimonial data
-  const testimonials = [
-    {
-      id: 1,
-      title: "Mohammed Al Farsi",
-      sub_title: "Factory Manager, Al Noor Textiles",
-      short_description:
-        "Box Craft delivered skilled packing staff during our production peak. Their team was punctual, hardworking, and required minimal training. A truly professional service we’ll continue to use.",
-      image: bgImage,
-    },
-    {
-      id: 2,
-      title: "Sarah Khalid",
-      sub_title: "Operations Head, CleanSpace Co.",
-      short_description:
-        "We hired Box Craft for commercial cleaning, and the results were fantastic. The team followed strict hygiene protocols and exceeded our expectations in both quality and professionalism.",
-      image: bgImage,
-    },
-    {
-      id: 3,
-      title: "Imran Sheikh",
-      sub_title: "Security Supervisor, Silver Tower",
-      short_description:
-        "The security personnel provided by Box Craft were trained, alert, and courteous. We’ve noticed a clear improvement in safety and professionalism since hiring them.",
-      image: bgImage,
-    },
-    {
-      id: 4,
-      title: "Fatima Al Mansoori",
-      sub_title: "HR Director, Gulf Catering Services",
-      short_description:
-        "Our hospitality staffing needs were met quickly and efficiently. The staff from Box Craft were well-presented, courteous, and adapted seamlessly to our work environment.",
-      image: bgImage,
-    },
-    {
-      id: 5,
-      title: "Ahmed Raza",
-      sub_title: "Project Lead, BuildPro Logistics",
-      short_description:
-        "The laborers provided by Box Craft for our warehouse operations were reliable and fast. Their attention to detail helped us complete projects on time with zero issues.",
-      image: bgImage,
-    },
-    {
-      id: 6,
-      title: "Noura Hossain",
-      sub_title: "Admin Manager, Sunrise Hospitality",
-      short_description:
-        "We’ve been using Box Craft for multiple hospitality events. Their service staff are always on time, well-trained, and presentable. Guests frequently compliment their professionalism.",
-      image: bgImage,
-    },
-  ];
+const getYouTubeVideoId = (url) => {
+  if (!url) return null;
+  const match = url.match(
+    /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([\w-]+)/
+  );
+  if (match) {
+    return match[1];
+  }
+  return null;
+};
+
+export const HomeTestimonial = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
+  const [modalText, setModalText] = useState("");
+  const [selectedTestimonial, setSelectedTestimonial] = useState(null);
+
+  const openModal = (testimonial) => {
+    if (testimonial.video) {
+      const videoId = getYouTubeVideoId(testimonial.video);
+      if (videoId) {
+        setVideoUrl(`https://www.youtube.com/embed/${videoId}?autoplay=1`);
+        setModalText("");
+      }
+    } else {
+      setModalText(testimonial.text);
+      setVideoUrl("");
+    }
+    setSelectedTestimonial(testimonial);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setVideoUrl("");
+    setModalOpen(false);
+  };
 
   return (
-    <section className="relative bg-primary w-full text-white py-20">
-      <div className="absolute inset-0 "></div>
+    <section className="bg-white">
+      <div className="pt-18 pb-20 _max_width">
+        <SectionTitle className=" text-center mb-2">Testimonials</SectionTitle>
+        <SectionSubHeading className="mb-8 justify-center">
+          What Our Clients Say
+        </SectionSubHeading>
+        <Swiper
+          spaceBetween={20}
+          slidesPerView={1}
+          autoplay={{ delay: 10000, disableOnInteraction: false }}
+          modules={[Autoplay, Pagination]}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
+          }}
+          className="pb-12"
+        >
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide key={index}>
+              <motion.div
+                variants={fadeIn("up", 0.1 + index * 0.0)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.25 }}
+                className="flex flex-col items-center p-4 min-h-[350px]"
+              >
+                <div className="relative w-40 h-40 rounded-full overflow-hidden">
+                  <Image
+                    src={testimonial.imageUrl}
+                    alt={testimonial.name}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-full"
+                  />
+                </div>
+                <h3 className="mt-4 text-xl font-semibold text-center">
+                  {testimonial.name}
+                </h3>
+                <p className="mt-1 text-sm text-gray-600 text-center"></p>
+                <Paragraph className="text-center !text-xs lg:!text-sm">
+                  {testimonial.position} <br />
+                  {testimonial.company}
+                </Paragraph>
 
-      <div className="max-w-screen-xl mx-auto px-4 relative ">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="flex flex-col justify-center">
-            <div className="mb-10 text-center md:text-left">
-              <motion.div
-                variants={fadeIn("right", 0.2)}
-                initial="hidden"
-                whileInView="show"
-              >
-                <SectionSubHeading
-                  icon={Sparkles}
-                  className="my-2 justify-center md:justify-start"
-                  iconClass="text-white"
-                  titleClass="text-white"
-                >
-                  Testimonials
-                </SectionSubHeading>
+                <div className="mt-auto">
+                  <ButtonDefault
+                    className="cursor-pointer"
+                    onClick={() => openModal(testimonial)}
+                  >
+                    {testimonial?.video ? "Watch Video" : "See Comments"}
+                  </ButtonDefault>
+                </div>
               </motion.div>
-              <motion.div
-                variants={fadeIn("right", 0.3)}
-                initial="hidden"
-                whileInView="show"
-              >
-                <SectionTitle className="text-white">
-                  What People Say
-                </SectionTitle>
-              </motion.div>
-            </div>
-            <motion.div
-              variants={fadeIn("up", 0.4)}
-              initial="hidden"
-              whileInView="show"
-              className="flex flex-col md:flex-row gap-4 items-center md:items-start"
-            >
-              <Quote className="size-12 text-white" />
-              <Swiper
-                modules={[Autoplay]}
-                spaceBetween={30}
-                slidesPerView={1}
-                autoplay={{ delay: 5000 }}
-                onSwiper={setSwiper}
-                className="w-full"
-              >
-                {testimonials.map((testimonial, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="rounded-xl flex flex-col md:flex-row gap-6 items-center">
-                      <div className="w-full text-center md:text-left">
-                        <Paragraph className="text-white mb-4">
-                          {testimonial.short_description}
-                        </Paragraph>
-                        <div className="flex items-center justify-center md:justify-start gap-3">
-                          <Image
-                            src={testimonial.image.src}
-                            alt={testimonial.title}
-                            width={48}
-                            height={48}
-                            className="rounded-full object-cover object-center h-12 w-12"
-                          />
-                          <div>
-                            <h3 className="cl-h4 font-semibold">
-                              {testimonial.title}
-                            </h3>
-                            <p className="cl-p text-gray-200">
-                              {testimonial.sub_title}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </motion.div>
-          </div>
-          <motion.div
-            variants={fadeIn("up", 0.5)}
-            initial="hidden"
-            whileInView="show"
-          >
-            <Image
-              src={bgImage}
-              alt=""
-              className="w-full h-full group-hover:scale-105 rounded-xl transition-all duration-200 mt-2"
-              loading="lazy"
-            />
-          </motion.div>
-        </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
+
+      {modalOpen && (
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center ${
+            videoUrl ? "bg-black" : "bg-black/80"
+          }`}
+        >
+          <button
+            onClick={closeModal}
+            className="absolute top-4 right-4 text-white hover:text-red-600"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <div className="relative w-full h-8/10 max-w-4xl bg-white rounded-lg">
+            <div className="aspect-w-16 aspect-h-9 h-full flex items-center justify-center">
+              {videoUrl ? (
+                <iframe
+                  className="w-full h-full rounded-lg"
+                  src={videoUrl}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
+                  <Quote className="w-10 h-10 text-gray-400 mb-4" />
+                  <Paragraph className="text-lg italic leading-relaxed text-gray-700 mb-6">
+                    {modalText}
+                  </Paragraph>
+                  {selectedTestimonial && (
+                    <>
+                      <h3 className="text-xl font-semibold">
+                        {selectedTestimonial.name}
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        {selectedTestimonial.position}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        {selectedTestimonial.company}
+                      </p>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

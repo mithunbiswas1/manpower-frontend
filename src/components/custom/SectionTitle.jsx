@@ -2,5 +2,11 @@
 "use client";
 
 export const SectionTitle = ({ children, className }) => {
-  return <h3 className={`_h3 text-gray-900 ${className}`}>{children}</h3>;
+  return (
+    <h3
+      className={`_h2 max-w-5xl mx-auto text-gray-700 uppercase ${className}`}
+    >
+      {children}
+    </h3>
+  );
 };

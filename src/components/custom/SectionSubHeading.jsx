@@ -11,7 +11,9 @@ export const SectionSubHeading = ({
   return (
     <div className={`flex items-center ${className}`}>
       {Icon && <Icon className={`text-primary w-6 h-6 mr-2 ${iconClass}`} />}
-      <h5 className={`_h5 text-gray-700 ${titleClass}`}>{children}</h5>
+      <h2 className={`_h3 !text-gray-500 !font-light ${titleClass}`}>
+        {children}
+      </h2>
     </div>
   );
 };

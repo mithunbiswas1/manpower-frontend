@@ -92,7 +92,7 @@ body {
 /* Custom CSS */
 
 ._max_width {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10;
 }
 
 ._h1 {
@@ -100,25 +100,26 @@ body {
 }
 
 ._h2 {
-  @apply text-3xl lg:text-4xl font-semibold;
+  @apply text-3xl lg:text-4xl 2xl:text-5xl font-bold;
 }
 
 ._h3 {
-  @apply text-2xl lg:text-3xl font-bold;
+  @apply text-2xl lg:text-3xl 2xl:text-4xl font-bold;
 }
 
 ._h4 {
-  @apply text-xl lg:text-2xl font-semibold;
+  @apply text-xl lg:text-2xl 2xl:text-3xl font-semibold;
 }
 
 ._h5 {
-  @apply text-lg lg:text-xl font-medium;
+  @apply text-lg lg:text-xl 2xl:text-2xl font-semibold;
 }
 
 ._h6 {
-  @apply text-base font-medium;
+  @apply text-base 2xl:text-lg font-medium;
 }
 
 ._p {
-  @apply text-sm lg:text-base font-normal;
+  @apply text-sm lg:text-base 2xl:text-lg font-normal;
+  
 }
