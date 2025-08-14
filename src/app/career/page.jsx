@@ -28,26 +28,12 @@ export default function CareerPage() {
 
       <section className="py-20 bg-gray-50">
         <div className="max-w-screen-xl mx-auto px-4 md:px-8">
-          <motion.div
-            variants={fadeIn("top", 0.1)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-          >
-            <SectionSubHeading icon={Sparkles} className="my-2 justify-center">
-              Join Our Team
-            </SectionSubHeading>
-          </motion.div>
-          <motion.div
-            variants={fadeIn("top", 0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-          >
-            <SectionTitle className="mb-16 text-center text-gray-800">
-              Current Job Openings
-            </SectionTitle>
-          </motion.div>
+          <SectionTitle className="mb-2 text-center">
+            Current Job Openings
+          </SectionTitle>
+          <SectionSubHeading className="mb-10 justify-center">
+            Join Our Team
+          </SectionSubHeading>
 
           <div className="grid grid-cols-1 gap-8">
             {jobListings.map((job, index) => (

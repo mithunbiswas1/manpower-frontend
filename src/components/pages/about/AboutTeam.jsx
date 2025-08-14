@@ -35,42 +35,49 @@ export const AboutTeam = () => {
       sub_title: "Customer Service",
       image: about,
     },
+    {
+      id: 5,
+      title: "John Smith",
+      sub_title: "HVAC Specialist",
+      image: about,
+    },
+    {
+      id: 6,
+      title: "Sarah Johnson",
+      sub_title: "Man Power Technician",
+      image: about,
+    },
+    {
+      id: 7,
+      title: "Michael Brown",
+      sub_title: "Installation Expert",
+      image: about,
+    },
+    {
+      id: 8,
+      title: "Emily Davis",
+      sub_title: "Customer Service",
+      image: about,
+    },
   ];
 
   return (
     <section>
-      <div className="w-full bg-primary">
+      <div className="w-full bg-primary/10">
         <div className="py-16 _max_width">
           <div className="max-w-6xl mx-auto">
-            <motion.div
-              variants={fadeIn("left", 0.2)}
-              initial="hidden"
-              whileInView="show"
-            >
-              <SectionSubHeading
-                icon={Sparkles}
-                className="my-2 justify-center"
-                titleClass="text-white"
-                iconClass="text-white"
-              >
-                Our team of professionals is skilled
-              </SectionSubHeading>
-            </motion.div>
-            <motion.div
-              variants={fadeIn("left", 0.3)}
-              initial="hidden"
-              whileInView="show"
-            >
-              <SectionTitle className="mb-4 text-center text-white">
-                Meet Our Team
-              </SectionTitle>
-            </motion.div>
+            <SectionTitle className="mb-2 text-center">
+              Meet Our Team
+            </SectionTitle>
+            <SectionSubHeading className="mb-6 justify-center text-center">
+              Our team of professionals is skilled
+            </SectionSubHeading>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
             {teamData.map((member, index) => (
               <div key={member.id} className="group">
                 <motion.div
-                  variants={fadeIn("up", 0.2 * (index + 1))}
+                  variants={fadeIn("up", 0.1 * (index + 1))}
                   initial="hidden"
                   whileInView="show"
                   className="bg-white rounded overflow-hidden shadow-lg p-3"

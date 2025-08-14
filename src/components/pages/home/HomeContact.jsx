@@ -13,7 +13,7 @@ export const HomeContact = () => {
           <p className="text-lg">Call Us</p>
           <a
             href="tel:+97143535837"
-            className="font-semibold text-xl mt-1 tracking-wide hover:underline"
+            className="font-semibold text-xl mt-1 tracking-wide hover:underline text-gray-500"
           >
             04-3535837
           </a>
@@ -24,7 +24,7 @@ export const HomeContact = () => {
           <p className="text-lg">Email Us</p>
           <a
             href="mailto:info@alsaharagroup.com"
-            className="font-semibold text-xl mt-1 tracking-wide hover:underline"
+            className="font-semibold text-xl mt-1 tracking-wide hover:underline text-gray-500"
           >
             info@alsaharagroup.com
           </a>
@@ -36,7 +36,7 @@ export const HomeContact = () => {
           <Link
             href="/reach-us"
             rel="noopener noreferrer"
-            className="font-semibold text-xl mt-1 tracking-wide hover:underline"
+            className="font-semibold text-xl text-gray-500 mt-1 tracking-wide hover:underline"
           >
             Book Online
           </Link>

@@ -32,7 +32,7 @@ export const HomeClients = () => {
   return (
     <section className="_max_width bg-white py-16 text-center">
       <SectionTitle className="mb-2 text-center">Clients</SectionTitle>
-      <SectionSubHeading className="mb-6 justify-center">
+      <SectionSubHeading className="mb-6 justify-center text-center">
         See Our Honorable Clients
       </SectionSubHeading>
 

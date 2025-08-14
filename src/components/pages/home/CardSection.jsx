@@ -14,7 +14,7 @@ const cardData = [
     title: "Boost Efficiency in Your Factory",
     subtitle: "Experienced Operators & Helpers",
     description:
-      "Our factory workforce is trained to handle packing, machine operation, and support roles — reducing downtime and increasing productivity.",
+      "Our factory workforce is trained to handle packing, machine operation, and support roles — reducing downtime.",
     buttonText: "Get Factory Help",
     href: "/services",
   },

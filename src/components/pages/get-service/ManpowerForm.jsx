@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import logo_img from "@/resource/man_logo.jpg";
+import { Paragraph } from "@/components/custom/Paragraph";
 
 export const ManpowerForm = ({
   serviceData,
@@ -49,19 +50,19 @@ export const ManpowerForm = ({
         {serviceData.map((role) => (
           <div
             key={role.name}
-            className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm"
+            className="flex flex-col items-center text-center p-4 "
           >
-            <div className="h-18 w-18 flex items-center justify-center mb-2 text-primary">
+            <div className="h-15 w-15 flex items-center justify-center mb-2 text-primary">
               {/* <UserRound size={80} /> */}
               <Image
-                src={logo_img.src}
+                src="https://tabascouae.com/img/services/serman.svg"
                 alt="image"
                 height={80}
                 width={80}
                 className=""
               />
             </div>
-            <h5 className="_h6">{role.name}</h5>
+            <Paragraph className="!font-bold !text-sm">{role.name}</Paragraph>
             <div className="flex items-center gap-2 mt-2 text-sm">
               <input
                 type="number"
@@ -71,21 +72,21 @@ export const ManpowerForm = ({
                   handleQuantityChange(role.name, e.target.value)
                 }
                 min="0"
-                className="w-16 lg:w-20 h-8 p-1 text-xs text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-12 lg:w-20 h-6 p-1 text-[10px] text-center border focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {booking[selectedService]?.[role.name] ? (
                 <button
                   onClick={() =>
                     onBookingUpdate(selectedService, role.name, "")
                   }
-                  className="w-16 py-2 text-xs bg-secondary text-white rounded-md hover:bg-secondary transition-colors"
+                  className="w-12 py-1 text-[10px] bg-secondary text-white hover:bg-secondary transition-colors"
                 >
                   Remove
                 </button>
               ) : (
                 <button
                   onClick={() => handleAddRemove(role.name)}
-                  className="w-16 py-2 text-xs bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+                  className="w-12 py-1 text-xs bg-primary text-white hover:bg-primary/90 transition-colors"
                 >
                   Add
                 </button>
