@@ -66,9 +66,10 @@ const navItems = [
     //   { name: "Demo 4", path: "#" },
     // ],
   },
+  { name: "Get Service", path: "/get-service" },
   { name: "Projects", path: "/projects" },
+  { name: "Clients", path: "/clients" },
   { name: "Career", path: "/career" },
-  { name: "Book Service", path: "/get-service" },
   { name: "Reach Us", path: "/reach-us" },
 ];
 

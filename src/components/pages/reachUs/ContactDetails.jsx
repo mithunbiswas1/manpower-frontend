@@ -5,21 +5,21 @@ export const ContactDetails = () => {
   const contactData = [
     {
       icon: Phone,
-      title: "Phone",
-      content: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
+      title: "Phone/WhatsApp",
+      content: "+971 [Your Number]",
+      link: "tel:+971[YourNumber]",
     },
     {
       icon: Mail,
       title: "Email",
-      content: "contact@example.com",
-      link: "mailto:contact@example.com",
+      content: "info@boxcraftuae.com",
+      link: "mailto:info@boxcraftuae.com",
     },
     {
       icon: MapPin,
       title: "Location",
-      content: "123 Main St, City, Country",
-      link: "https://maps.app.goo.gl/MoDgZv7zZnMQRxHR9",
+      content: "Warehouse No. XX, Industrial Area 11, Sharjah, UAE",
+      link: "https://goo.gl/maps/your-google-map-link",
     },
     {
       icon: Clock,

@@ -58,7 +58,7 @@ export const SharedContact = () => {
           </motion.div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center">
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-8">
           <div className="w-full md:w-2/5 py-6">
             <ContactDetails />
           </div>
