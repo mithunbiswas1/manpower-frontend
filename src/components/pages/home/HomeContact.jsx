@@ -1,5 +1,3 @@
-import { ButtonDefault } from "@/components/custom/ButtonDefault";
-import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
 import { PhoneCall, Mail, FileText } from "lucide-react";
 import Link from "next/link";
 
@@ -9,7 +7,7 @@ export const HomeContact = () => {
       {/* <div className="flex justify-center mb-12">
         <ButtonPrimary link="/about">Know More</ButtonPrimary>
       </div> */}
-      <div className="_max_width pb-20 grid grid-cols-1 lg:grid-cols-3">
+      <div className="_max_width pb-16 grid grid-cols-1 lg:grid-cols-3">
         <div className="flex flex-col items-center">
           <PhoneCall className="w-10 h-10  mb-2 text-gray-500" />
           <p className="text-lg">Call Us</p>
@@ -21,7 +19,7 @@ export const HomeContact = () => {
           </a>
         </div>
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mt-8 md:mt-0">
           <Mail className="w-10 h-10  mb-2 text-gray-500" />
           <p className="text-lg">Email Us</p>
           <a
@@ -32,7 +30,7 @@ export const HomeContact = () => {
           </a>
         </div>
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mt-8 md:mt-0">
           <FileText className="w-10 h-10  mb-2 text-gray-500" />
           <p className="text-lg">Request a Quote</p>
           <Link

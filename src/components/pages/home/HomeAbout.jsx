@@ -1,6 +1,4 @@
 "use client";
-import { Sparkles } from "lucide-react";
-import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Paragraph } from "@/components/custom/Paragraph";
 

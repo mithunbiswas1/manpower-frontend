@@ -17,6 +17,7 @@ import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffin
 import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
 import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
 import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
+import { ButtonSeeAll } from "@/components/custom/ButtonSeeAll";
 
 const project = [
   {
@@ -94,9 +95,11 @@ const project = [
 export const ProjectsCard = () => {
   return (
     <section className="bg-gray-100">
-      <div className="pt-18 pb-20 _max_width">
-        <SectionTitle className="mb-2 text-center">What We Do</SectionTitle>
-        <SectionSubHeading className="mb-10 justify-center">
+      <div className="py-16 _max_width">
+        <SectionTitle className="mb-2 text-center">
+          Real Time Projects
+        </SectionTitle>
+        <SectionSubHeading className="mb-10 justify-center text-center">
           Our Most Popular Man Power Services For You
         </SectionSubHeading>
 
@@ -155,6 +158,10 @@ export const ProjectsCard = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        <div className="flex justify-center mt-10">
+          <ButtonSeeAll href="/projects" text="See All Projects" />
+        </div>
       </div>
     </section>
   );

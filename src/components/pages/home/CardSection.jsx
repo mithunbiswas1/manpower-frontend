@@ -49,8 +49,8 @@ const cardData = [
 
 export const CardSection = () => {
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-screen-xl mx-auto px-4">
+    <section className="pt-16 pb-16 bg-gray-50">
+      <div className="_max_width">
         <SectionTitle className=" text-center mb-2">Feature</SectionTitle>
         <SectionSubHeading className="mb-8 justify-center">
           What we provide you

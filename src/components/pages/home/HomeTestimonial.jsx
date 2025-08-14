@@ -18,6 +18,7 @@ import DimitriPapakonstantinou from "@/resource/home_banner/expert_factory_workf
 import YazanAboshi from "@/resource/home_banner/expert_factory_workforce.jpg";
 import { ButtonDefault } from "@/components/custom/ButtonDefault";
 import { Paragraph } from "@/components/custom/Paragraph";
+import { ButtonSeeAll } from "@/components/custom/ButtonSeeAll";
 
 const testimonials = [
   {
@@ -109,63 +110,54 @@ export const HomeTestimonial = () => {
 
   return (
     <section className="bg-white">
-      <div className="pt-18 pb-20 _max_width">
+      <div className="py-16 _max_width">
         <SectionTitle className=" text-center mb-2">Testimonials</SectionTitle>
         <SectionSubHeading className="mb-8 justify-center">
           What Our Clients Say
         </SectionSubHeading>
-        <Swiper
-          spaceBetween={20}
-          slidesPerView={1}
-          autoplay={{ delay: 10000, disableOnInteraction: false }}
-          modules={[Autoplay, Pagination]}
-          breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-            1280: { slidesPerView: 4 },
-          }}
-          className="pb-12"
-        >
-          {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={index}>
-              <motion.div
-                variants={fadeIn("up", 0.1 + index * 0.0)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.25 }}
-                className="flex flex-col items-center p-4 min-h-[350px]"
-              >
-                <div className="relative w-40 h-40 rounded-full overflow-hidden">
-                  <Image
-                    src={testimonial.imageUrl}
-                    alt={testimonial.name}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-full"
-                  />
-                </div>
-                <h3 className="mt-4 text-xl font-semibold text-center">
-                  {testimonial.name}
-                </h3>
-                <p className="mt-1 text-sm text-gray-600 text-center"></p>
-                <Paragraph className="text-center !text-xs lg:!text-sm">
-                  {testimonial.position} <br />
-                  {testimonial.company}
-                </Paragraph>
 
-                <div className="mt-auto">
-                  <ButtonDefault
-                    className="cursor-pointer"
-                    onClick={() => openModal(testimonial)}
-                  >
-                    {testimonial?.video ? "Watch Video" : "See Comments"}
-                  </ButtonDefault>
-                </div>
-              </motion.div>
-            </SwiperSlide>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {testimonials.slice(0, 4).map((testimonial, index) => (
+            <motion.div
+              key={index}
+              variants={fadeIn("up", 0.1 + index * 0.0)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.25 }}
+              className="flex flex-col items-center p-4 min-h-[350px] bg-white rounded-lg shadow-sm"
+            >
+              <div className="relative w-40 h-40 rounded-full overflow-hidden">
+                <Image
+                  src={testimonial.imageUrl}
+                  alt={testimonial.name}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-full"
+                />
+              </div>
+              <h3 className="mt-4 text-xl font-semibold text-center">
+                {testimonial.name}
+              </h3>
+              <Paragraph className="text-center !text-xs lg:!text-sm">
+                {testimonial.position} <br />
+                {testimonial.company}
+              </Paragraph>
+
+              <div className="mt-auto">
+                <ButtonDefault
+                  className="cursor-pointer"
+                  onClick={() => openModal(testimonial)}
+                >
+                  {testimonial?.video ? "Watch Video" : "See Comments"}
+                </ButtonDefault>
+              </div>
+            </motion.div>
           ))}
-        </Swiper>
+        </div>
+
+        <div className="flex justify-center mt-10">
+          <ButtonSeeAll href="/testimonials" text="See All Testimonials" />
+        </div>
       </div>
 
       {modalOpen && (

@@ -120,6 +120,5 @@ body {
 }
 
 ._p {
-  @apply text-sm lg:text-base 2xl:text-lg font-normal;
-  
+  @apply text-sm lg:text-base 2xl:text-lg font-normal text-gray-600;
 }

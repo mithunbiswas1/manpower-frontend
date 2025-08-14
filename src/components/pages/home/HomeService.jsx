@@ -60,7 +60,7 @@ const services = [
 export const HomeService = () => {
   return (
     <section className="bg-gray-100">
-      <div className="pt-18 pb-20 _max_width">
+      <div className="py-16 _max_width">
         <SectionTitle className=" text-center mb-2">Services</SectionTitle>
         <SectionSubHeading className="mb-8 justify-center">
           Let's Talk Manpower Services
@@ -70,7 +70,7 @@ export const HomeService = () => {
             <Link
               href={link}
               key={id}
-              className="relative group block h-screen w-screen md:h-96 md:w-auto 2xl:h-[500px] overflow-hidden shadow-lg"
+              className="relative group block max-w-screen h-[450px] md:w-auto 2xl:h-[500px] overflow-hidden shadow-lg"
             >
               {/* Background image */}
               <div
@@ -93,11 +93,11 @@ export const HomeService = () => {
                   {/* X and Y white lines */}
                   <div className="absolute inset-0 flex">
                     <div className="w-0.5 h-full ml-6 bg-secondary opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                    <div className="absolute w-2/5 xl:w-1/5 bottom-14 h-0.5 bg-secondary opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                    <div className="absolute w-2/5 xl:w-1/5 bottom-12 md:bottom-14 h-0.5 bg-secondary opacity-0 group-hover:opacity-100 transition-all duration-500" />
                   </div>
 
                   {/* Title */}
-                  <h4 className="absolute _h4 opacity-0 group-hover:opacity-100 group-hover:text-2xl font-semibold z-10 text-right bottom-10 right-10 transition-all duration-300 ml-10 xl:ml-20">
+                  <h4 className="absolute _h4 opacity-0 group-hover:opacity-100 group-hover:text-2xl font-semibold z-10 text-right bottom-10 right-10 transition-all duration-300 ml-20">
                     {title}
                   </h4>
                 </div>
