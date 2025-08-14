@@ -52,7 +52,7 @@ export const BookingSummary = ({ booking }) => {
   return (
     <>
       {/* Booking Summary Card */}
-      <div className="p-4 rounded-lg bg-white shadow-md h-full flex flex-col">
+      <div className="p-4 rounded-lg bg-white shadow-md flex flex-col">
         <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
           <ShoppingCart size={24} /> Booking Summary
         </h3>
@@ -73,7 +73,7 @@ export const BookingSummary = ({ booking }) => {
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-500 italic mt-8">
+            <p className="text-center text-gray-500 italic mt-8 mb-4">
               Your booking summary will appear here.
             </p>
           )}
@@ -106,7 +106,7 @@ export const BookingSummary = ({ booking }) => {
             >
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold text-primary">
-                  Make an Appointment
+                  Custom Quote Form
                 </h2>
                 <ButtonDefault
                   onClick={onClose}
