@@ -15,11 +15,11 @@ export default function Home() {
       <HomeAbout />
       <HomeContact />
       <HomeService />
-      <CardSection />
+      {/* <CardSection /> */}
       <ProjectsCard />
-      <HomeTestimonial />
-      <HomeQuickStats />
       <HomeClients />
+      <HomeTestimonial />
+      {/* <HomeQuickStats /> */}
     </>
   );
 }

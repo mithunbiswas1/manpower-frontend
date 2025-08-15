@@ -55,7 +55,8 @@ export const ManpowerForm = ({
             <div className="h-15 w-15 flex items-center justify-center mb-2 text-primary">
               {/* <UserRound size={80} /> */}
               <Image
-                src="https://tabascouae.com/img/services/serman.svg"
+                // src="https://tabascouae.com/img/services/serman.svg"
+                src={logo_img}
                 alt="image"
                 height={80}
                 width={80}

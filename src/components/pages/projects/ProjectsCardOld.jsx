@@ -18,7 +18,6 @@ import certified_safety_officers from "@/resource/home_banner/certified_safety_o
 import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
 import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
 import { ButtonSeeAll } from "@/components/custom/ButtonSeeAll";
-import { Paragraph } from "@/components/custom/Paragraph";
 
 const project = [
   {
@@ -132,16 +131,27 @@ export const ProjectsCard = () => {
                     style={{ backgroundImage: `url(${item.imageUrl.src})` }}
                     aria-hidden="true"
                   />
-                </Link>
 
-                <div className="mt-2">
-                  <h6 className="_h6 text-center text-gray-600 !font-semibold">
-                    {item.title}
-                  </h6>
-                  <Paragraph className="text-center my-2">
-                    {item.location}
-                  </Paragraph>
-                </div>
+                  {/* Overlay with flip animation */}
+                  <div className="w-full h-0 group-hover:h-full bg-black/30 text-white transition-all duration-500 ease-in-out transform origin-bottom group-hover:rotate-x-0"></div>
+                  <div className="absolute inset-0 m-2 flex items-end justify-center overflow-hidden">
+                    <div className="w-full h-0 group-hover:h-7/10 bg-black/70 text-white p-4 transition-all duration-500 ease-in-out transform origin-bottom rotate-x-90 group-hover:rotate-x-0">
+                      <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div className="bg-secondary text-black rounded-full p-1">
+                          <Plus className="size-10" />
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="absolute _h4 opacity-0 group-hover:opacity-100 group-hover:text-2xl font-semibold z-10 p-4 bottom-10 left-2 transition-all duration-300">
+                        {item.title}
+                      </h3>
+                      <h6 className="absolute _h6 opacity-0 group-hover:opacity-100 group-hover:text-2xl font-semibold z-10 p-4 bottom-2 left-2 transition-all duration-300">
+                        {item.location}
+                      </h6>
+                    </div>
+                  </div>
+                </Link>
               </motion.div>
             </SwiperSlide>
           ))}

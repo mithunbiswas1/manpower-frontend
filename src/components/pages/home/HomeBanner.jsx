@@ -178,8 +178,14 @@ export const HomeBanner = () => {
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.7 }}
+                      className="space-x-3"
                     >
-                      <ButtonPrimary link="/reach-us">Book Now</ButtonPrimary>
+                      <ButtonPrimary link="/reach-us">
+                        Request Quotation
+                      </ButtonPrimary>
+                      <ButtonPrimary className="bg-secondary" link="/reach-us">
+                        Get Services
+                      </ButtonPrimary>
                     </motion.div>
                   </div>
                 </div>

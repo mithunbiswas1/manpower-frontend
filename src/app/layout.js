@@ -2,6 +2,7 @@
 import "@/app/globals.css";
 import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
+import WhatsAppChatButton from "@/components/WhatsAppChatButton";
 
 export const metadata = {
   title: "Empowering Your Business with Skilled & Compliant Manpower.",
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <WhatsAppChatButton />
       </body>
     </html>
   );
