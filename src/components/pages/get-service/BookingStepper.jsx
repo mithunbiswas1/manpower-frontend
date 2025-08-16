@@ -45,11 +45,7 @@ export const BookingStepper = ({ activeStep }) => {
                     : "bg-primary/10 text-primary"
                 }`}
             >
-              {activeStep > step.id ? (
-                <CheckCircle size={24} className="text-white" />
-              ) : (
-                step.id
-              )}
+              {step.id}
             </div>
 
             {/* Connector line for desktop */}

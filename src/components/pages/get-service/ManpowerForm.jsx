@@ -35,7 +35,7 @@ export const ManpowerForm = ({
 
   return (
     <div className="flex flex-col h-full">
-      <div className="h-32 bg-primary text-white md:p-4 mb-4 relative">
+      <div className="h-40 bg-primary text-white md:p-4 mb-4 relative">
         <h2 className="text-3xl font-bold absolute top-1/2 -translate-y-1/2 p-2">
           {selectedService}
         </h2>
@@ -57,7 +57,7 @@ export const ManpowerForm = ({
           >
             <div className="h-15 w-15 flex items-center justify-center mb-2 text-primary">
               <Image
-                src={logo_img}
+                src="https://image.winudf.com/v2/image1/Y29tLmZvcmJpdGJkLmNvbnN0cnVjdGlvbm1hbmFnZXJfaWNvbl8xNjAzODc0Nzk1XzA5NA/icon.png?w=156&fakeurl=1"
                 alt="image"
                 height={80}
                 width={80}
