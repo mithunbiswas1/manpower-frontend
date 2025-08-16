@@ -49,27 +49,29 @@ const footerSections = [
     title: "About Us",
     content: {
       description:
-        "At Al Shahara Group, we believe that people are the foundation of every successful operation. Based in the heart of the Gulf, we specialize in providing skilled and reliable manpower solutions across a range.",
+        "At Al Shahara Group, we believe that people are the foundation of every successful operation. Based in the heart of the Gulf, we specialize in reliable manpower solutions across a range.",
       badge: "#1 Man Power Services",
     },
   },
   {
     title: "Useful Links",
     links: [
-      { icon: <Home size={16} />, name: "Home", href: "/" },
-      { icon: <Info size={16} />, name: "About Us", href: "/about-us" },
-      {
-        icon: <Wrench size={16} />,
-        name: "Services",
-        href: "/services",
-      },
+      // { icon: <Home size={16} />, name: "Home", href: "/" },
+      // { icon: <Info size={16} />, name: "About Us", href: "/about-us" },
+      // { icon: <Wrench size={16} />, name: "Services", href: "/get-service" },
       {
         icon: <BookOpenCheck size={16} />,
         name: "Projects",
         href: "/projects",
       },
       { icon: <Users size={16} />, name: "Clients", href: "/clients" },
-      { icon: <Phone size={16} />, name: "Reach Us", href: "/contact" },
+      { icon: <User size={16} />, name: "Career", href: "/career" },
+      { icon: <Phone size={16} />, name: "Reach Us", href: "/reach-us" },
+      {
+        icon: <Info size={16} />,
+        name: "Terms And Conditions",
+        href: "/terms-and-conditions",
+      },
     ],
   },
   {
@@ -77,23 +79,28 @@ const footerSections = [
     links: [
       {
         icon: <User size={16} />,
-        name: "Skilled Technicians",
-        href: "#",
+        name: "Warehouse & Packing Helpers",
+        href: "/get-service",
       },
       {
         icon: <Briefcase size={16} />,
-        name: "Trained Professionals",
-        href: "#",
+        name: "Cleaning Staff",
+        href: "/get-service",
       },
       {
         icon: <Users size={16} />,
-        name: "Certified Team",
-        href: "#",
+        name: "Construction Labour",
+        href: "/get-service",
       },
       {
         icon: <Wrench size={16} />,
-        name: "Expert Staff",
-        href: "#",
+        name: "Hospitality Workers",
+        href: "/get-service",
+      },
+      {
+        icon: <BookOpenCheck size={16} />,
+        name: "Factory & General Helpers",
+        href: "/get-service",
       },
     ],
   },
