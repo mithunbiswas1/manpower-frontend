@@ -35,8 +35,8 @@ export const ManpowerForm = ({
 
   return (
     <div className="flex flex-col h-full">
-      <div className="h-40 bg-primary text-white md:p-4 mb-4 relative">
-        <h2 className="text-3xl font-bold absolute top-1/2 -translate-y-1/2 p-2">
+      <div className="h-40 bg-gray-100 text-white md:p-4 mb-4 relative">
+        <h2 className="text-3xl font-bold absolute top-1/2 -translate-y-1/2 p-2 text-gray-700">
           {selectedService}
         </h2>
         <div className="absolute top-0 right-0 h-full w-1/3 overflow-hidden rounded-r-lg">
@@ -44,7 +44,7 @@ export const ManpowerForm = ({
             src="https://images.pexels.com/photos/16697843/pexels-photo-16697843/free-photo-of-factory-worker.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt={selectedService}
             fill
-            className="object-cover object-center opacity-30"
+            className="object-cover object-center opacity-90 p-2"
           />
         </div>
       </div>

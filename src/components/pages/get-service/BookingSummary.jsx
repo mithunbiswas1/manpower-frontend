@@ -17,7 +17,7 @@ export const BookingSummary = ({
     company: "",
     contact: "",
     email: "",
-    tradeLicense: null, // New field for the file upload
+    tradeLicense: null,
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -58,7 +58,7 @@ export const BookingSummary = ({
   return (
     <>
       {/* Booking Summary Card */}
-      <div className="p-4 rounded-lg bg-white shadow-md flex flex-col">
+      <div className="p-2 rounded-lg flex flex-col">
         <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
           <ShoppingCart size={24} /> Booking Summary
         </h3>
@@ -186,7 +186,7 @@ export const BookingSummary = ({
                     rows={3}
                   />
                   <ButtonSecondary type="submit" className="w-full mt-2">
-                    Get My Custom Quote Now
+                    Submit Custom Quote
                   </ButtonSecondary>
                 </form>
               ) : (
