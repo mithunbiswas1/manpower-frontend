@@ -1,24 +1,22 @@
 // components/pages/get-service/ServiceSelection.jsx
 "use client";
 import {
-  Factory,
-  Brush,
-  Shield,
-  Hotel,
-  LifeBuoy,
-  Users,
-  Clock,
+  Package, // for Warehouse & Packing Helpers
+  BrushCleaning, // for Cleaning Staff
+  Hammer, // for Construction Labour
+  UtensilsCrossed, // for Hospitality Workers
+  Factory, // for Factory & General Helpers
+  Users, // for Others Labour & Workers
 } from "lucide-react";
 
-// Map your service names to icons
+// Map your new service names to icons
 const serviceIcons = {
-  "Factory Workers": Factory,
-  "Cleaning Services": Brush,
-  "Security Guard": Shield,
-  "Hotel & Catering": Hotel,
-  "Safety Officer": LifeBuoy,
-  "Permanent Staffing": Users,
-  "Temporary Staffing": Clock,
+  "Warehouse & Packing Helpers": Package,
+  "Cleaning Staff": BrushCleaning,
+  "Construction Labour": Hammer,
+  "Hospitality Workers": UtensilsCrossed,
+  "Factory & General Helpers": Factory,
+  "Others Labour & Workers": Users,
 };
 
 export const ServiceSelection = ({
@@ -35,7 +33,7 @@ export const ServiceSelection = ({
             <li
               key={serviceName}
               onClick={() => onSelectService(serviceName)}
-              className={`p-0.5 md:p-2 flex flex-col gap-1 md:gap-2 items-center cursor-pointer transition-colors duration-300 rounded-lg`}
+              className="p-0.5 md:p-2 flex flex-col gap-1 md:gap-2 items-center cursor-pointer transition-colors duration-300 rounded-lg"
             >
               {Icon && (
                 <div

@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import image1 from "@/resource/service1.jpg";
+import chairman from "@/resource/chairman.jpg";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Paragraph } from "@/components/custom/Paragraph";
 
@@ -28,7 +29,7 @@ export const AboutChaiman = () => {
       <div className="_max_width grid grid-cols-1 lg:grid-cols-2 gap-12 md:!px-20 2xl:!px-32">
         {/* Image Section */}
         <Image
-          src={image.src}
+          src={chairman.src}
           alt={image.alt}
           width={1920}
           height={1080}

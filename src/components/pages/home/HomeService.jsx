@@ -1,13 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Sparkles, Plus } from "lucide-react";
-import { motion } from "framer-motion";
-import { fadeIn } from "@/ultils/motion";
+import { Plus } from "lucide-react";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
@@ -16,42 +12,41 @@ import trusted_security_personnel from "@/resource/home_banner/trusted_security_
 import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffing.jpg";
 import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
 import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
-import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
 
 const services = [
   {
     id: 1,
-    title: "Factory & Industrial Staffing",
+    title: "Warehouse & Packing Helpers",
     imageUrl: expert_factory_workforce,
     link: "#",
   },
   {
     id: 2,
-    title: "Professional Cleaning Services",
+    title: "Cleaning Staff",
     imageUrl: professional_leaning_services,
     link: "#",
   },
   {
     id: 3,
-    title: "Licensed Security Personnel",
+    title: "Construction Labour",
     imageUrl: trusted_security_personnel,
     link: "#",
   },
   {
     id: 4,
-    title: "Hotel & Catering",
+    title: "Hospitality Workers",
     imageUrl: hotel_catering_taffing,
     link: "#",
   },
   {
     id: 5,
-    title: "Certified Safety Officers",
+    title: "Factory & General Helpers",
     imageUrl: certified_safety_officers,
     link: "#",
   },
   {
     id: 6,
-    title: "Permanent Staffing Solutions",
+    title: "Others Labour & Workers",
     imageUrl: permanent_staffing_solutions,
     link: "#",
   },

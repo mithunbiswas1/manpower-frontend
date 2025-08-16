@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Sparkles, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
 import { SectionTitle } from "@/components/custom/SectionTitle";

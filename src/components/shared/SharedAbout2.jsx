@@ -25,7 +25,7 @@ export const SharedAbout2 = () => {
                 key={index}
                 className="flex items-start gap-3 text-gray-700 leading-relaxed"
               >
-                <CheckCircle className="text-green-600 w-5 h-5 mt-1 shrink-0" />
+                <CheckCircle className="text-primary w-5 h-5 mt-1 shrink-0" />
                 <span>{item}</span>
               </li>
             ))}

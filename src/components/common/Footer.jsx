@@ -16,6 +16,7 @@ import {
   Users,
   Briefcase,
   Phone,
+  ShieldCheck,
 } from "lucide-react";
 import { SharedContactService } from "../shared/SharedContactService";
 
@@ -66,11 +67,16 @@ const footerSections = [
       },
       { icon: <Users size={16} />, name: "Clients", href: "/clients" },
       { icon: <User size={16} />, name: "Career", href: "/career" },
-      { icon: <Phone size={16} />, name: "Reach Us", href: "/reach-us" },
+      // { icon: <Phone size={16} />, name: "Reach Us", href: "/reach-us" },
       {
         icon: <Info size={16} />,
         name: "Terms And Conditions",
-        href: "/terms-and-conditions",
+        href: "/terms-conditions",
+      },
+      {
+        icon: <ShieldCheck size={16} />,
+        name: "Privacy- Policy",
+        href: "/privacy-policy",
       },
     ],
   },

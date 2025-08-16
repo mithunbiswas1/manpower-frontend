@@ -1,7 +1,7 @@
+// ManpowerForm.jsx
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import logo_img from "@/resource/man_logo.jpg";
 import { Paragraph } from "@/components/custom/Paragraph";
 
 export const ManpowerForm = ({
@@ -10,6 +10,7 @@ export const ManpowerForm = ({
   booking,
   onBookingUpdate,
   onFormInteraction,
+  serviceImage,
 }) => {
   const [quantities, setQuantities] = useState({});
 
@@ -35,16 +36,18 @@ export const ManpowerForm = ({
 
   return (
     <div className="flex flex-col h-full">
-      <div className="h-40 bg-gray-100 text-white md:p-4 mb-4 relative">
-        <h2 className="text-3xl font-bold absolute top-1/2 -translate-y-1/2 p-2 text-gray-700">
+      <div className="h-40 bg-gray-100 text-white md:p-4 mb-4 flex items-center justify-between space-x-2 overflow-hidden">
+        {/* Left side: Service Title */}
+        <h2 className="w-2/3 text-xl md:text-2xl lg:text-3xl font-bold text-gray-700 px-2">
           {selectedService}
         </h2>
-        <div className="absolute top-0 right-0 h-full w-1/3 overflow-hidden rounded-r-lg">
+
+        {/* Right side: Service Image */}
+        <div className="h-full w-1/3">
           <Image
-            src="https://images.pexels.com/photos/16697843/pexels-photo-16697843/free-photo-of-factory-worker.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            src={serviceImage}
             alt={selectedService}
-            fill
-            className="object-cover object-center opacity-90 p-2"
+            className="object-cover object-center h-full w-full"
           />
         </div>
       </div>
@@ -61,7 +64,6 @@ export const ManpowerForm = ({
                 alt="image"
                 height={80}
                 width={80}
-                className=""
               />
             </div>
             <Paragraph className="!font-bold !text-sm">{role.name}</Paragraph>

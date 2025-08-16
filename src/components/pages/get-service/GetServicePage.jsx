@@ -1,29 +1,36 @@
+// GetServicePage.jsx
 "use client";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { ServiceSelection } from "@/components/pages/get-service/ServiceSelection";
 import { ManpowerForm } from "@/components/pages/get-service/ManpowerForm";
 import { BookingSummary } from "@/components/pages/get-service/BookingSummary";
-import { BookingStepper } from "./BookingStepper";
+import { BookingStepper } from "@/components/pages/get-service/BookingStepper";
+
+import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
+import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
+import trusted_security_personnel from "@/resource/home_banner/trusted_security_personnel.jpg";
+import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffing.jpg";
+import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
+import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
 
 export const GetServicePage = () => {
   const searchParams = useSearchParams();
-  const [selectedService, setSelectedService] = useState("Factory Workers");
+  const [selectedService, setSelectedService] = useState(
+    "Warehouse & Packing Helpers"
+  );
   const [booking, setBooking] = useState({});
   const [activeStep, setActiveStep] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // Read the 'service' parameter from the URL
     const serviceFromUrl = searchParams.get("service");
     if (serviceFromUrl) {
-      // Decode the URL component and set the selected service
       setSelectedService(decodeURIComponent(serviceFromUrl));
     }
   }, [searchParams]);
 
   useEffect(() => {
-    // Update active step based on booking state
     const hasBookings = Object.values(booking).some(
       (service) => Object.keys(service).length > 0
     );
@@ -39,7 +46,7 @@ export const GetServicePage = () => {
 
   const handleSelectService = (service) => {
     setSelectedService(service);
-    setActiveStep(1); // Set to step 1 when a service is selected
+    setActiveStep(1);
   };
 
   const handleBookingUpdate = (service, role, quantity) => {
@@ -64,8 +71,6 @@ export const GetServicePage = () => {
 
       return newBooking;
     });
-    // This will trigger the useEffect to update the step to 3 if there are bookings
-    // or keep it at 2 if the form is interacted with but no booking is added yet.
   };
 
   const handleFormInteraction = () => {
@@ -102,11 +107,12 @@ export const GetServicePage = () => {
         {/* Main Content Area */}
         <div className="md:col-span-6 px-4">
           <ManpowerForm
-            serviceData={serviceData[selectedService]}
+            serviceData={serviceData[selectedService]?.roles || []}
             selectedService={selectedService}
             booking={booking}
             onBookingUpdate={handleBookingUpdate}
             onFormInteraction={handleFormInteraction}
+            serviceImage={serviceData[selectedService]?.imageUrl}
           />
         </div>
 
@@ -125,40 +131,52 @@ export const GetServicePage = () => {
   );
 };
 
-// This data powers the components
+// Updated serviceData
 const serviceData = {
-  "Factory Workers": [
-    { name: "Supervisor", defaultQty: 0 },
-    { name: "Foreman", defaultQty: 0 },
-    { name: "Chargehand", defaultQty: 0 },
-    { name: "Safety Officer", defaultQty: 0 },
-    { name: "Scaffolder Certified", defaultQty: 0 },
-    { name: "Scaffolder Normal", defaultQty: 0 },
-  ],
-  "Cleaning Services": [
-    { name: "Team Lead", defaultQty: 0 },
-    { name: "Cleaning Staff", defaultQty: 0 },
-    { name: "Sanitation Expert", defaultQty: 0 },
-  ],
-  "Security Guard": [
-    { name: "Head Guard", defaultQty: 0 },
-    { name: "Security Guard", defaultQty: 0 },
-  ],
-  "Hotel & Catering": [
-    { name: "Chef", defaultQty: 0 },
-    { name: "Waiter", defaultQty: 0 },
-    { name: "Housekeeping", defaultQty: 0 },
-  ],
-  "Safety Officer": [
-    { name: "Safety Supervisor", defaultQty: 0 },
-    { name: "Safety Officer", defaultQty: 0 },
-  ],
-  "Permanent Staffing": [
-    { name: "Hiring Manager", defaultQty: 0 },
-    { name: "Recruiter", defaultQty: 0 },
-  ],
-  "Temporary Staffing": [
-    { name: "Temp Staff", defaultQty: 0 },
-    { name: "Project Lead", defaultQty: 0 },
-  ],
+  "Warehouse & Packing Helpers": {
+    imageUrl: expert_factory_workforce,
+    roles: [
+      { name: "Supervisor", defaultQty: 0 },
+      { name: "Foreman", defaultQty: 0 },
+      { name: "Chargehand", defaultQty: 0 },
+    ],
+  },
+  "Cleaning Staff": {
+    imageUrl: professional_leaning_services,
+    roles: [
+      { name: "Team Lead", defaultQty: 0 },
+      { name: "Cleaning Staff", defaultQty: 0 },
+      { name: "Sanitation Expert", defaultQty: 0 },
+    ],
+  },
+  "Construction Labour": {
+    imageUrl: trusted_security_personnel,
+    roles: [
+      { name: "Mason", defaultQty: 0 },
+      { name: "Helper", defaultQty: 0 },
+      { name: "Welder", defaultQty: 0 },
+    ],
+  },
+  "Hospitality Workers": {
+    imageUrl: hotel_catering_taffing,
+    roles: [
+      { name: "Chef", defaultQty: 0 },
+      { name: "Waiter", defaultQty: 0 },
+      { name: "Housekeeping", defaultQty: 0 },
+    ],
+  },
+  "Factory & General Helpers": {
+    imageUrl: certified_safety_officers,
+    roles: [
+      { name: "Factory Helper", defaultQty: 0 },
+      { name: "General Worker", defaultQty: 0 },
+    ],
+  },
+  "Others Labour & Workers": {
+    imageUrl: permanent_staffing_solutions,
+    roles: [
+      { name: "Temp Staff", defaultQty: 0 },
+      { name: "Project Lead", defaultQty: 0 },
+    ],
+  },
 };
