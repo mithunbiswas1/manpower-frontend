@@ -9,11 +9,11 @@ export const ManpowerForm = ({
   selectedService,
   booking,
   onBookingUpdate,
+  onFormInteraction,
 }) => {
   const [quantities, setQuantities] = useState({});
 
   useEffect(() => {
-    // Initialize with an empty string to show the placeholder, or with a booked quantity
     const initialQuantities = {};
     serviceData.forEach((role) => {
       initialQuantities[role.name] =
@@ -25,6 +25,7 @@ export const ManpowerForm = ({
   const handleQuantityChange = (roleName, value) => {
     const newQuantity = Math.max(0, parseInt(value, 10) || 0);
     setQuantities((prev) => ({ ...prev, [roleName]: newQuantity }));
+    onFormInteraction();
   };
 
   const handleAddRemove = (roleName) => {
@@ -55,9 +56,7 @@ export const ManpowerForm = ({
             className="flex flex-col items-center text-center p-4 "
           >
             <div className="h-15 w-15 flex items-center justify-center mb-2 text-primary">
-              {/* <UserRound size={80} /> */}
               <Image
-                // src="https://tabascouae.com/img/services/serman.svg"
                 src={logo_img}
                 alt="image"
                 height={80}
@@ -74,6 +73,7 @@ export const ManpowerForm = ({
                 onChange={(e) =>
                   handleQuantityChange(role.name, e.target.value)
                 }
+                onFocus={onFormInteraction}
                 min="0"
                 className="w-12 lg:w-20 h-6 p-1 text-[10px] text-center border focus:outline-none focus:ring-2 focus:ring-primary"
               />

@@ -1,4 +1,3 @@
-// components/pages/get-service/GetServicePage.jsx
 "use client";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
@@ -11,6 +10,8 @@ export const GetServicePage = () => {
   const searchParams = useSearchParams();
   const [selectedService, setSelectedService] = useState("Factory Workers");
   const [booking, setBooking] = useState({});
+  const [activeStep, setActiveStep] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Read the 'service' parameter from the URL
@@ -21,8 +22,24 @@ export const GetServicePage = () => {
     }
   }, [searchParams]);
 
+  useEffect(() => {
+    // Update active step based on booking state
+    const hasBookings = Object.values(booking).some(
+      (service) => Object.keys(service).length > 0
+    );
+
+    if (isModalOpen) {
+      setActiveStep(4);
+    } else if (hasBookings) {
+      setActiveStep(3);
+    } else if (selectedService) {
+      setActiveStep(1);
+    }
+  }, [booking, selectedService, isModalOpen]);
+
   const handleSelectService = (service) => {
     setSelectedService(service);
+    setActiveStep(1); // Set to step 1 when a service is selected
   };
 
   const handleBookingUpdate = (service, role, quantity) => {
@@ -47,11 +64,30 @@ export const GetServicePage = () => {
 
       return newBooking;
     });
+    // This will trigger the useEffect to update the step to 3 if there are bookings
+    // or keep it at 2 if the form is interacted with but no booking is added yet.
+  };
+
+  const handleFormInteraction = () => {
+    setActiveStep(2);
+  };
+
+  const handleBookNow = () => {
+    setIsModalOpen(true);
+    setActiveStep(4);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmission = () => {
+    setActiveStep(5);
   };
 
   return (
     <div className="pb-16">
-      <BookingStepper />
+      <BookingStepper activeStep={activeStep} />
 
       <div className="_max_width bg-white grid grid-cols-1 md:grid-cols-11">
         {/* Left Navigation */}
@@ -70,12 +106,19 @@ export const GetServicePage = () => {
             selectedService={selectedService}
             booking={booking}
             onBookingUpdate={handleBookingUpdate}
+            onFormInteraction={handleFormInteraction}
           />
         </div>
 
         {/* Right Sidebar Summary */}
         <div className="md:col-span-3 bg-gray-100 p-4 border-l border-gray-200">
-          <BookingSummary booking={booking} />
+          <BookingSummary
+            booking={booking}
+            onBookNow={handleBookNow}
+            onClose={handleModalClose}
+            onSubmission={handleSubmission}
+            isModalOpen={isModalOpen}
+          />
         </div>
       </div>
     </div>

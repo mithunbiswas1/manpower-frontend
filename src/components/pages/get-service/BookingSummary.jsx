@@ -5,17 +5,19 @@ import { ButtonSecondary } from "@/components/custom/ButtonSecondary";
 import { ButtonDefault } from "@/components/custom/ButtonDefault";
 import { ShoppingCart, X } from "lucide-react";
 
-export const BookingSummary = ({ booking }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const BookingSummary = ({
+  booking,
+  onBookNow,
+  onClose,
+  onSubmission,
+  isModalOpen,
+}) => {
   const [formData, setFormData] = useState({
-    companyName: "",
-    contactPerson: "",
-    phoneEmail: "",
-    labourType: "",
-    quantity: "",
-    worksiteLocation: "",
-    contractDuration: "",
-    startDate: "",
+    name: "",
+    company: "",
+    contact: "",
+    email: "",
+    tradeLicense: null, // New field for the file upload
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -27,24 +29,28 @@ export const BookingSummary = ({ booking }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prev) => ({ ...prev, tradeLicense: file }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Booking Request Submitted:", formData);
+    // You would typically send the formData to a server here, including the file.
     setSubmitted(true);
+    onSubmission();
   };
 
-  const onClose = () => {
-    setIsOpen(false);
+  const handleClose = () => {
+    onClose();
     setSubmitted(false);
     setFormData({
-      companyName: "",
-      contactPerson: "",
-      phoneEmail: "",
-      labourType: "",
-      quantity: "",
-      worksiteLocation: "",
-      contractDuration: "",
-      startDate: "",
+      name: "",
+      company: "",
+      contact: "",
+      email: "",
+      tradeLicense: null,
       message: "",
     });
   };
@@ -79,7 +85,11 @@ export const BookingSummary = ({ booking }) => {
           )}
         </div>
         <div className="mt-auto pt-4 border-t">
-          <ButtonSecondary onClick={() => setIsOpen(true)} className="w-full">
+          <ButtonSecondary
+            onClick={onBookNow}
+            className="w-full"
+            disabled={!hasBookings}
+          >
             Book Now
           </ButtonSecondary>
         </div>
@@ -87,14 +97,14 @@ export const BookingSummary = ({ booking }) => {
 
       {/* Modal */}
       <AnimatePresence>
-        {isOpen && (
+        {isModalOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-            onClick={onClose}
+            onClick={handleClose}
           >
             <motion.div
               initial={{ y: -50, opacity: 0 }}
@@ -109,7 +119,7 @@ export const BookingSummary = ({ booking }) => {
                   Custom Quote Form
                 </h2>
                 <ButtonDefault
-                  onClick={onClose}
+                  onClick={handleClose}
                   className="text-gray-500 cursor-pointer hover:bg-secondary rounded-sm hover:text-white transition-all duration-200"
                 >
                   <X size={24} />
@@ -121,81 +131,51 @@ export const BookingSummary = ({ booking }) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input
                       type="text"
-                      name="companyName"
+                      name="name"
+                      placeholder="Name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="border rounded px-3 py-2 w-full"
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="company"
                       placeholder="Company Name"
-                      value={formData.companyName}
+                      value={formData.company}
                       onChange={handleInputChange}
                       className="border rounded px-3 py-2 w-full"
                       required
                     />
                     <input
                       type="text"
-                      name="contactPerson"
-                      placeholder="Contact Person"
-                      value={formData.contactPerson}
+                      name="contact"
+                      placeholder="Contact Number"
+                      value={formData.contact}
                       onChange={handleInputChange}
                       className="border rounded px-3 py-2 w-full"
                       required
                     />
                     <input
-                      type="text"
-                      name="phoneEmail"
-                      placeholder="Phone & Email"
-                      value={formData.phoneEmail}
+                      type="email"
+                      name="email"
+                      placeholder="Email Address"
+                      value={formData.email}
                       onChange={handleInputChange}
                       className="border rounded px-3 py-2 w-full"
                       required
                     />
-                    <select
-                      name="labourType"
-                      value={formData.labourType}
-                      onChange={handleInputChange}
-                      className="border rounded px-3 py-2 w-full"
-                      required
-                    >
-                      <option value="">Type of Labour Required</option>
-                      <option value="Skilled">Skilled</option>
-                      <option value="Unskilled">Unskilled</option>
-                      <option value="Supervisory">Supervisory</option>
-                    </select>
-                    <input
-                      type="number"
-                      name="quantity"
-                      placeholder="Quantity Needed"
-                      value={formData.quantity}
-                      onChange={handleInputChange}
-                      className="border rounded px-3 py-2 w-full"
-                      required
-                    />
-                    <input
-                      type="text"
-                      name="worksiteLocation"
-                      placeholder="Worksite Location"
-                      value={formData.worksiteLocation}
-                      onChange={handleInputChange}
-                      className="border rounded px-3 py-2 w-full"
-                      required
-                    />
-                    <select
-                      name="contractDuration"
-                      value={formData.contractDuration}
-                      onChange={handleInputChange}
-                      className="border rounded px-3 py-2 w-full"
-                      required
-                    >
-                      <option value="">Contract Duration</option>
-                      <option value="Daily">Daily</option>
-                      <option value="Monthly">Monthly</option>
-                      <option value="Project">Project</option>
-                    </select>
-                    <input
-                      type="date"
-                      name="startDate"
-                      value={formData.startDate}
-                      onChange={handleInputChange}
-                      className="border rounded px-3 py-2 w-full"
-                      required
-                    />
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Trade License
+                      </label>
+                      <input
+                        type="file"
+                        name="tradeLicense"
+                        onChange={handleFileChange}
+                        className="border rounded px-3 py-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
+                      />
+                    </div>
                   </div>
                   <textarea
                     name="message"
@@ -215,7 +195,7 @@ export const BookingSummary = ({ booking }) => {
                     ✅ Thank you. Our team will respond with a quotation within
                     24 hours.
                   </p>
-                  <ButtonSecondary onClick={onClose} className="mt-4">
+                  <ButtonSecondary onClick={handleClose} className="mt-4">
                     Close
                   </ButtonSecondary>
                 </div>

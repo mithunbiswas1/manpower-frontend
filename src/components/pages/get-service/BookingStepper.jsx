@@ -1,4 +1,3 @@
-// components/pages/get-service/BookingStepper.jsx
 "use client";
 
 import { CheckCircle } from "lucide-react";
@@ -9,14 +8,14 @@ import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Paragraph } from "@/components/custom/Paragraph";
 
 const steps = [
-  { id: 1, text: "Choose category" },
-  { id: 2, text: "Choose trade" },
-  { id: 3, text: "Enter quantity and click add" },
-  { id: 4, text: "Review booking summary and click 'book now'" },
-  { id: 5, text: "Fill in details and click proceed" },
+  { id: 1, text: "Choose a service" },
+  { id: 2, text: "Select trades and quantity" },
+  { id: 3, text: "Review your booking" },
+  { id: 4, text: "Submit your request" },
+  { id: 5, text: "Await our response" },
 ];
 
-export const BookingStepper = () => {
+export const BookingStepper = ({ activeStep }) => {
   return (
     <section className="_max_width py-16 px-4 md:px-10 bg-white">
       {/* Heading */}
@@ -39,13 +38,24 @@ export const BookingStepper = () => {
             className="flex flex-col items-center text-center relative md:w-1/5"
           >
             {/* Step Number */}
-            <div className="flex items-center justify-center w-14 h-14 rounded-full border-2 border-primary bg-primary/10 text-primary font-bold text-lg relative z-10">
-              {step.id}
+            <div
+              className={`flex items-center justify-center w-14 h-14 rounded-full border-2 border-primary font-bold text-lg relative z-10 transition-colors duration-300
+                ${
+                  activeStep >= step.id
+                    ? "bg-primary text-white"
+                    : "bg-primary/10 text-primary"
+                }`}
+            >
+              {activeStep > step.id ? (
+                <CheckCircle size={24} className="text-white" />
+              ) : (
+                step.id
+              )}
             </div>
 
             {/* Connector line for desktop */}
             {index < steps.length - 1 && (
-              <div className="hidden md:block absolute top-7 left-full w-full h-0.5 bg-gray-300 -z-0" />
+              <div className="hidden md:block absolute top-7 left-[calc(50%+28px)] w-[calc(100%-56px)] h-0.5 bg-gray-300 -z-0" />
             )}
 
             {/* Step Text */}
