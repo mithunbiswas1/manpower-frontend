@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import { X, ChevronDown } from "lucide-react";
+import { X } from "lucide-react";
 
 import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
 import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
@@ -17,11 +17,43 @@ import permanent_staffing_solutions from "@/resource/home_banner/permanent_staff
 import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
 
 import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
-import ContactForm from "../reachUs/ContactForm";
 import { ButtonDefault } from "@/components/custom/ButtonDefault";
+import { ButtonSecondary } from "@/components/custom/ButtonSecondary";
 
-// --- New Modal Component (Moved from Navbar) ---
+// --- Booking-style Modal ---
 const AppointmentModal = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    contact: "",
+    email: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Submitted:", formData);
+    setSubmitted(true);
+  };
+
+  const handleClose = () => {
+    onClose();
+    setSubmitted(false);
+    setFormData({
+      name: "",
+      company: "",
+      contact: "",
+      email: "",
+      message: "",
+    });
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -33,29 +65,94 @@ const AppointmentModal = ({ isOpen, onClose }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-          onClick={onClose} // Close modal when clicking outside
+          onClick={handleClose}
         >
           <motion.div
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -50, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="bg-white rounded-lg shadow-xl w-5/6 md:w-4/6 max-w-5xl mx-4"
-            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
+            className="bg-white rounded-lg shadow-xl w-5/6 md:w-4/6 max-w-5xl mx-4 overflow-y-auto max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-center p-6">
+            {/* Header */}
+            <div className="flex justify-between items-center p-6 border-b">
               <h2 className="text-xl font-bold text-primary">
                 Request Quotation
               </h2>
               <ButtonDefault
-                onClick={onClose}
+                onClick={handleClose}
                 className="text-gray-500 cursor-pointer hover:bg-secondary rounded-sm hover:text-white transition-all duration-200"
               >
                 <X size={24} />
               </ButtonDefault>
             </div>
 
-            <ContactForm />
+            {/* Form */}
+            {!submitted ? (
+              <form onSubmit={handleSubmit} className="p-6 grid gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="border rounded px-3 py-2 w-full"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="company"
+                    placeholder="Company Name"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    className="border rounded px-3 py-2 w-full"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="contact"
+                    placeholder="Contact Number"
+                    value={formData.contact}
+                    onChange={handleInputChange}
+                    className="border rounded px-3 py-2 w-full"
+                    required
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="border rounded px-3 py-2 w-full"
+                    required
+                  />
+                </div>
+
+                <textarea
+                  name="message"
+                  placeholder="Message / Instructions"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  className="border rounded px-3 py-2 w-full"
+                  rows={3}
+                />
+
+                <ButtonSecondary type="submit" className="w-full mt-2">
+                  Submit Request
+                </ButtonSecondary>
+              </form>
+            ) : (
+              <div className="text-center py-10">
+                <p className="text-green-600 text-lg font-semibold">
+                  ✅ Your request has been submitted successfully!
+                </p>
+                <ButtonSecondary onClick={handleClose} className="mt-4">
+                  Close
+                </ButtonSecondary>
+              </div>
+            )}
           </motion.div>
         </motion.div>
       )}
@@ -128,13 +225,8 @@ export const HomeBanner = () => {
   const swiperRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <>
@@ -162,39 +254,29 @@ export const HomeBanner = () => {
           <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-white to-transparent" />
         </div>
 
-        {/* Swiper with motion enhancements */}
+        {/* Swiper */}
         <Swiper
           ref={swiperRef}
           modules={[Autoplay]}
           spaceBetween={0}
           slidesPerView={1}
           loop={true}
-          autoplay={{
-            delay: 6000,
-            disableOnInteraction: false,
-          }}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
           className="h-full w-full"
           onSlideChange={(swiper) => {
             setActiveIndex(swiper.realIndex);
-            // Crucial: Update animationKey when the slide changes
             setAnimationKey(swiper.realIndex);
           }}
         >
-          {slides.map((slide, index) => (
+          {slides.map((slide) => (
             <SwiperSlide key={slide.id}>
               <div className="relative h-full w-full overflow-hidden">
-                {/* Zoom-in background image */}
                 <motion.div
-                  // Use the animationKey combined with slide.id to ensure re-mount on every slide change
                   key={`${slide.id}-${animationKey}`}
                   className="absolute inset-0"
                   initial={{ scale: 1 }}
                   animate={{ scale: 1.1 }}
-                  transition={{
-                    duration: 6,
-                    ease: "easeOut",
-                    repeat: 0,
-                  }}
+                  transition={{ duration: 6, ease: "easeOut", repeat: 0 }}
                 >
                   <Image
                     src={slide.image}
@@ -205,7 +287,6 @@ export const HomeBanner = () => {
                   />
                 </motion.div>
 
-                {/* Overlay with motion text */}
                 <div className="absolute inset-0 bg-black/50 flex items-center">
                   <div className="container mx-auto pl-0 pr-4 md:px-4 lg:px-6 2xl:px-8">
                     <div className="max-w-2xl 2xl:max-w-4xl ml-20">
@@ -236,7 +317,6 @@ export const HomeBanner = () => {
                         transition={{ duration: 0.8, delay: 0.7 }}
                         className="space-x-3"
                       >
-                        {/* Use onClick to open the modal instead of a link */}
                         <ButtonDefault onClick={openModal}>
                           Request Quotation
                         </ButtonDefault>
@@ -255,7 +335,8 @@ export const HomeBanner = () => {
           ))}
         </Swiper>
       </div>
-      {/* Render the Appointment Modal */}
+
+      {/* Render Booking-style Modal */}
       <AppointmentModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
