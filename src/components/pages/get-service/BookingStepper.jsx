@@ -8,13 +8,12 @@ import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Paragraph } from "@/components/custom/Paragraph";
 
 const steps = [
-  { id: 1, text: "Choose a service" },
-  { id: 2, text: "Select trades and quantity" },
-  { id: 3, text: "Review your booking" },
-  { id: 4, text: "Submit your request" },
-  { id: 5, text: "Await our response" },
+  { id: 1, text: "Choose category" },
+  { id: 2, text: "Choose trade" },
+  { id: 3, text: "Enter quantity and click add" },
+  { id: 4, text: "Review booking summary and click on 'book now'" },
+  { id: 5, text: "Fill in details and click proceed" },
 ];
-
 export const BookingStepper = ({ activeStep }) => {
   return (
     <section className="_max_width py-16 px-4 md:px-10 bg-white">

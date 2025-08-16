@@ -5,12 +5,16 @@ export const ButtonSecondary = ({
   className = "",
   onClick,
   type = "button",
+  disabled = false,
 }) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`group relative overflow-hidden rounded-md bg-primary px-4 lg:px-6 2xl:px-8 py-1 lg:py-2.5 2xl:py-3 text-white ${className}`}
+      disabled={disabled}
+      className={`group relative overflow-hidden rounded-md bg-primary px-4 lg:px-6 2xl:px-8 py-1 lg:py-2.5 2xl:py-3 text-white transition-all duration-200
+        ${disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-primary/90"}
+        ${className}`}
     >
       {/* Button content */}
       <span className="relative z-10">{children}</span>

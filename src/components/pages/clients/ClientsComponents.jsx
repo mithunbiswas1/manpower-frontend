@@ -36,12 +36,12 @@ export const ClientsComponents = () => {
         See Our Honorable Clients
       </SectionSubHeading>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8">
+      <div className="max-w-3xl mx-auto grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-8 md:gap-10 lg:gap-12">
         {clientLogos.map((logo, idx) => (
           <Image
             src={logo}
             alt={`Client ${idx + 1}`}
-            className="h-full w-full object-contain p-3 m-2 bg-white rounded-lg border border-gray-200"
+            className="h-full w-full object-contain p-3 m-2 bg-white rounded-lg "
           />
         ))}
       </div>
