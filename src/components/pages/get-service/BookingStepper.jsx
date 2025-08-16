@@ -1,6 +1,7 @@
 // components/pages/get-service/BookingStepper.jsx
 "use client";
-import { Check, CheckCircle, Sparkles } from "lucide-react";
+
+import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
@@ -11,21 +12,23 @@ const steps = [
   { id: 1, text: "Choose category" },
   { id: 2, text: "Choose trade" },
   { id: 3, text: "Enter quantity and click add" },
-  { id: 4, text: "Review booking summary and click on 'book now'" },
+  { id: 4, text: "Review booking summary and click 'book now'" },
   { id: 5, text: "Fill in details and click proceed" },
 ];
 
 export const BookingStepper = () => {
   return (
-    <div className="_max_width py-12 bg-white text-center">
+    <section className="_max_width py-16 px-4 md:px-10 bg-white">
+      {/* Heading */}
       <SectionTitle className="mb-2 text-center">
-        Welcome to our online booking services.
+        Welcome to our online booking services
       </SectionTitle>
-      <SectionSubHeading className="mb-10 justify-center">
-        Follow the instructions to make your bookings effortless.
+      <SectionSubHeading className="mb-14 justify-center text-center max-w-2xl mx-auto">
+        Follow the instructions to make your bookings effortless
       </SectionSubHeading>
 
-      <div className="flex flex-wrap justify-center items-start gap-y-8">
+      {/* Stepper */}
+      <div className="grid grid-cols-2 md:flex flex-col md:flex-row md:justify-between md:items-start gap-12">
         {steps.map((step, index) => (
           <motion.div
             key={step.id}
@@ -33,24 +36,28 @@ export const BookingStepper = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
-            className="relative flex flex-col items-center w-1/3 md:w-1/4 lg:w-1/5"
+            className="flex flex-col items-center text-center relative md:w-1/5"
           >
-            {/* Step Icon */}
-            <div className="flex items-center justify-center p-4 border-2 border-gray-500 rounded-full transition-colors duration-300 text-white bg-white">
-              <Check className="text-gray-500" size={24} />
+            {/* Step Number */}
+            <div className="flex items-center justify-center w-14 h-14 rounded-full border-2 border-primary bg-primary/10 text-primary font-bold text-lg relative z-10">
+              {step.id}
             </div>
 
-            {/* Horizontal Line between steps (hidden on mobile) */}
-            <div className="my-4 w-full h-0.5 bg-gray-400 " />
+            {/* Connector line for desktop */}
+            {index < steps.length - 1 && (
+              <div className="hidden md:block absolute top-7 left-full w-full h-0.5 bg-gray-300 -z-0" />
+            )}
 
             {/* Step Text */}
-            <div className="text-center text-gray-800">
-              <h6 className="font-semibold">{`Step ${step.id}`}</h6>
-              <Paragraph className="mt-1 px-4">{step.text}</Paragraph>
+            <div className="mt-4">
+              <h6 className="font-semibold text-gray-800">{`Step ${step.id}`}</h6>
+              <Paragraph className="mt-2 text-gray-600 px-2 md:px-0">
+                {step.text}
+              </Paragraph>
             </div>
           </motion.div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };

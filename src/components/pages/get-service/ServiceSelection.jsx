@@ -28,14 +28,14 @@ export const ServiceSelection = ({
 }) => {
   return (
     <nav>
-      <ul className="flex flex-row md:flex-col ">
+      <ul className="flex flex-row md:flex-col">
         {services.map((serviceName) => {
           const Icon = serviceIcons[serviceName];
           return (
             <li
               key={serviceName}
               onClick={() => onSelectService(serviceName)}
-              className={`p-1 md:p-2 flex flex-col gap-1 md:gap-2 items-center cursor-pointer transition-colors duration-300 rounded-lg`}
+              className={`p-0.5 md:p-2 flex flex-col gap-1 md:gap-2 items-center cursor-pointer transition-colors duration-300 rounded-lg`}
             >
               {Icon && (
                 <div

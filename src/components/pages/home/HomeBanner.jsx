@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
 import "swiper/css";
+import { X, ChevronDown } from "lucide-react";
 
 import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
 import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
@@ -15,6 +15,53 @@ import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffin
 import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
 import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
 import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
+
+import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
+import ContactForm from "../reachUs/ContactForm";
+import { ButtonDefault } from "@/components/custom/ButtonDefault";
+
+// --- New Modal Component (Moved from Navbar) ---
+const AppointmentModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          onClick={onClose} // Close modal when clicking outside
+        >
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-lg shadow-xl w-5/6 md:w-4/6 max-w-5xl mx-4"
+            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
+          >
+            <div className="flex justify-between items-center p-6">
+              <h2 className="text-xl font-bold text-primary">
+                Request Quotation
+              </h2>
+              <ButtonDefault
+                onClick={onClose}
+                className="text-gray-500 cursor-pointer hover:bg-secondary rounded-sm hover:text-white transition-all duration-200"
+              >
+                <X size={24} />
+              </ButtonDefault>
+            </div>
+
+            <ContactForm />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
 
 const slides = [
   {
@@ -77,123 +124,139 @@ const slides = [
 
 export const HomeBanner = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  // This state will force the image motion.div to re-render and restart animation
   const [animationKey, setAnimationKey] = useState(0);
   const swiperRef = useRef(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
-    <div className="relative h-screen w-full flex mt-8 ">
-      {/* Left-side bullets */}
-      <div className="absolute left-8 top-1/2 transform -translate-y-1/2 z-10 flex flex-col items-center space-y-4">
-        <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-transparent to-white" />
-        {slides.map((slide, index) => (
-          <button
-            key={slide.id}
-            onClick={() => {
-              if (swiperRef.current && swiperRef.current.swiper) {
-                swiperRef.current.swiper.slideTo(index);
-                setActiveIndex(index);
-                setAnimationKey(index);
-              }
-            }}
-            className={`size-3 border-2 rounded-full transition-all duration-300 ${
-              activeIndex === index
-                ? "border-white bg-white"
-                : "border-white/50 bg-transparent"
-            }`}
-          />
-        ))}
-        <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-white to-transparent" />
-      </div>
+    <>
+      <div className="relative h-screen w-full flex mt-8 ">
+        {/* Left-side bullets */}
+        <div className="absolute left-8 top-1/2 transform -translate-y-1/2 z-10 flex flex-col items-center space-y-4">
+          <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-transparent to-white" />
+          {slides.map((slide, index) => (
+            <button
+              key={slide.id}
+              onClick={() => {
+                if (swiperRef.current && swiperRef.current.swiper) {
+                  swiperRef.current.swiper.slideTo(index);
+                  setActiveIndex(index);
+                  setAnimationKey(index);
+                }
+              }}
+              className={`size-3 border-2 rounded-full transition-all duration-300 ${
+                activeIndex === index
+                  ? "border-white bg-white"
+                  : "border-white/50 bg-transparent"
+              }`}
+            />
+          ))}
+          <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-white to-transparent" />
+        </div>
 
-      {/* Swiper with motion enhancements */}
-      <Swiper
-        ref={swiperRef}
-        modules={[Autoplay]}
-        spaceBetween={0}
-        slidesPerView={1}
-        loop={true}
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-        }}
-        className="h-full w-full"
-        onSlideChange={(swiper) => {
-          setActiveIndex(swiper.realIndex);
-          // Crucial: Update animationKey when the slide changes
-          setAnimationKey(swiper.realIndex);
-        }}
-      >
-        {slides.map((slide, index) => (
-          <SwiperSlide key={slide.id}>
-            <div className="relative h-full w-full overflow-hidden">
-              {/* Zoom-in background image */}
-              <motion.div
-                // Use the animationKey combined with slide.id to ensure re-mount on every slide change
-                key={`${slide.id}-${animationKey}`}
-                className="absolute inset-0"
-                initial={{ scale: 1 }}
-                animate={{ scale: 1.1 }}
-                transition={{
-                  duration: 6,
-                  ease: "easeOut",
-                  repeat: 0,
-                }}
-              >
-                <Image
-                  src={slide.image}
-                  alt={slide.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </motion.div>
+        {/* Swiper with motion enhancements */}
+        <Swiper
+          ref={swiperRef}
+          modules={[Autoplay]}
+          spaceBetween={0}
+          slidesPerView={1}
+          loop={true}
+          autoplay={{
+            delay: 6000,
+            disableOnInteraction: false,
+          }}
+          className="h-full w-full"
+          onSlideChange={(swiper) => {
+            setActiveIndex(swiper.realIndex);
+            // Crucial: Update animationKey when the slide changes
+            setAnimationKey(swiper.realIndex);
+          }}
+        >
+          {slides.map((slide, index) => (
+            <SwiperSlide key={slide.id}>
+              <div className="relative h-full w-full overflow-hidden">
+                {/* Zoom-in background image */}
+                <motion.div
+                  // Use the animationKey combined with slide.id to ensure re-mount on every slide change
+                  key={`${slide.id}-${animationKey}`}
+                  className="absolute inset-0"
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 1.1 }}
+                  transition={{
+                    duration: 6,
+                    ease: "easeOut",
+                    repeat: 0,
+                  }}
+                >
+                  <Image
+                    src={slide.image}
+                    alt={slide.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </motion.div>
 
-              {/* Overlay with motion text */}
-              <div className="absolute inset-0 bg-black/50 flex items-center">
-                <div className="container mx-auto pl-0 pr-4 md:px-4 lg:px-6 2xl:px-8">
-                  <div className="max-w-2xl 2xl:max-w-4xl ml-20">
-                    <motion.p
-                      key={`${slide.description}-${animationKey}`}
-                      className="_h5 text-white mb-8"
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.5 }}
-                    >
-                      {slide.description}
-                    </motion.p>
+                {/* Overlay with motion text */}
+                <div className="absolute inset-0 bg-black/50 flex items-center">
+                  <div className="container mx-auto pl-0 pr-4 md:px-4 lg:px-6 2xl:px-8">
+                    <div className="max-w-2xl 2xl:max-w-4xl ml-20">
+                      <motion.p
+                        key={`${slide.description}-${animationKey}`}
+                        className="_h5 text-white mb-8"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.5 }}
+                      >
+                        {slide.description}
+                      </motion.p>
 
-                    <motion.h1
-                      key={`${slide.title}-${animationKey}`}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.3 }}
-                      className="_h1 text-white mb-8"
-                    >
-                      {slide.title}
-                    </motion.h1>
+                      <motion.h1
+                        key={`${slide.title}-${animationKey}`}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                        className="_h1 text-white mb-8"
+                      >
+                        {slide.title}
+                      </motion.h1>
 
-                    <motion.div
-                      key={`${slide.buttonText}-${animationKey}`}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.7 }}
-                      className="space-x-3"
-                    >
-                      <ButtonPrimary link="/reach-us">
-                        Request Quotation
-                      </ButtonPrimary>
-                      <ButtonPrimary className="bg-secondary" link="/reach-us">
-                        Get Services
-                      </ButtonPrimary>
-                    </motion.div>
+                      <motion.div
+                        key={`${slide.buttonText}-${animationKey}`}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.7 }}
+                        className="space-x-3"
+                      >
+                        {/* Use onClick to open the modal instead of a link */}
+                        <ButtonDefault onClick={openModal}>
+                          Request Quotation
+                        </ButtonDefault>
+                        <ButtonPrimary
+                          className="bg-secondary"
+                          link="/get-service"
+                        >
+                          Get Services
+                        </ButtonPrimary>
+                      </motion.div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      {/* Render the Appointment Modal */}
+      <AppointmentModal isOpen={isModalOpen} onClose={closeModal} />
+    </>
   );
 };

@@ -64,7 +64,7 @@ export const GetServicePage = () => {
         </div>
 
         {/* Main Content Area */}
-        <div className="md:col-span-6 p-4">
+        <div className="md:col-span-6 px-4">
           <ManpowerForm
             serviceData={serviceData[selectedService]}
             selectedService={selectedService}
