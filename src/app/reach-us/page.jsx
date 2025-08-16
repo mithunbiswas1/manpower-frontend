@@ -21,7 +21,6 @@ export default function ReachUsPage() {
         bgImage={bannerData.image.src}
       />
       <SharedContact />
-      <Map />
     </div>
   );
 }
