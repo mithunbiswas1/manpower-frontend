@@ -113,6 +113,7 @@ export default function ProjectsPage() {
               >
                 <Link
                   href={item.link}
+                  target="_blank"
                   className="relative group block h-80 2xl:h-96 overflow-hidden hover:shadow-lg transition-shadow duration-200"
                 >
                   {/* Background image */}

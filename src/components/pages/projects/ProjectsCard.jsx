@@ -123,6 +123,7 @@ export const ProjectsCard = () => {
                 <Link
                   href={item.link}
                   key={index}
+                  target="_blank"
                   className="relative group block h-80 2xl:h-96 overflow-hidden hover:shadow-lg"
                 >
                   {/* Background image */}

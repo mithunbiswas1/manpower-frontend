@@ -28,12 +28,18 @@ const AppointmentModal = ({ isOpen, onClose }) => {
     contact: "",
     email: "",
     message: "",
+    tradeLicense: null,
   });
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prev) => ({ ...prev, tradeLicense: file }));
   };
 
   const handleSubmit = (e) => {
@@ -51,6 +57,7 @@ const AppointmentModal = ({ isOpen, onClose }) => {
       contact: "",
       email: "",
       message: "",
+      tradeLicense: null,
     });
   };
 
@@ -127,6 +134,18 @@ const AppointmentModal = ({ isOpen, onClose }) => {
                     onChange={handleInputChange}
                     className="border rounded px-3 py-2 w-full"
                     required
+                  />
+                </div>
+
+                <div>
+                  <label className="block mb-1 font-medium text-gray-700">
+                    Trade License
+                  </label>
+                  <input
+                    type="file"
+                    name="tradeLicense"
+                    onChange={handleFileChange}
+                    className="border rounded px-3 py-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
                   />
                 </div>
 

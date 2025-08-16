@@ -12,6 +12,7 @@ import AlQabdahLogo from "@/resource/clients.png";
 import StrabagLogo from "@/resource/clients2.png";
 import ShapoorjiLogo from "@/resource/clients.png";
 import DutcoLogo from "@/resource/clients2.png";
+import Link from "next/link";
 
 export const HomeClients = () => {
   const clientLogos = [
@@ -53,11 +54,13 @@ export const HomeClients = () => {
         >
           {clientLogos.map((logo, idx) => (
             <SwiperSlide key={idx} className="flex items-center justify-center">
-              <Image
-                src={logo}
-                alt={`Client ${idx + 1}`}
-                className="h-full w-full object-contain p-4 m-2 bg-white"
-              />
+              <a href="https://www.google.com" target="_blank" className="">
+                <Image
+                  src={logo}
+                  alt={`Client ${idx + 1}`}
+                  className="h-full w-full object-contain p-4 m-2 bg-white"
+                />
+              </a>
             </SwiperSlide>
           ))}
         </Swiper>

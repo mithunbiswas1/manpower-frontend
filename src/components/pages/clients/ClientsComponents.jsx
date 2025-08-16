@@ -38,11 +38,13 @@ export const ClientsComponents = () => {
 
       <div className="max-w-3xl mx-auto grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-8 md:gap-10 lg:gap-12">
         {clientLogos.map((logo, idx) => (
-          <Image
-            src={logo}
-            alt={`Client ${idx + 1}`}
-            className="h-full w-full object-contain p-3 m-2 bg-white rounded-lg "
-          />
+          <a href="https://www.google.com" target="_blank" className="">
+            <Image
+              src={logo}
+              alt={`Client ${idx + 1}`}
+              className="h-full w-full object-contain p-3 m-2 bg-white rounded-lg "
+            />
+          </a>
         ))}
       </div>
     </section>
