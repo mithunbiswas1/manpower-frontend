@@ -5,71 +5,17 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { SectionTitle } from "@/components/custom/SectionTitle";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
 import { Quote, X } from "lucide-react";
 
-import MichelDibHanna from "@/resource/home_banner/expert_factory_workforce.jpg";
-import LiuChangjun from "@/resource/home_banner/expert_factory_workforce.jpg";
-import DimitriPapakonstantinou from "@/resource/home_banner/expert_factory_workforce.jpg";
-import YazanAboshi from "@/resource/home_banner/expert_factory_workforce.jpg";
 import { ButtonDefault } from "@/components/custom/ButtonDefault";
 import { Paragraph } from "@/components/custom/Paragraph";
 import { ButtonSeeAll } from "@/components/custom/ButtonSeeAll";
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Michel Dib Hanna",
-    position: "Group General Manager",
-    company: "Speed House Group of companies",
-    text: "Speed House Group of companies Speed House Group of companies",
-    imageUrl: MichelDibHanna,
-  },
-  {
-    id: 2,
-    name: "Liu Changjun",
-    position: "Deputy General Manager",
-    company: "China Railway 18th Bureau Group LLC",
-    text: "Speed House Group of companies Speed House Group of companies",
-    imageUrl: LiuChangjun,
-  },
-  {
-    id: 3,
-    name: "Dimitri Papakonstantinou",
-    position: "Managing Director",
-    company: "Al Shafar Interiors Co, LLC",
-    video: "https://youtu.be/SCoC3ZCX7VM?si=Y0dA6FlpGuaPtjVJ",
-    imageUrl: DimitriPapakonstantinou,
-  },
-  {
-    id: 4,
-    name: "Yazan Aboshi",
-    position: "Projects Director",
-    company: "Was Electromechanical",
-    video: "https://youtu.be/SCoC3ZCX7VM?si=Y0dA6FlpGuaPtjVJ",
-    imageUrl: YazanAboshi,
-  },
-  {
-    id: 5,
-    name: "Michel Dib Hanna",
-    position: "Group General Manager",
-    company: "Speed House Group of companies",
-    video: "https://youtu.be/SCoC3ZCX7VM?si=Y0dA6FlpGuaPtjVJ",
-    imageUrl: MichelDibHanna,
-  },
-  {
-    id: 6,
-    name: "Liu Changjun",
-    position: "Deputy General Manager",
-    company: "China Railway 18th Bureau Group LLC",
-    video: "https://youtu.be/SCoC3ZCX7VM?si=Y0dA6FlpGuaPtjVJ",
-    imageUrl: LiuChangjun,
-  },
-];
+import { baseUriBackend } from "@/redux/endPoints/url";
+import { useGetAllTestimonialsQuery } from "@/redux/features/testimonialsApi";
 
 const getYouTubeVideoId = (url) => {
   if (!url) return null;
@@ -88,15 +34,20 @@ export const TestimonialsComponents = () => {
   const [modalText, setModalText] = useState("");
   const [selectedTestimonial, setSelectedTestimonial] = useState(null);
 
+  const { data, isLoading, isError } = useGetAllTestimonialsQuery();
+  const testimonials = data?.data || [];
+
+  console.log(testimonials, "testimonialsData");
+
   const openModal = (testimonial) => {
-    if (testimonial.video) {
+    if (testimonial?.video) {
       const videoId = getYouTubeVideoId(testimonial.video);
       if (videoId) {
         setVideoUrl(`https://www.youtube.com/embed/${videoId}?autoplay=1`);
         setModalText("");
       }
     } else {
-      setModalText(testimonial.text);
+      setModalText(testimonial?.sub_tital);
       setVideoUrl("");
     }
     setSelectedTestimonial(testimonial);
@@ -117,42 +68,62 @@ export const TestimonialsComponents = () => {
         </SectionSubHeading>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              variants={fadeIn("up", 0.1 + index * 0.0)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.25 }}
-              className="flex flex-col items-center p-4 min-h-[350px] bg-white rounded-lg shadow-sm"
-            >
-              <div className="relative w-40 h-40 rounded-full overflow-hidden">
-                <Image
-                  src={testimonial.imageUrl}
-                  alt={testimonial.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-full"
-                />
-              </div>
-              <h3 className="mt-4 text-xl font-semibold text-center">
-                {testimonial.name}
-              </h3>
-              <Paragraph className="text-center !text-xs lg:!text-sm">
-                {testimonial.position} <br />
-                {testimonial.company}
-              </Paragraph>
-
-              <div className="mt-auto">
-                <ButtonDefault
-                  className="cursor-pointer"
-                  onClick={() => openModal(testimonial)}
+          {isLoading
+            ? [...Array(4)].map((_, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center p-4 min-h-[350px] bg-white rounded-lg shadow-sm animate-pulse"
                 >
-                  {testimonial?.video ? "Watch Video" : "See Comments"}
-                </ButtonDefault>
-              </div>
-            </motion.div>
-          ))}
+                  {/* Circular Image */}
+                  <div className="w-40 h-40 rounded-full bg-gray-300 mb-4" />
+
+                  {/* Title */}
+                  <div className="h-6 w-32 bg-gray-300 rounded mb-2" />
+
+                  {/* Paragraph */}
+                  <div className="h-4 w-40 bg-gray-300 rounded mb-2" />
+                  <div className="h-4 w-36 bg-gray-300 rounded mb-4" />
+
+                  {/* Button */}
+                  <div className="h-10 w-32 bg-gray-300 rounded mt-auto" />
+                </div>
+              ))
+            : testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  variants={fadeIn("up", 0.1 + index * 0.0)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.25 }}
+                  className="flex flex-col items-center p-4 min-h-[350px] bg-white rounded-lg shadow-sm"
+                >
+                  <div className="relative w-40 h-40 rounded-full overflow-hidden">
+                    <Image
+                      src={`${baseUriBackend}${testimonial.image}`}
+                      alt={testimonial.title}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-full"
+                    />
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold text-center">
+                    {testimonial.title}
+                  </h3>
+                  <Paragraph className="text-center !text-xs lg:!text-sm">
+                    {testimonial.sub_tital} <br />
+                    {testimonial.sub_tital}
+                  </Paragraph>
+
+                  <div className="mt-auto">
+                    <ButtonDefault
+                      className="cursor-pointer"
+                      onClick={() => openModal(testimonial)}
+                    >
+                      {testimonial?.video ? "Watch Video" : "See Comments"}
+                    </ButtonDefault>
+                  </div>
+                </motion.div>
+              ))}
         </div>
       </div>
 
@@ -191,10 +162,10 @@ export const TestimonialsComponents = () => {
                         {selectedTestimonial.name}
                       </h3>
                       <p className="text-sm text-gray-500">
-                        {selectedTestimonial.position}
+                        {selectedTestimonial.sub_tital}
                       </p>
                       <p className="text-sm text-gray-500">
-                        {selectedTestimonial.company}
+                        {selectedTestimonial.sub_tital}
                       </p>
                     </>
                   )}

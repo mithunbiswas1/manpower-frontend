@@ -8,27 +8,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-import AlQabdahLogo from "@/resource/clients.png";
-import StrabagLogo from "@/resource/clients2.png";
-import ShapoorjiLogo from "@/resource/clients.png";
-import DutcoLogo from "@/resource/clients2.png";
-import Link from "next/link";
+import { baseUriBackend } from "@/redux/endPoints/url";
+import { useGetAllClientsQuery } from "@/redux/features/clientsApi";
 
 export const HomeClients = () => {
-  const clientLogos = [
-    AlQabdahLogo,
-    StrabagLogo,
-    ShapoorjiLogo,
-    DutcoLogo,
-    AlQabdahLogo,
-    StrabagLogo,
-    ShapoorjiLogo,
-    DutcoLogo,
-    AlQabdahLogo,
-    StrabagLogo,
-    ShapoorjiLogo,
-    DutcoLogo,
-  ];
+  const { data, isLoading, isError } = useGetAllClientsQuery();
+  const clientsData = data?.data || [];
 
   return (
     <section className="bg-gray-100">
@@ -38,32 +23,78 @@ export const HomeClients = () => {
           See Our Honorable Clients
         </SectionSubHeading>
 
-        <Swiper
-          spaceBetween={20}
-          slidesPerView={2}
-          loop={true}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          modules={[Autoplay]}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            768: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 },
-            1280: { slidesPerView: 5 },
-          }}
-          className="mx-auto"
-        >
-          {clientLogos.map((logo, idx) => (
-            <SwiperSlide key={idx} className="flex items-center justify-center">
-              <a href="https://www.google.com" target="_blank" className="">
-                <Image
-                  src={logo}
-                  alt={`Client ${idx + 1}`}
-                  className="h-full w-full object-contain p-4 m-2 bg-white"
-                />
-              </a>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {isLoading ? (
+          <Swiper
+            spaceBetween={20}
+            slidesPerView={2}
+            loop={true}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            modules={[Autoplay]}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 4 },
+              1280: { slidesPerView: 5 },
+            }}
+            className="mx-auto"
+          >
+            {[...Array(6)].map((_, idx) => (
+              <SwiperSlide
+                key={idx}
+                className="flex items-center justify-center "
+              >
+                <div className="size-40 p-4 m-4 bg-gray-300 rounded-lg animate-pulse" />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <Swiper
+            spaceBetween={20}
+            slidesPerView={2}
+            loop={true}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            modules={[Autoplay]}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 4 },
+              1280: { slidesPerView: 5 },
+            }}
+            className="mx-auto"
+          >
+            {clientsData.map((logo, idx) => (
+              <SwiperSlide
+                key={idx}
+                className="flex items-center justify-center"
+              >
+                {logo.link ? (
+                  <a
+                    href={logo.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className=""
+                  >
+                    <Image
+                      src={`${baseUriBackend}${logo.image}`}
+                      alt={`Client ${idx + 1}`}
+                      height={200}
+                      width={200}
+                      className="h-full w-full object-contain p-4 m-2 bg-white"
+                    />
+                  </a>
+                ) : (
+                  <Image
+                    src={`${baseUriBackend}${logo.image}`}
+                    alt={`Client ${idx + 1}`}
+                    height={200}
+                    width={200}
+                    className="h-full w-full object-contain p-4 m-2 bg-white"
+                  />
+                )}
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
 
         <div className="flex justify-center mt-10">
           <ButtonSeeAll href="/clients" text="See All Clients" />

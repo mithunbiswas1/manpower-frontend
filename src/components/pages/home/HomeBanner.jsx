@@ -2,23 +2,18 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import { X } from "lucide-react";
-
-import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
-import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
-import trusted_security_personnel from "@/resource/home_banner/trusted_security_personnel.jpg";
-import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffing.jpg";
-import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
-import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
-import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
 
 import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
 import { ButtonDefault } from "@/components/custom/ButtonDefault";
 import { ButtonSecondary } from "@/components/custom/ButtonSecondary";
+
+import { baseUriBackend } from "@/redux/endPoints/url";
+import { useGetAllBannerQuery } from "@/redux/features/bannerApi";
 
 // --- Booking-style Modal ---
 const AppointmentModal = ({ isOpen, onClose }) => {
@@ -179,65 +174,6 @@ const AppointmentModal = ({ isOpen, onClose }) => {
   );
 };
 
-const slides = [
-  {
-    id: 1,
-    image: certified_safety_officers,
-    title: "Certified Safety Officers",
-    description:
-      "We provide trained safety officers to help you meet compliance and safety standards.",
-    buttonText: "Ensure Safety",
-  },
-  {
-    id: 2,
-    image: flexible_temporary_staffing,
-    title: "Flexible Temporary Staffing",
-    description:
-      "Scale your workforce efficiently during peak periods with our short-term staffing options.",
-    buttonText: "Hire Temporarily",
-  },
-  {
-    id: 3,
-    image: trusted_security_personnel,
-    title: "Trusted Security Personnel",
-    description:
-      "Ensure the safety of your premises with our trained and licensed security guards.",
-    buttonText: "Request Security",
-  },
-  {
-    id: 4,
-    image: hotel_catering_taffing,
-    title: "Hotel & Catering",
-    description:
-      "Deliver excellent guest experiences with our professional hospitality staff.",
-    buttonText: "Get Hospitality Staff",
-  },
-  {
-    id: 5,
-    image: expert_factory_workforce,
-    title: "Expert Factory Workforce",
-    description:
-      "From machine operators to general helpers, we provide reliable manpower for all factory needs.",
-    buttonText: "Hire Factory Staff",
-  },
-  {
-    id: 6,
-    image: permanent_staffing_solutions,
-    title: "Permanent Staffing Solutions",
-    description:
-      "Hire long-term packing and cleaning professionals tailored to your business culture.",
-    buttonText: "Find Candidates",
-  },
-  {
-    id: 7,
-    image: professional_leaning_services,
-    title: "Professional Cleaning Services",
-    description:
-      "Keep your workspace spotless with our routine and specialized cleaning teams.",
-    buttonText: "Book Cleaning",
-  },
-];
-
 export const HomeBanner = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animationKey, setAnimationKey] = useState(0);
@@ -247,6 +183,46 @@ export const HomeBanner = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  // Fetch banner data using the custom hook
+  const { data, error, isLoading } = useGetAllBannerQuery();
+  const slides = data?.data || [];
+  console.log("Banner Data:", slides);
+
+  if (isLoading) {
+    return (
+      <div className="relative h-screen w-full flex mt-8">
+        {/* Left-side bullets */}
+        <div className="absolute left-8 top-1/2 -translate-y-1/2 z-10 flex flex-col items-center space-y-4">
+          <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-transparent to-gray-300 animate-pulse" />
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className="size-3 border-2 border-gray-300 rounded-full bg-gray-200 animate-pulse"
+            />
+          ))}
+          <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-gray-300 to-transparent animate-pulse" />
+        </div>
+
+        {/* Skeleton Banner */}
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-[pulse_1.5s_ease-in-out_infinite]" />
+
+        {/* Skeleton Text + Buttons */}
+        <div className="absolute inset-0 bg-black/40 flex items-center">
+          <div className="container mx-auto pl-0 pr-4 md:px-4 lg:px-6 2xl:px-8">
+            <div className="max-w-2xl 2xl:max-w-4xl ml-20 space-y-6">
+              <div className="h-4 w-1/2 bg-gray-300 rounded animate-pulse" />
+              <div className="h-10 w-3/4 bg-gray-400 rounded animate-pulse" />
+              <div className="flex space-x-3 pt-4">
+                <div className="h-10 w-32 bg-gray-300 rounded-lg animate-pulse" />
+                <div className="h-10 w-32 bg-gray-300 rounded-lg animate-pulse" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="relative h-screen w-full flex mt-8 ">
@@ -255,7 +231,7 @@ export const HomeBanner = () => {
           <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-transparent to-white" />
           {slides.map((slide, index) => (
             <button
-              key={slide.id}
+              key={slide._id}
               onClick={() => {
                 if (swiperRef.current && swiperRef.current.swiper) {
                   swiperRef.current.swiper.slideTo(index);
@@ -288,17 +264,17 @@ export const HomeBanner = () => {
           }}
         >
           {slides.map((slide) => (
-            <SwiperSlide key={slide.id}>
+            <SwiperSlide key={slide._id}>
               <div className="relative h-full w-full overflow-hidden">
                 <motion.div
-                  key={`${slide.id}-${animationKey}`}
+                  key={`${slide._id}-image-${animationKey}`}
                   className="absolute inset-0"
                   initial={{ scale: 1 }}
                   animate={{ scale: 1.1 }}
                   transition={{ duration: 6, ease: "easeOut", repeat: 0 }}
                 >
                   <Image
-                    src={slide.image}
+                    src={`${baseUriBackend}${slide.image}`}
                     alt={slide.title}
                     fill
                     className="object-cover"
@@ -310,17 +286,17 @@ export const HomeBanner = () => {
                   <div className="container mx-auto pl-0 pr-4 md:px-4 lg:px-6 2xl:px-8">
                     <div className="max-w-2xl 2xl:max-w-4xl ml-20">
                       <motion.p
-                        key={`${slide.description}-${animationKey}`}
+                        key={`${slide._id}-sub-${animationKey}`}
                         className="_h5 text-white mb-8"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.5 }}
                       >
-                        {slide.description}
+                        {slide.sub_tital}
                       </motion.p>
 
                       <motion.h1
-                        key={`${slide.title}-${animationKey}`}
+                        key={`${slide._id}-title-${animationKey}`}
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
@@ -330,7 +306,7 @@ export const HomeBanner = () => {
                       </motion.h1>
 
                       <motion.div
-                        key={`${slide.buttonText}-${animationKey}`}
+                        key={`${slide._id}-buttons-${animationKey}`}
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.7 }}
