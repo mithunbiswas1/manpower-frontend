@@ -8,52 +8,59 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
 import { ButtonDefault } from "@/components/custom/ButtonDefault";
 import { ButtonSecondary } from "@/components/custom/ButtonSecondary";
 
 import { baseUriBackend } from "@/redux/endPoints/url";
 import { useGetAllBannerQuery } from "@/redux/features/bannerApi";
+import { useCreatequotationApiMutation } from "@/redux/features/quotationApi";
+
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 // --- Booking-style Modal ---
 const AppointmentModal = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    company: "",
-    contact: "",
+  const [createQuotation, { isLoading }] = useCreatequotationApiMutation();
+
+  const initialValues = {
+    job_type: "",
+    tital: "",
+    first_name: "",
+    last_name: "",
     email: "",
-    message: "",
-    tradeLicense: null,
+    phone: "",
+    image: null,
+  };
+
+  const validationSchema = Yup.object().shape({
+    job_type: Yup.string().required("Job type is required"),
+    tital: Yup.string().required("Title is required"),
+    first_name: Yup.string().required("First name is required"),
+    last_name: Yup.string().required("Last name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    phone: Yup.string().required("Phone is required"),
+    image: Yup.mixed().required("Image is required"),
   });
-  const [submitted, setSubmitted] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      const formData = new FormData();
+      for (const key in values) {
+        formData.append(key, values[key]);
+      }
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData((prev) => ({ ...prev, tradeLicense: file }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted:", formData);
-    setSubmitted(true);
-  };
-
-  const handleClose = () => {
-    onClose();
-    setSubmitted(false);
-    setFormData({
-      name: "",
-      company: "",
-      contact: "",
-      email: "",
-      message: "",
-      tradeLicense: null,
-    });
+      await createQuotation(formData).unwrap();
+      toast.success("Submitted successfully!");
+      resetForm();
+      onClose();
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to submit. Please try again.");
+    }
   };
 
   if (!isOpen) return null;
@@ -67,7 +74,7 @@ const AppointmentModal = ({ isOpen, onClose }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-          onClick={handleClose}
+          onClick={onClose}
         >
           <motion.div
             initial={{ y: -50, opacity: 0 }}
@@ -83,90 +90,138 @@ const AppointmentModal = ({ isOpen, onClose }) => {
                 Request Quotation
               </h2>
               <ButtonDefault
-                onClick={handleClose}
+                onClick={onClose}
                 className="text-gray-500 cursor-pointer hover:bg-secondary rounded-sm hover:text-white transition-all duration-200"
               >
                 <X size={24} />
               </ButtonDefault>
             </div>
 
-            {/* Form */}
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className="p-6 grid gap-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="company"
-                    placeholder="Company Name"
-                    value={formData.company}
-                    onChange={handleInputChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="contact"
-                    placeholder="Contact Number"
-                    value={formData.contact}
-                    onChange={handleInputChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                </div>
+            {/* Formik Form */}
+            <div className="p-6">
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                {({ setFieldValue }) => (
+                  <Form className="grid gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Field
+                          type="text"
+                          name="job_type"
+                          placeholder="Job Type"
+                          className="border rounded px-3 py-2 w-full"
+                        />
+                        <ErrorMessage
+                          name="job_type"
+                          component="div"
+                          className="text-red-500 text-sm mt-1"
+                        />
+                      </div>
 
-                <div>
-                  <label className="block mb-1 font-medium text-gray-700">
-                    Trade License
-                  </label>
-                  <input
-                    type="file"
-                    name="tradeLicense"
-                    onChange={handleFileChange}
-                    className="border rounded px-3 py-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
-                  />
-                </div>
+                      <div>
+                        <Field
+                          type="text"
+                          name="tital"
+                          placeholder="Title"
+                          className="border rounded px-3 py-2 w-full"
+                        />
+                        <ErrorMessage
+                          name="tital"
+                          component="div"
+                          className="text-red-500 text-sm mt-1"
+                        />
+                      </div>
 
-                <textarea
-                  name="message"
-                  placeholder="Message / Instructions"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  className="border rounded px-3 py-2 w-full"
-                  rows={3}
-                />
+                      <div>
+                        <Field
+                          type="text"
+                          name="first_name"
+                          placeholder="First Name"
+                          className="border rounded px-3 py-2 w-full"
+                        />
+                        <ErrorMessage
+                          name="first_name"
+                          component="div"
+                          className="text-red-500 text-sm mt-1"
+                        />
+                      </div>
 
-                <ButtonSecondary type="submit" className="w-full mt-2">
-                  Submit Request
-                </ButtonSecondary>
-              </form>
-            ) : (
-              <div className="text-center py-10">
-                <p className="text-green-600 text-lg font-semibold">
-                  ✅ Your request has been submitted successfully!
-                </p>
-                <ButtonSecondary onClick={handleClose} className="mt-4">
-                  Close
-                </ButtonSecondary>
-              </div>
-            )}
+                      <div>
+                        <Field
+                          type="text"
+                          name="last_name"
+                          placeholder="Last Name"
+                          className="border rounded px-3 py-2 w-full"
+                        />
+                        <ErrorMessage
+                          name="last_name"
+                          component="div"
+                          className="text-red-500 text-sm mt-1"
+                        />
+                      </div>
+
+                      <div>
+                        <Field
+                          type="email"
+                          name="email"
+                          placeholder="Email Address"
+                          className="border rounded px-3 py-2 w-full"
+                        />
+                        <ErrorMessage
+                          name="email"
+                          component="div"
+                          className="text-red-500 text-sm mt-1"
+                        />
+                      </div>
+
+                      <div>
+                        <Field
+                          type="text"
+                          name="phone"
+                          placeholder="Phone Number"
+                          className="border rounded px-3 py-2 w-full"
+                        />
+                        <ErrorMessage
+                          name="phone"
+                          component="div"
+                          className="text-red-500 text-sm mt-1"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block mb-1 font-medium text-gray-700">
+                        Trade License
+                      </label>
+                      <input
+                        type="file"
+                        name="image"
+                        onChange={(e) =>
+                          setFieldValue("image", e.target.files[0])
+                        }
+                        className="border rounded px-3 py-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
+                      />
+                      <ErrorMessage
+                        name="image"
+                        component="div"
+                        className="text-red-500 text-sm mt-1"
+                      />
+                    </div>
+
+                    <ButtonSecondary
+                      type="submit"
+                      className="w-full mt-2"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Submitting..." : "Submit Request"}
+                    </ButtonSecondary>
+                  </Form>
+                )}
+              </Formik>
+            </div>
           </motion.div>
         </motion.div>
       )}
@@ -174,6 +229,7 @@ const AppointmentModal = ({ isOpen, onClose }) => {
   );
 };
 
+// --- HomeBanner Component ---
 export const HomeBanner = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animationKey, setAnimationKey] = useState(0);
@@ -183,45 +239,8 @@ export const HomeBanner = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  // Fetch banner data using the custom hook
   const { data, error, isLoading } = useGetAllBannerQuery();
   const slides = data?.data || [];
-  console.log("Banner Data:", slides);
-
-  if (isLoading) {
-    return (
-      <div className="relative h-screen w-full flex mt-8">
-        {/* Left-side bullets */}
-        <div className="absolute left-8 top-1/2 -translate-y-1/2 z-10 flex flex-col items-center space-y-4">
-          <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-transparent to-gray-300 animate-pulse" />
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="size-3 border-2 border-gray-300 rounded-full bg-gray-200 animate-pulse"
-            />
-          ))}
-          <div className="h-20 2xl:h-28 w-2 bg-gradient-to-b from-gray-300 to-transparent animate-pulse" />
-        </div>
-
-        {/* Skeleton Banner */}
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-[pulse_1.5s_ease-in-out_infinite]" />
-
-        {/* Skeleton Text + Buttons */}
-        <div className="absolute inset-0 bg-black/40 flex items-center">
-          <div className="container mx-auto pl-0 pr-4 md:px-4 lg:px-6 2xl:px-8">
-            <div className="max-w-2xl 2xl:max-w-4xl ml-20 space-y-6">
-              <div className="h-4 w-1/2 bg-gray-300 rounded animate-pulse" />
-              <div className="h-10 w-3/4 bg-gray-400 rounded animate-pulse" />
-              <div className="flex space-x-3 pt-4">
-                <div className="h-10 w-32 bg-gray-300 rounded-lg animate-pulse" />
-                <div className="h-10 w-32 bg-gray-300 rounded-lg animate-pulse" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -331,7 +350,7 @@ export const HomeBanner = () => {
         </Swiper>
       </div>
 
-      {/* Render Booking-style Modal */}
+      {/* Render Modal */}
       <AppointmentModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );

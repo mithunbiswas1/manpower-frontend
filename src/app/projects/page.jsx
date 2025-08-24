@@ -4,11 +4,14 @@
 import { SharedBanner } from "@/components/shared/SharedBanner";
 import banner_image from "@/resource/banner_image_3.jpg";
 import Link from "next/link";
-import { Plus } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
+import { Paragraph } from "@/components/custom/Paragraph";
+
+import { useGetAllProjectsQuery } from "@/redux/features/projectsApi";
+import { baseUriBackend } from "@/redux/endPoints/url";
 
 import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
 import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
@@ -17,74 +20,76 @@ import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffin
 import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
 import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
 import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
-import { Paragraph } from "@/components/custom/Paragraph";
+
+const bannerData = {
+  title: "Projects",
+  description:
+    "Explore our portfolio of successful projects showcasing our expertise, innovative solutions.",
+  image: banner_image,
+};
+
+// const project = [
+//   {
+//     id: 1,
+//     title: "Factory & Industrial Staffing",
+//     imageUrl: expert_factory_workforce,
+//     location: "Abu Dhabi",
+//     link: "#",
+//   },
+//   {
+//     id: 2,
+//     title: "Professional Cleaning Services",
+//     imageUrl: professional_leaning_services,
+//     location: "Abu Dhabi",
+//     link: "#",
+//   },
+//   {
+//     id: 3,
+//     title: "Licensed Security Personnel",
+//     imageUrl: trusted_security_personnel,
+//     location: "Abu Dhabi",
+//     link: "#",
+//   },
+//   {
+//     id: 4,
+//     title: "Hotel & Catering",
+//     imageUrl: hotel_catering_taffing,
+//     location: "Abu Dhabi",
+//     link: "#",
+//   },
+//   {
+//     id: 5,
+//     title: "Certified Safety Officers",
+//     imageUrl: certified_safety_officers,
+//     location: "Abu Dhabi",
+//     link: "#",
+//   },
+//   {
+//     id: 6,
+//     title: "Permanent Staffing Solutions",
+//     imageUrl: permanent_staffing_solutions,
+//     location: "Abu Dhabi",
+//     link: "#",
+//   },
+//   {
+//     id: 7,
+//     title: "Temporary Staffing Services",
+//     imageUrl: flexible_temporary_staffing,
+//     location: "Abu Dhabi",
+//     link: "#",
+//   },
+//   {
+//     id: 8,
+//     title: "Certified Safety Officers",
+//     imageUrl: certified_safety_officers,
+//     location: "Abu Dhabi",
+//     link: "#",
+//   },
+// ];
 
 export default function ProjectsPage() {
-  const bannerData = {
-    title: "Projects",
-    description:
-      "Explore our portfolio of successful projects showcasing our expertise, innovative solutions.",
-    image: banner_image,
-  };
-
-  const project = [
-    {
-      id: 1,
-      title: "Factory & Industrial Staffing",
-      imageUrl: expert_factory_workforce,
-      location: "Abu Dhabi",
-      link: "#",
-    },
-    {
-      id: 2,
-      title: "Professional Cleaning Services",
-      imageUrl: professional_leaning_services,
-      location: "Abu Dhabi",
-      link: "#",
-    },
-    {
-      id: 3,
-      title: "Licensed Security Personnel",
-      imageUrl: trusted_security_personnel,
-      location: "Abu Dhabi",
-      link: "#",
-    },
-    {
-      id: 4,
-      title: "Hotel & Catering",
-      imageUrl: hotel_catering_taffing,
-      location: "Abu Dhabi",
-      link: "#",
-    },
-    {
-      id: 5,
-      title: "Certified Safety Officers",
-      imageUrl: certified_safety_officers,
-      location: "Abu Dhabi",
-      link: "#",
-    },
-    {
-      id: 6,
-      title: "Permanent Staffing Solutions",
-      imageUrl: permanent_staffing_solutions,
-      location: "Abu Dhabi",
-      link: "#",
-    },
-    {
-      id: 7,
-      title: "Temporary Staffing Services",
-      imageUrl: flexible_temporary_staffing,
-      location: "Abu Dhabi",
-      link: "#",
-    },
-    {
-      id: 8,
-      title: "Certified Safety Officers",
-      imageUrl: certified_safety_officers,
-      location: "Abu Dhabi",
-      link: "#",
-    },
-  ];
+  const { data, error, isLoading } = useGetAllProjectsQuery();
+  const project = data?.data || [];
 
   return (
     <div>
@@ -119,7 +124,9 @@ export default function ProjectsPage() {
                   {/* Background image */}
                   <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{ backgroundImage: `url(${item.imageUrl.src})` }}
+                    style={{
+                      backgroundImage: `url(${baseUriBackend}${item.image})`,
+                    }}
                   />
                 </Link>
                 <div className="mt-2">
