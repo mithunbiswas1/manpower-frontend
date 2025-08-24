@@ -9,90 +9,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
-import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
-import trusted_security_personnel from "@/resource/home_banner/trusted_security_personnel.jpg";
-import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffing.jpg";
-import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
-import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
-import flexible_temporary_staffing from "@/resource/home_banner/flexible_temporary_staffing.jpg";
+import { useGetAllProjectsQuery } from "@/redux/features/projectsApi";
+import { baseUriBackend } from "@/redux/endPoints/url";
 import { ButtonSeeAll } from "@/components/custom/ButtonSeeAll";
 import { Paragraph } from "@/components/custom/Paragraph";
 
-const project = [
-  {
-    id: 1,
-    title: "Factory & Industrial Staffing",
-    imageUrl: expert_factory_workforce,
-    location: "Abu Dhabi",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "Professional Cleaning Services",
-    imageUrl: professional_leaning_services,
-    location: "Abu Dhabi",
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "Licensed Security Personnel",
-    imageUrl: trusted_security_personnel,
-    location: "Abu Dhabi",
-    link: "#",
-  },
-  {
-    id: 4,
-    title: "Hotel & Catering",
-    imageUrl: hotel_catering_taffing,
-    location: "Abu Dhabi",
-    link: "#",
-  },
-  {
-    id: 5,
-    title: "Certified Safety Officers",
-    imageUrl: certified_safety_officers,
-    location: "Abu Dhabi",
-    link: "#",
-  },
-  {
-    id: 6,
-    title: "Permanent Staffing Solutions",
-    imageUrl: permanent_staffing_solutions,
-    location: "Abu Dhabi",
-    link: "#",
-  },
-  {
-    id: 7,
-    title: "Temporary Staffing Services",
-    imageUrl: flexible_temporary_staffing,
-    location: "Abu Dhabi",
-    link: "#",
-  },
-  {
-    id: 8,
-    title: "Certified Safety Officers",
-    imageUrl: certified_safety_officers,
-    location: "Abu Dhabi",
-    link: "#",
-  },
-  {
-    id: 9,
-    title: "Permanent Staffing Solutions",
-    imageUrl: permanent_staffing_solutions,
-    location: "Abu Dhabi",
-    link: "#",
-  },
-  {
-    id: 10,
-    title: "Temporary Staffing Services",
-    imageUrl: flexible_temporary_staffing,
-    location: "Abu Dhabi",
-    link: "#",
-  },
-];
-
 export const ProjectsCard = () => {
+  const { data, isLoading } = useGetAllProjectsQuery();
+  const projects = data?.data || [];
+
   return (
     <section className="">
       <div className="py-16 _max_width">
@@ -113,38 +38,64 @@ export const ProjectsCard = () => {
             1280: { slidesPerView: 4 },
           }}
         >
-          {project.map((item, index) => (
-            <SwiperSlide key={index}>
-              <motion.div
-                variants={fadeIn("up", 0.1 + index * 0.0)}
-                initial="hidden"
-                whileInView="show"
-              >
-                <Link
-                  href={item.link}
-                  key={index}
-                  target="_blank"
-                  className="relative group block h-80 2xl:h-96 overflow-hidden hover:shadow-lg"
-                >
-                  {/* Background image */}
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{ backgroundImage: `url(${item.imageUrl.src})` }}
-                    aria-hidden="true"
-                  />
-                </Link>
-
+          {isLoading ? (
+            Array.from({ length: 8 }).map((_, index) => (
+              <SwiperSlide key={index}>
+                <div className="h-80 2xl:h-96 bg-gray-200 rounded-lg animate-pulse" />
                 <div className="mt-2">
-                  <h6 className="_h6 text-center text-gray-600 !font-semibold">
-                    {item.title}
-                  </h6>
-                  <Paragraph className="text-center my-2">
-                    {item.location}
-                  </Paragraph>
+                  <div className="h-4 w-3/4 mx-auto bg-gray-200 rounded animate-pulse" />
+                  <div className="h-3 w-1/2 mx-auto mt-2 bg-gray-200 rounded animate-pulse" />
                 </div>
-              </motion.div>
-            </SwiperSlide>
-          ))}
+              </SwiperSlide>
+            ))
+          ) : projects.length === 0 ? (
+            <div className="text-center w-full py-10 text-gray-500">
+              <Paragraph>No projects available at the moment.</Paragraph>
+            </div>
+          ) : (
+            projects.map((item, index) => (
+              <SwiperSlide key={item._id}>
+                <motion.div
+                  variants={fadeIn("up", 0.1 + index * 0.05)}
+                  initial="hidden"
+                  whileInView="show"
+                >
+                  {item.link ? (
+                    <Link
+                      href={item.link}
+                      target="_blank"
+                      className="relative group block h-80 2xl:h-96 overflow-hidden hover:shadow-lg transition-shadow duration-200"
+                    >
+                      <div
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                        style={{
+                          backgroundImage: `url(${baseUriBackend}${item.image})`,
+                        }}
+                      />
+                    </Link>
+                  ) : (
+                    <div className="relative group block h-80 2xl:h-96 overflow-hidden hover:shadow-lg transition-shadow duration-200">
+                      <div
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                        style={{
+                          backgroundImage: `url(${baseUriBackend}${item.image})`,
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  <div className="mt-2">
+                    <h6 className="_h6 text-center text-gray-600 !font-semibold">
+                      {item.title}
+                    </h6>
+                    <Paragraph className="text-center my-2">
+                      {item.location}
+                    </Paragraph>
+                  </div>
+                </motion.div>
+              </SwiperSlide>
+            ))
+          )}
         </Swiper>
 
         <div className="flex justify-center mt-10">

@@ -10,9 +10,10 @@ import "swiper/css";
 
 import { baseUriBackend } from "@/redux/endPoints/url";
 import { useGetAllClientsQuery } from "@/redux/features/clientsApi";
+import { Paragraph } from "@/components/custom/Paragraph";
 
 export const HomeClients = () => {
-  const { data, isLoading, isError } = useGetAllClientsQuery();
+  const { data, isLoading } = useGetAllClientsQuery();
   const clientsData = data?.data || [];
 
   return (
@@ -50,6 +51,10 @@ export const HomeClients = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+        ) : clientsData.length === 0 ? (
+          <div className="text-center w-full py-10 text-gray-500">
+            <Paragraph>No Clients Data available at the moment.</Paragraph>
+          </div>
         ) : (
           <Swiper
             spaceBetween={20}

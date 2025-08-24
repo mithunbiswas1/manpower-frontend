@@ -68,62 +68,70 @@ export const TestimonialsComponents = () => {
         </SectionSubHeading>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {isLoading
-            ? [...Array(4)].map((_, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center p-4 min-h-[350px] bg-white rounded-lg shadow-sm animate-pulse"
-                >
-                  {/* Circular Image */}
-                  <div className="w-40 h-40 rounded-full bg-gray-300 mb-4" />
+          {isLoading ? (
+            [...Array(4)].map((_, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center p-4 min-h-[350px] bg-white rounded-lg shadow-sm animate-pulse"
+              >
+                {/* Circular Image */}
+                <div className="w-40 h-40 rounded-full bg-gray-300 mb-4" />
 
-                  {/* Title */}
-                  <div className="h-6 w-32 bg-gray-300 rounded mb-2" />
+                {/* Title */}
+                <div className="h-6 w-32 bg-gray-300 rounded mb-2" />
 
-                  {/* Paragraph */}
-                  <div className="h-4 w-40 bg-gray-300 rounded mb-2" />
-                  <div className="h-4 w-36 bg-gray-300 rounded mb-4" />
+                {/* Paragraph */}
+                <div className="h-4 w-40 bg-gray-300 rounded mb-2" />
+                <div className="h-4 w-36 bg-gray-300 rounded mb-4" />
 
-                  {/* Button */}
-                  <div className="h-10 w-32 bg-gray-300 rounded mt-auto" />
+                {/* Button */}
+                <div className="h-10 w-32 bg-gray-300 rounded mt-auto" />
+              </div>
+            ))
+          ) : testimonials.length === 0 ? (
+            <div className="text-center w-full py-10 text-gray-500">
+              <Paragraph>
+                No Testimonials Data available at the moment.
+              </Paragraph>
+            </div>
+          ) : (
+            testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn("up", 0.1 + index * 0.0)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.25 }}
+                className="flex flex-col items-center p-4 min-h-[350px] bg-white rounded-lg shadow-sm"
+              >
+                <div className="relative w-40 h-40 rounded-full overflow-hidden">
+                  <Image
+                    src={`${baseUriBackend}${testimonial.image}`}
+                    alt={testimonial.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-full"
+                  />
                 </div>
-              ))
-            : testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeIn("up", 0.1 + index * 0.0)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.25 }}
-                  className="flex flex-col items-center p-4 min-h-[350px] bg-white rounded-lg shadow-sm"
-                >
-                  <div className="relative w-40 h-40 rounded-full overflow-hidden">
-                    <Image
-                      src={`${baseUriBackend}${testimonial.image}`}
-                      alt={testimonial.title}
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-full"
-                    />
-                  </div>
-                  <h3 className="mt-4 text-xl font-semibold text-center">
-                    {testimonial.title}
-                  </h3>
-                  <Paragraph className="text-center !text-xs lg:!text-sm">
-                    {testimonial.sub_tital} <br />
-                    {testimonial.sub_tital}
-                  </Paragraph>
+                <h3 className="mt-4 text-xl font-semibold text-center">
+                  {testimonial.title}
+                </h3>
+                <Paragraph className="text-center !text-xs lg:!text-sm">
+                  {testimonial.sub_tital} <br />
+                  {testimonial.sub_tital}
+                </Paragraph>
 
-                  <div className="mt-auto">
-                    <ButtonDefault
-                      className="cursor-pointer"
-                      onClick={() => openModal(testimonial)}
-                    >
-                      {testimonial?.video ? "Watch Video" : "See Comments"}
-                    </ButtonDefault>
-                  </div>
-                </motion.div>
-              ))}
+                <div className="mt-auto">
+                  <ButtonDefault
+                    className="cursor-pointer"
+                    onClick={() => openModal(testimonial)}
+                  >
+                    {testimonial?.video ? "Watch Video" : "See Comments"}
+                  </ButtonDefault>
+                </div>
+              </motion.div>
+            ))
+          )}
         </div>
       </div>
 

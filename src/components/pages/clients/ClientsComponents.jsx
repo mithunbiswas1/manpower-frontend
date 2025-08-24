@@ -5,6 +5,7 @@ import { SectionTitle } from "@/components/custom/SectionTitle";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import { baseUriBackend } from "@/redux/endPoints/url";
 import { useGetAllClientsQuery } from "@/redux/features/clientsApi";
+import { Paragraph } from "@/components/custom/Paragraph";
 
 export const ClientsComponents = () => {
   const { data, isLoading, isError } = useGetAllClientsQuery();
@@ -27,6 +28,10 @@ export const ClientsComponents = () => {
               className="size-32 bg-gray-300 rounded-lg animate-pulse p-3 m-2"
             />
           ))}
+        </div>
+      ) : clientsData.length === 0 ? (
+        <div className="text-center w-full py-10 text-gray-500">
+          <Paragraph>No Clients Data available at the moment.</Paragraph>
         </div>
       ) : (
         <div className="max-w-3xl mx-auto grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-8 md:gap-10 lg:gap-12">
