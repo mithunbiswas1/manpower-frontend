@@ -47,7 +47,7 @@ export const HomeTestimonial = () => {
         setModalText("");
       }
     } else {
-      setModalText(testimonial?.sub_tital);
+      setModalText(testimonial?.comments);
       setVideoUrl("");
     }
     setSelectedTestimonial(testimonial);
@@ -67,13 +67,7 @@ export const HomeTestimonial = () => {
           What Our Clients Say
         </SectionSubHeading>
 
-        <div
-          className={` ${
-            testimonials.length !== 0
-              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-              : " "
-          }`}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {isLoading ? (
             [...Array(4)].map((_, index) => (
               <div
@@ -95,7 +89,7 @@ export const HomeTestimonial = () => {
               </div>
             ))
           ) : testimonials.length === 0 ? (
-            <div className="text-center w-full py-10 text-gray-500 flex justify-center">
+            <div className="text-center w-full py-10 text-gray-500">
               <Paragraph>
                 No Testimonials Data available at the moment.
               </Paragraph>
@@ -124,7 +118,7 @@ export const HomeTestimonial = () => {
                 </h3>
                 <Paragraph className="text-center !text-xs lg:!text-sm">
                   {testimonial.sub_tital} <br />
-                  {testimonial.sub_tital}
+                  {testimonial.company}
                 </Paragraph>
 
                 <div className="mt-auto">
@@ -177,13 +171,13 @@ export const HomeTestimonial = () => {
                   {selectedTestimonial && (
                     <>
                       <h3 className="text-xl font-semibold">
-                        {selectedTestimonial.name}
+                        {selectedTestimonial.title}
                       </h3>
                       <p className="text-sm text-gray-500">
                         {selectedTestimonial.sub_tital}
                       </p>
                       <p className="text-sm text-gray-500">
-                        {selectedTestimonial.sub_tital}
+                        {selectedTestimonial.company}
                       </p>
                     </>
                   )}
