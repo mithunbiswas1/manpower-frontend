@@ -17,7 +17,7 @@ export const SharedBanner = ({ title, description, bgImage }) => {
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         ></div>
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-4xl mt-6">
           <div className="text-center text-white">
             <h1 className="_h1 mb-8">{title}</h1>
             {description && (

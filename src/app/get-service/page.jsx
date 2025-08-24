@@ -7,9 +7,7 @@ import banner_image from "@/resource/banner_image_3.jpg";
 
 export default function Page() {
   const bannerData = {
-    title: "Services",
-    description:
-      "Select your required manpower from our wide range of services to receive a custom quote.",
+    title: "Our Services",
     image: banner_image,
   };
 

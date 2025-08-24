@@ -12,9 +12,11 @@ export const ClientsComponents = () => {
 
   return (
     <section className="_max_width bg-white py-16 text-center">
-      <SectionTitle className="mb-2 text-center">Clients</SectionTitle>
+      <SectionTitle className="mb-2 text-center">
+        Clients & Partners
+      </SectionTitle>
       <SectionSubHeading className="mb-6 justify-center text-center">
-        See Our Honorable Clients
+        See Our Honorable Clients & Partners
       </SectionSubHeading>
 
       {isLoading ? (
@@ -57,6 +59,10 @@ export const ClientsComponents = () => {
           )}
         </div>
       )}
+
+      <SectionSubHeading className="mt-12 justify-center text-center border-b-2 border-gray-400 max-w-3xl mx-auto pb-4">
+        Become one of our valued partners today!
+      </SectionSubHeading>
     </section>
   );
 };

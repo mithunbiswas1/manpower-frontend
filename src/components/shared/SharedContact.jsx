@@ -185,7 +185,7 @@ export const SharedContact = () => {
       <div className="mt-20 flex flex-col items-center justify-center text-center">
         <h3 className="text-xl font-bold text-gray-700">Corporate Office</h3>
         <p className="mt-2 mb-8 text-sm text-gray-600 md:text-base">
-          8ᵗʰ Floor, Damas Tower, Sharjah, United Arab Emirates.
+          Warehouse No. XX, Industrial Area 11, Sharjah, United Arab Emirates
         </p>
 
         <iframe

@@ -18,9 +18,12 @@ export const HomeClients = () => {
   return (
     <section className="bg-gray-100">
       <div className="max-w-4xl mx-auto py-16 text-center">
-        <SectionTitle className="mb-2 text-center">Clients</SectionTitle>
+        <SectionTitle className="mb-2 text-center">
+          Clients &amp; Partners
+        </SectionTitle>
         <SectionSubHeading className="mb-6 justify-center text-center">
-          See Our Honorable Clients
+          We are proud to serve various reputable companies in the UAE,
+          including:
         </SectionSubHeading>
 
         {isLoading ? (

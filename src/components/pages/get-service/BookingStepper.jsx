@@ -19,10 +19,11 @@ export const BookingStepper = ({ activeStep }) => {
     <section className="_max_width py-16 px-4 md:px-10 bg-white">
       {/* Heading */}
       <SectionTitle className="mb-2 text-center">
-        Welcome to our online booking services
+        Manpower Supply Solutions
       </SectionTitle>
       <SectionSubHeading className="mb-14 justify-center text-center max-w-2xl mx-auto">
-        Follow the instructions to make your bookings effortless
+        We offer reliable manpower across various sectors with full visa and
+        payroll management:
       </SectionSubHeading>
 
       {/* Stepper */}
