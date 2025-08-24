@@ -67,7 +67,13 @@ export const HomeTestimonial = () => {
           What Our Clients Say
         </SectionSubHeading>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div
+          className={` ${
+            testimonials.length !== 0
+              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+              : " "
+          }`}
+        >
           {isLoading ? (
             [...Array(4)].map((_, index) => (
               <div
@@ -89,7 +95,7 @@ export const HomeTestimonial = () => {
               </div>
             ))
           ) : testimonials.length === 0 ? (
-            <div className="text-center w-full py-10 text-gray-500">
+            <div className="text-center w-full py-10 text-gray-500 flex justify-center">
               <Paragraph>
                 No Testimonials Data available at the moment.
               </Paragraph>

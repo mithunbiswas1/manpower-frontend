@@ -98,7 +98,14 @@ export default function ProjectsPage() {
           </SectionSubHeading>
 
           {/* Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <div
+            className={` ${
+              project.length !== 0
+                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                : " "
+            }`}
+          >
             {isLoading ? (
               Array.from({ length: 4 }).map((_, index) => (
                 <div key={index}>
