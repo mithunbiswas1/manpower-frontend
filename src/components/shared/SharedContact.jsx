@@ -9,18 +9,22 @@ import { Linkedin, Instagram, Facebook, Twitter, Youtube } from "lucide-react";
 import { ButtonSubmit } from "../custom/ButtonSubmit";
 
 import { useCreateContactApiMutation } from "@/redux/features/contactApi";
+import { useGetAllBusinessSettingQuery } from "@/redux/features/businessSettingApi";
 
 export const socialLinks = [
-  { id: 1, name: "LinkedIn", href: "#", icon: Linkedin },
+  { id: 1, name: "Facebook", href: "#", icon: Facebook },
   { id: 2, name: "Instagram", href: "#", icon: Instagram },
-  { id: 3, name: "Facebook", href: "#", icon: Facebook },
+  { id: 3, name: "Linkdin", href: "#", icon: Linkedin },
   { id: 4, name: "Twitter", href: "#", icon: Twitter },
   { id: 5, name: "YouTube", href: "#", icon: Youtube },
 ];
 
 export const SharedContact = () => {
-  const [createContact, { isLoading }] = useCreateContactApiMutation();
   const formRef = useRef(null);
+  const [createContact, { isLoading }] = useCreateContactApiMutation();
+  const { data: businessSettingData } = useGetAllBusinessSettingQuery();
+  const businessSetting = businessSettingData?.data || {};
+  console.log(businessSetting, "businessSettingData");
 
   // Validation Schema
   const validationSchema = Yup.object({
@@ -67,19 +71,24 @@ export const SharedContact = () => {
 
       {/* Social Icons */}
       <div className="flex space-x-4 mb-10">
-        {socialLinks.map((item) => {
-          const Icon = item.icon;
-          return (
-            <a
-              key={item.id}
-              href={item.href}
-              className="p-3 rounded-md bg-primary hover:bg-primary/90 transition"
-              aria-label={item.name}
-            >
-              <Icon size={20} className="text-white" />
-            </a>
-          );
-        })}
+        {socialLinks
+          .filter((item) => businessSetting[item.name.toLowerCase()]) // Only show if data exists
+          .map((item) => {
+            const Icon = item.icon;
+            const href = businessSetting[item.name.toLowerCase()]; // Get value from API
+            return (
+              <a
+                key={item.id}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-md bg-primary hover:bg-primary/90 transition"
+                aria-label={item.name}
+              >
+                <Icon size={20} className="text-white" />
+              </a>
+            );
+          })}
       </div>
 
       {/* Contact Form */}
@@ -185,18 +194,35 @@ export const SharedContact = () => {
       <div className="mt-20 flex flex-col items-center justify-center text-center">
         <h3 className="text-xl font-bold text-gray-700">Corporate Office</h3>
         <p className="mt-2 mb-8 text-sm text-gray-600 md:text-base">
-          Warehouse No. XX, Industrial Area 11, Sharjah, United Arab Emirates
+          {businessSetting.address} <br />
+          Phone:{" "}
+          <a
+            href={`tel:${businessSetting.phone}`}
+            className="text-primary hover:underline"
+          >
+            {businessSetting.phone}
+          </a>
+          <br />
+          Email:{" "}
+          <a
+            href={`mailto:${businessSetting.email}`}
+            className="text-primary hover:underline"
+          >
+            {businessSetting.email}
+          </a>
         </p>
 
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d338553.8078434383!2d54.2289643279561!3d24.386473916422997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e440f723ef2b9%3A0xc7cc2e9341971108!2sAbu%20Dhabi%20-%20United%20Arab%20Emirates!5e1!3m2!1sen!2sbd!4v1755348364412!5m2!1sen!2sbd"
-          width="100%"
-          height="150"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+        {businessSetting.map && (
+          <iframe
+            src={businessSetting.map}
+            width="100%"
+            height="150"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        )}
       </div>
     </div>
   );

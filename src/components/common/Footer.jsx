@@ -17,32 +17,10 @@ import {
   Briefcase,
   Phone,
   ShieldCheck,
+  Twitter,
 } from "lucide-react";
-import { SharedContactService } from "../shared/SharedContactService";
 
-// Social with Lucide icons
-const Social = [
-  {
-    icon: Facebook,
-    href: "#",
-    label: "Facebook",
-  },
-  {
-    icon: Linkedin,
-    href: "#",
-    label: "LinkedIn",
-  },
-  {
-    icon: Youtube,
-    href: "#",
-    label: "YouTube",
-  },
-  {
-    icon: Instagram,
-    href: "#",
-    label: "Instagram",
-  },
-];
+import { useGetAllBusinessSettingQuery } from "@/redux/features/businessSettingApi";
 
 // Footer content
 const footerSections = [
@@ -117,6 +95,38 @@ const footerSections = [
 ];
 
 const Footer = () => {
+  const { data: businessSettingData } = useGetAllBusinessSettingQuery();
+  const businessSetting = businessSettingData?.data || {};
+
+  // Map API fields to social icons, only include if data exists
+  const Social = [
+    businessSetting.facebook && {
+      icon: Facebook,
+      href: businessSetting.facebook,
+      label: "Facebook",
+    },
+    businessSetting.instagram && {
+      icon: Instagram,
+      href: businessSetting.instagram,
+      label: "Instagram",
+    },
+    businessSetting.linkdin && {
+      icon: Linkedin,
+      href: businessSetting.linkdin,
+      label: "LinkedIn",
+    },
+    businessSetting.twitter && {
+      icon: Twitter,
+      href: businessSetting.twitter,
+      label: "Twitter",
+    },
+    businessSetting.youtube && {
+      icon: Youtube,
+      href: businessSetting.youtube,
+      label: "YouTube",
+    },
+  ].filter(Boolean);
+
   return (
     <footer className="">
       {/* <SharedContactService /> */}
