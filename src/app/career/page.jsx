@@ -13,49 +13,21 @@ import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Linkedin } from "lucide-react";
 import { Paragraph } from "@/components/custom/Paragraph";
 import { useCreateCvApiMutation } from "@/redux/features/cvApi";
+import { useGetAllJobsQuery } from "@/redux/features/jobsApi";
 
 export default function CareerPage() {
   const [activeTab, setActiveTab] = useState("");
   const fileInputRef = useRef(null);
   const [createCv, { isLoading }] = useCreateCvApiMutation();
+  const { data, isLoading: jobLoading } = useGetAllJobsQuery();
+  const jobs = data?.data || [];
+  console.log("Job Data:", data);
 
   const bannerData = {
     title: "Career Opportunities",
     description: "Explore exciting career opportunities and grow with us.",
     image: banner_image,
   };
-
-  const jobs = [
-    {
-      id: 1,
-      title: "Sales Executive",
-      requirements: [
-        "5 Years Experience in Manpower Domain",
-        "Valid UAE Driving License",
-      ],
-    },
-    {
-      id: 2,
-      title: "HR Manager",
-      requirements: ["7 Years Experience in HR Domain", "MBA Preferred"],
-    },
-    {
-      id: 3,
-      title: "Marketing Specialist",
-      requirements: [
-        "3 Years Experience in Digital Marketing",
-        "Strong communication skills",
-      ],
-    },
-    {
-      id: 4,
-      title: "IT Support Engineer",
-      requirements: [
-        "2 Years Experience in IT Support",
-        "Knowledge of Networking",
-      ],
-    },
-  ];
 
   // Validation Schema
   const validationSchema = Yup.object({
@@ -152,21 +124,31 @@ export default function CareerPage() {
           {/* Job List */}
           {activeTab === "jobs" && (
             <div className="space-y-12 text-center">
-              {jobs.map((job) => (
-                <div key={job.id}>
-                  <h5 className="_h5 text-gray-500">
-                    {job.id}. {job.title}
-                  </h5>
-                  <p className="_p mt-2 !text-gray-500 !font-semibold">
-                    Requirements:
-                  </p>
-                  <ul className="text-gray-600 mb-4 text-xs md:text-sm">
-                    {job.requirements.map((req, i) => (
-                      <li key={i}>{req}</li>
-                    ))}
-                  </ul>
+              {jobLoading ? (
+                <div className="animate-pulse space-y-2 py-4 border-b border-gray-200">
+                  <div className="h-5 bg-gray-300 rounded w-1/2 mx-auto"></div>
+                  <div className="h-3 bg-gray-300 rounded w-3/4 mx-auto mt-2"></div>
+                  <div className="h-3 bg-gray-300 rounded w-2/3 mx-auto mt-1"></div>
                 </div>
-              ))}
+              ) : jobs.length > 0 ? (
+                jobs.map((job, index) => (
+                  <div key={job._id}>
+                    <h5 className="_h5 text-gray-500">
+                      {index + 1}. {job.title}
+                    </h5>
+                    <p className="_p mt-2 !text-gray-500 !font-semibold">
+                      Requirements:
+                    </p>
+                    <ul className="text-gray-600 mb-4 text-xs md:text-sm">
+                      {job.sub_tital}
+                    </ul>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500 my-10">
+                  No jobs available at the moment.
+                </p>
+              )}
             </div>
           )}
 
