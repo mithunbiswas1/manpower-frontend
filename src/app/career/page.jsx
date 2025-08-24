@@ -1,24 +1,23 @@
 // app/career/page.jsx
 
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
 import { SharedBanner } from "@/components/shared/SharedBanner";
 import banner_image from "@/resource/banner_image_3.jpg";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Linkedin } from "lucide-react";
 import { Paragraph } from "@/components/custom/Paragraph";
+import { useCreateCvApiMutation } from "@/redux/features/cvApi";
 
 export default function CareerPage() {
   const [activeTab, setActiveTab] = useState("");
-  const [formData, setFormData] = useState({
-    jobTitle: "",
-    title: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    mobile: "",
-    resume: null,
-  });
+  const fileInputRef = useRef(null);
+  const [createCv, { isLoading }] = useCreateCvApiMutation();
 
   const bannerData = {
     title: "Career Opportunities",
@@ -58,19 +57,53 @@ export default function CareerPage() {
     },
   ];
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  // Validation Schema
+  const validationSchema = Yup.object({
+    job_type: Yup.string().required("Please select a job"),
+    tital: Yup.string(),
+    first_name: Yup.string().required("First name is required"),
+    last_name: Yup.string().required("Last name is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    phone: Yup.string().required("Phone number is required"),
+    image: Yup.mixed().required("Please upload your resume/CV"),
+  });
+
+  // Initial Values
+  const initialValues = {
+    job_type: "",
+    tital: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    image: null,
   };
 
-  const handleFileChange = (e) => {
-    setFormData((prev) => ({ ...prev, resume: e.target.files[0] }));
-  };
+  const handleSubmit = async (values, { resetForm }) => {
+    const fd = new FormData();
+    fd.append("job_type", values.job_type);
+    fd.append("tital", values.tital);
+    fd.append("first_name", values.first_name);
+    fd.append("last_name", values.last_name);
+    fd.append("email", values.email);
+    fd.append("phone", values.phone);
+    if (values.image) {
+      fd.append("image", values.image);
+    }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted:", formData);
-    // Add your form submission logic here
+    try {
+      const res = await createCv(fd).unwrap();
+      console.log("CV Submitted:", res);
+
+      toast.success("Application submitted successfully");
+      resetForm();
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    } catch (err) {
+      console.error("Submission error:", err);
+      toast.error("Failed to submit application");
+    }
   };
 
   return (
@@ -92,6 +125,7 @@ export default function CareerPage() {
             trained, and reliable labor across packing, construction,
             hospitality, industrial, and cleaning sectors.
           </Paragraph>
+
           {/* Tabs */}
           <div className="flex justify-center my-12 space-x-2">
             <button
@@ -135,107 +169,144 @@ export default function CareerPage() {
               ))}
             </div>
           )}
+
           {/* Application Form */}
           {activeTab === "form" && (
             <div className="bg-white max-w-lg mx-auto mt-8">
-              <form className="grid gap-4" onSubmit={handleSubmit}>
-                <div className="space-y-4">
-                  <div className="">
-                    <select
-                      name="jobTitle"
-                      value={formData.jobTitle}
-                      onChange={handleInputChange}
-                      className="border rounded px-3 py-2 w-full"
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                {({ setFieldValue }) => (
+                  <Form className="grid gap-4">
+                    <div className="space-y-4">
+                      {/* Job Select */}
+                      <Field
+                        as="select"
+                        name="job_type"
+                        className="border rounded px-3 py-2 w-full"
+                      >
+                        <option value="">Select Job</option>
+                        {jobs.map((job) => (
+                          <option key={job.id} value={job.title}>
+                            {job.title}
+                          </option>
+                        ))}
+                      </Field>
+                      <ErrorMessage
+                        name="job_type"
+                        component="div"
+                        className="text-red-500 text-sm"
+                      />
+
+                      <Field
+                        type="text"
+                        name="tital"
+                        placeholder="Title (Mr., Ms., Dr., etc.)"
+                        className="border rounded px-3 py-2 w-full"
+                      />
+
+                      <Field
+                        type="text"
+                        name="first_name"
+                        placeholder="First Name"
+                        className="border rounded px-3 py-2 w-full"
+                      />
+                      <ErrorMessage
+                        name="first_name"
+                        component="div"
+                        className="text-red-500 text-sm"
+                      />
+
+                      <Field
+                        type="text"
+                        name="last_name"
+                        placeholder="Last Name"
+                        className="border rounded px-3 py-2 w-full"
+                      />
+                      <ErrorMessage
+                        name="last_name"
+                        component="div"
+                        className="text-red-500 text-sm"
+                      />
+
+                      <Field
+                        type="email"
+                        name="email"
+                        placeholder="Email Address"
+                        className="border rounded px-3 py-2 w-full"
+                      />
+                      <ErrorMessage
+                        name="email"
+                        component="div"
+                        className="text-red-500 text-sm"
+                      />
+
+                      <Field
+                        type="tel"
+                        name="phone"
+                        placeholder="Mobile Number"
+                        className="border rounded px-3 py-2 w-full"
+                      />
+                      <ErrorMessage
+                        name="phone"
+                        component="div"
+                        className="text-red-500 text-sm"
+                      />
+                    </div>
+
+                    {/* File Upload */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Upload Resume/CV
+                      </label>
+                      <input
+                        type="file"
+                        name="image"
+                        ref={fileInputRef}
+                        onChange={(e) =>
+                          setFieldValue("image", e.currentTarget.files[0])
+                        }
+                        className="border rounded px-3 py-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-secondary"
+                      />
+
+                      <ErrorMessage
+                        name="image"
+                        component="div"
+                        className="text-red-500 text-sm"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className="w-full bg-primary text-white py-3 rounded-sm uppercase font-medium hover:bg-secondary transition-colors duration-200"
                     >
-                      <option value="">Select Job</option>
-                      {jobs.map((job) => (
-                        <option key={job.id} value={job.title}>
-                          {job.title}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <input
-                    type="text"
-                    name="title"
-                    placeholder="Title (Mr., Ms., Dr., etc.)"
-                    value={formData.title}
-                    onChange={handleInputChange}
-                    className="border rounded px-3 py-2 w-full"
-                  />
-                  <input
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                  <input
-                    type="tel"
-                    name="mobile"
-                    placeholder="Mobile Number"
-                    value={formData.mobile}
-                    onChange={handleInputChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Upload Resume/CV
-                  </label>
-                  <input
-                    type="file"
-                    name="resume"
-                    onChange={handleFileChange}
-                    className="border rounded px-3 py-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-secondary"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-primary text-white py-3 rounded-sm uppercase font-medium hover:bg-secondary transition-colors duration-200"
-                >
-                  Send
-                </button>
-              </form>
+                      {isLoading ? "Sending..." : "Send"}
+                    </button>
+                  </Form>
+                )}
+              </Formik>
             </div>
           )}
-          ,
+
+          {/* External Apply Buttons */}
           {activeTab !== "form" && (
-            <div className="flex justify-center gap-2">
+            <div className="flex justify-center gap-2 mt-8">
               <a
                 href="#"
                 className="flex items-center gap-2 bg-primary text-white font-semibold border border-primary"
               >
-                {/* Indeed Icon */}
                 <span className="w-10 h-10 flex items-center justify-center bg-white">
+                  {/* Indeed Icon */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="primary"
                     className="w-4 h-4"
                   >
-                    <path d="M10.824 16.516c-1.397.042-2.793-.414-3.832-1.285-.595-.506-1.127-1.11-1.583-1.812-.456-.702-.82-1.493-1.092-2.348-.272-.855-.443-1.765-.512-2.709-.07-.944.004-1.9.22-2.827.217-.927.568-1.802 1.054-2.585.485-.783 1.09-1.468 1.8-2.03.71-.56 1.523-.993 2.408-1.296.885-.303 1.834-.473 2.798-.485 1.488-.016 2.973.35 4.316 1.098 1.344.748 2.502 1.803 3.407 3.093.905 1.29 1.558 2.768 1.91 4.33.353 1.562.402 3.167.147 4.75-.255 1.583-.873 3.102-1.815 4.463-.942 1.36-2.203 2.5-3.69 3.385-1.487.884-3.178 1.455-4.935 1.691-.013.003-.028.003-.042.004h-.01c-1.18.06-2.36-.024-3.52-.258-1.16-.233-2.28-.66-3.32-1.258-.027-.015-.055-.03-.082-.045zm3.17-10.457c-.896-.007-1.78.18-2.6.55s-1.56.88-2.17 1.54c-.61.66-1.06 1.43-1.34 2.27s-.4 1.76-.32 2.65c.08.89.37 1.76.85 2.53.48.77 1.1 1.43 1.83 1.96.73.53 1.55.93 2.42 1.18.88.25 1.8.34 2.73.27.93-.07 1.84-.33 2.7-.79.86-.46 1.63-1.12 2.29-1.95.66-.83 1.2-1.78 1.58-2.8.38-1.02.5-2.11.36-3.19-.14-1.08-.54-2.13-1.18-3.08-.64-.95-1.5-1.78-2.52-2.42-1.02-.64-2.16-1.03-3.35-1.17-.05-.005-.1-.01-.15-.015z" />
+                    <path d="M10.824 16.516c-1.397.042-2.793-.414-3.832-1.285..."></path>
                   </svg>
                 </span>
                 <span className="max-w-32 text-sm ">Apply Now on Indeed</span>
@@ -247,7 +318,6 @@ export default function CareerPage() {
                 <span className="w-10 h-10 flex items-center justify-center bg-white">
                   <Linkedin className="text-[#0a66c2]" size={18} />
                 </span>
-
                 <span className="max-w-32 text-sm ">Apply Now on LinkedIn</span>
               </a>
             </div>

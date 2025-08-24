@@ -5,6 +5,7 @@ import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
 import WhatsAppChatButton from "@/components/WhatsAppChatButton";
 import ReduxProvider from "@/redux/reduxProvider/ReduxProvider";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "Welcome to Box Craft Packing Services",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
           {children}
           <Footer />
           {/* <WhatsAppChatButton /> */}
+          <ToastContainer position="top-right" autoClose={3000} />
         </ReduxProvider>
       </body>
     </html>
