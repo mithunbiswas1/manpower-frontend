@@ -47,7 +47,7 @@ export const TestimonialsComponents = () => {
         setModalText("");
       }
     } else {
-      setModalText(testimonial?.sub_tital);
+      setModalText(testimonial?.comments);
       setVideoUrl("");
     }
     setSelectedTestimonial(testimonial);
@@ -124,7 +124,7 @@ export const TestimonialsComponents = () => {
                 </h3>
                 <Paragraph className="text-center !text-xs lg:!text-sm">
                   {testimonial.sub_tital} <br />
-                  {testimonial.sub_tital}
+                  {testimonial.company}
                 </Paragraph>
 
                 <div className="mt-auto">
@@ -173,13 +173,13 @@ export const TestimonialsComponents = () => {
                   {selectedTestimonial && (
                     <>
                       <h3 className="text-xl font-semibold">
-                        {selectedTestimonial.name}
+                        {selectedTestimonial.title}
                       </h3>
                       <p className="text-sm text-gray-500">
                         {selectedTestimonial.sub_tital}
                       </p>
                       <p className="text-sm text-gray-500">
-                        {selectedTestimonial.sub_tital}
+                        {selectedTestimonial.company}
                       </p>
                     </>
                   )}
