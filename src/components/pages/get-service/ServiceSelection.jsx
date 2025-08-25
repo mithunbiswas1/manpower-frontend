@@ -1,23 +1,7 @@
 // components/pages/get-service/ServiceSelection.jsx
-"use client";
-import {
-  Package, // for Warehouse & Packing Helpers
-  BrushCleaning, // for Cleaning Staff
-  Hammer, // for Construction Labour
-  UtensilsCrossed, // for Hospitality Workers
-  Factory, // for Factory & General Helpers
-  Users, // for Others Labour & Workers
-} from "lucide-react";
 
-// Map your new service names to icons
-const serviceIcons = {
-  "Warehouse & Packing Helpers": Package,
-  "Cleaning Staff": BrushCleaning,
-  "Construction Labour": Hammer,
-  "Hospitality Workers": UtensilsCrossed,
-  "Factory & General Helpers": Factory,
-  "Others Labour & Workers": Users,
-};
+"use client";
+import { Users } from "lucide-react";
 
 export const ServiceSelection = ({
   services,
@@ -28,7 +12,7 @@ export const ServiceSelection = ({
     <nav>
       <ul className="flex flex-row md:flex-col">
         {services.map((serviceName) => {
-          const Icon = serviceIcons[serviceName];
+          const Icon = Users;
           return (
             <li
               key={serviceName}

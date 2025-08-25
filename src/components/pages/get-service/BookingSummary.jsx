@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ButtonSecondary } from "@/components/custom/ButtonSecondary";
 import { ButtonDefault } from "@/components/custom/ButtonDefault";
 import { ShoppingCart, X } from "lucide-react";
+import { useCreateBookingApiMutation } from "@/redux/features/bookingApi";
 
 export const BookingSummary = ({
   booking,
@@ -17,29 +18,57 @@ export const BookingSummary = ({
     company: "",
     contact: "",
     email: "",
-    tradeLicense: null,
+    image: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
+  const [createBooking] = useCreateBookingApiMutation();
+
   const hasBookings = Object.keys(booking).length > 0;
+
+  console.log("Booking Data:", booking);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // instead of file, just string (filename)
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFormData((prev) => ({ ...prev, tradeLicense: file }));
+    setFormData((prev) => ({
+      ...prev,
+      image: file ? file.name : "",
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Booking Request Submitted:", formData);
-    // You would typically send the formData to a server here, including the file.
-    setSubmitted(true);
-    onSubmission();
+
+    // transform booking object into array (like Postman example)
+    const bookingArray = Object.keys(booking).map((serviceName) => ({
+      job_type: serviceName,
+      designation: Object.keys(booking[serviceName]).map((roleName) => ({
+        name: roleName,
+        qut: booking[serviceName][roleName],
+      })),
+    }));
+
+    const payload = {
+      ...formData,
+      booking: bookingArray,
+    };
+
+    console.log("Booking Request Submitted:", JSON.stringify(payload, null, 2));
+
+    try {
+      await createBooking(payload).unwrap();
+      setSubmitted(true);
+      onSubmission();
+    } catch (error) {
+      console.error("Booking submission failed:", error);
+    }
   };
 
   const handleClose = () => {
@@ -50,7 +79,7 @@ export const BookingSummary = ({
       company: "",
       contact: "",
       email: "",
-      tradeLicense: null,
+      image: "",
       message: "",
     });
   };
@@ -171,7 +200,7 @@ export const BookingSummary = ({
                       </label>
                       <input
                         type="file"
-                        name="tradeLicense"
+                        name="image"
                         onChange={handleFileChange}
                         className="border rounded px-3 py-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
                       />

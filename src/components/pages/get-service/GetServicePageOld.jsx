@@ -19,16 +19,16 @@ import permanent_staffing_solutions from "@/resource/home_banner/permanent_staff
 
 export const GetServicePage = () => {
   const searchParams = useSearchParams();
-  const { data, error, isLoading } = useGetAllServicesQuery();
-  const services = data?.data || [];
-
   const [selectedService, setSelectedService] = useState(
     "Warehouse & Packing Helpers"
   );
   const [booking, setBooking] = useState({});
   const [activeStep, setActiveStep] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const currentService = services.find((s) => s.name === selectedService);
+
+  const { data, error, isLoading } = useGetAllServicesQuery();
+  const services = data?.data || [];
+  console.log("Fetched Services:", services);
 
   useEffect(() => {
     const serviceFromUrl = searchParams.get("service");
@@ -105,7 +105,7 @@ export const GetServicePage = () => {
         {/* Left Navigation */}
         <div className="md:col-span-2 bg-gray-100 p-4 border-r border-gray-200">
           <ServiceSelection
-            services={services.map((s) => s.name)}
+            services={Object.keys(serviceData)}
             selectedService={selectedService}
             onSelectService={handleSelectService}
           />
@@ -114,12 +114,12 @@ export const GetServicePage = () => {
         {/* Main Content Area */}
         <div className="md:col-span-6 px-4">
           <ManpowerForm
-            serviceData={currentService?.roles || []}
+            serviceData={serviceData[selectedService]?.roles || []}
             selectedService={selectedService}
             booking={booking}
             onBookingUpdate={handleBookingUpdate}
             onFormInteraction={handleFormInteraction}
-            serviceImage={`${baseUriBackend}${currentService?.image}`}
+            serviceImage={serviceData[selectedService]?.imageUrl}
           />
         </div>
 
@@ -136,4 +136,54 @@ export const GetServicePage = () => {
       </div>
     </div>
   );
+};
+
+// Updated serviceData
+const serviceData = {
+  "Warehouse & Packing Helpers": {
+    imageUrl: expert_factory_workforce,
+    roles: [
+      { name: "Supervisor", defaultQty: 0 },
+      { name: "Foreman", defaultQty: 0 },
+      { name: "Chargehand", defaultQty: 0 },
+    ],
+  },
+  "Cleaning Staff": {
+    imageUrl: professional_leaning_services,
+    roles: [
+      { name: "Team Lead", defaultQty: 0 },
+      { name: "Cleaning Staff", defaultQty: 0 },
+      { name: "Sanitation Expert", defaultQty: 0 },
+    ],
+  },
+  "Construction Labour": {
+    imageUrl: trusted_security_personnel,
+    roles: [
+      { name: "Mason", defaultQty: 0 },
+      { name: "Helper", defaultQty: 0 },
+      { name: "Welder", defaultQty: 0 },
+    ],
+  },
+  "Hospitality Workers": {
+    imageUrl: hotel_catering_taffing,
+    roles: [
+      { name: "Chef", defaultQty: 0 },
+      { name: "Waiter", defaultQty: 0 },
+      { name: "Housekeeping", defaultQty: 0 },
+    ],
+  },
+  "Factory & General Helpers": {
+    imageUrl: certified_safety_officers,
+    roles: [
+      { name: "Factory Helper", defaultQty: 0 },
+      { name: "General Worker", defaultQty: 0 },
+    ],
+  },
+  "Others Labour & Workers": {
+    imageUrl: permanent_staffing_solutions,
+    roles: [
+      { name: "Temp Staff", defaultQty: 0 },
+      { name: "Project Lead", defaultQty: 0 },
+    ],
+  },
 };

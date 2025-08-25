@@ -47,12 +47,14 @@ export const ManpowerForm = ({
           <Image
             src={serviceImage}
             alt={selectedService}
+            height={400}
+            width={300}
             className="object-cover object-center h-full w-full"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-1">
         {serviceData.map((role) => (
           <div
             key={role.name}

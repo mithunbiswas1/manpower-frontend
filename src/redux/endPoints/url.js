@@ -14,4 +14,6 @@ export const CREATE_CV_URL = API_BASE_URL + "create-cv";
 export const JOBS_URL = API_BASE_URL + "all-jobs";
 export const CREATE_CONTACT_URL = API_BASE_URL + "create-contact";
 export const CREATE_QUOTATION_URL = API_BASE_URL + "create-quotation";
+export const CREATE_BOOKING_URL = API_BASE_URL + "create-booking";
 export const BUSINESS_SETTINGS = API_BASE_URL + "get-bs";
+export const SERVICES_URL = API_BASE_URL + "get-all-service";

@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/ultils/motion";
 import {
   Info,
-  Wrench,
-  Home,
   User,
   BookOpenCheck,
   Facebook,
@@ -14,13 +12,13 @@ import {
   Youtube,
   Instagram,
   Users,
-  Briefcase,
-  Phone,
   ShieldCheck,
   Twitter,
+  Quote,
 } from "lucide-react";
 
 import { useGetAllBusinessSettingQuery } from "@/redux/features/businessSettingApi";
+import { useGetAllServicesQuery } from "@/redux/features/servicesApi";
 
 // Footer content
 const footerSections = [
@@ -44,6 +42,11 @@ const footerSections = [
         href: "/projects",
       },
       { icon: <Users size={16} />, name: "Clients", href: "/clients" },
+      {
+        icon: <Quote size={16} />,
+        name: "Testimonials",
+        href: "/testimonials",
+      },
       { icon: <User size={16} />, name: "Career", href: "/career" },
       // { icon: <Phone size={16} />, name: "Reach Us", href: "/reach-us" },
       {
@@ -60,33 +63,7 @@ const footerSections = [
   },
   {
     title: "Man Power Solutions",
-    links: [
-      {
-        icon: <User size={16} />,
-        name: "Warehouse & Packing Helpers",
-        href: "/get-service",
-      },
-      {
-        icon: <Briefcase size={16} />,
-        name: "Cleaning Staff",
-        href: "/get-service",
-      },
-      {
-        icon: <Users size={16} />,
-        name: "Construction Labour",
-        href: "/get-service",
-      },
-      {
-        icon: <Wrench size={16} />,
-        name: "Hospitality Workers",
-        href: "/get-service",
-      },
-      {
-        icon: <BookOpenCheck size={16} />,
-        name: "Factory & General Helpers",
-        href: "/get-service",
-      },
-    ],
+    isServiceList: true,
   },
   {
     title: "Follow Us",
@@ -97,6 +74,9 @@ const footerSections = [
 const Footer = () => {
   const { data: businessSettingData } = useGetAllBusinessSettingQuery();
   const businessSetting = businessSettingData?.data || {};
+
+  const { data, error, isLoading } = useGetAllServicesQuery();
+  const services = data?.data || [];
 
   // Map API fields to social icons, only include if data exists
   const Social = [
@@ -175,6 +155,31 @@ const Footer = () => {
                     >
                       {link.icon}
                       <Link href={link.href}>{link.name}</Link>
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+
+              {section.isServiceList && (
+                <motion.ul
+                  variants={fadeIn("up", 0.3)}
+                  initial="hidden"
+                  whileInView="show"
+                  className="space-y-2 text-gray-400 flex flex-col items-center md:items-start"
+                >
+                  {services.map(({ name, _id }) => (
+                    <li
+                      key={_id}
+                      className="flex items-center gap-2 hover:text-white transition-all"
+                    >
+                      <Users size={16} />
+                      <Link
+                        href={`/get-service?service=${encodeURIComponent(
+                          name
+                        )}`}
+                      >
+                        {name}
+                      </Link>
                     </li>
                   ))}
                 </motion.ul>

@@ -93,7 +93,7 @@ export const HomeDifference = () => {
               whileInView="show"
               className="_h2 mt-3 pb-12 text-center "
             >
-              Why Choose Aussie HVAC Man Power Services?
+              Box Craft Packing Services
             </motion.h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

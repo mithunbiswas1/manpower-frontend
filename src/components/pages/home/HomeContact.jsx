@@ -32,7 +32,7 @@ export const HomeContact = () => {
 
         <div className="flex flex-col items-center mt-8 md:mt-0">
           <FileText className="w-10 h-10  mb-2 text-gray-500" />
-          <p className="text-lg">Request a Quote</p>
+          <p className="text-lg">Reach Us</p>
           <Link
             href="/reach-us"
             rel="noopener noreferrer"

@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           {children}
           <Footer />
-          {/* <WhatsAppChatButton /> */}
+          <WhatsAppChatButton />
           <ToastContainer position="top-right" autoClose={3000} />
         </ReduxProvider>
       </body>

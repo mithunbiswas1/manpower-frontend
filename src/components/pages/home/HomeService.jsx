@@ -6,53 +6,13 @@ import { SectionTitle } from "@/components/custom/SectionTitle";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
 import "swiper/css";
 
-import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
-import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
-import trusted_security_personnel from "@/resource/home_banner/trusted_security_personnel.jpg";
-import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffing.jpg";
-import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
-import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
-
-const services = [
-  {
-    id: 1,
-    title: "Warehouse & Packing Helpers",
-    imageUrl: expert_factory_workforce,
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "Cleaning Staff",
-    imageUrl: professional_leaning_services,
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "Construction Labour",
-    imageUrl: trusted_security_personnel,
-    link: "#",
-  },
-  {
-    id: 4,
-    title: "Hospitality Workers",
-    imageUrl: hotel_catering_taffing,
-    link: "#",
-  },
-  {
-    id: 5,
-    title: "Factory & General Helpers",
-    imageUrl: certified_safety_officers,
-    link: "#",
-  },
-  {
-    id: 6,
-    title: "Others Labour & Workers",
-    imageUrl: permanent_staffing_solutions,
-    link: "#",
-  },
-];
+import { baseUriBackend } from "@/redux/endPoints/url";
+import { useGetAllServicesQuery } from "@/redux/features/servicesApi";
 
 export const HomeService = () => {
+  const { data, error, isLoading } = useGetAllServicesQuery();
+  const services = data?.data || [];
+
   return (
     <section className="bg-gray-100">
       <div className="py-16 _max_width">
@@ -61,16 +21,16 @@ export const HomeService = () => {
           Let's Talk Manpower Services
         </SectionSubHeading>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {services.map(({ id, title, imageUrl, link }, index) => (
+          {services.map(({ _id, name, image }) => (
             <Link
-              href={link}
-              key={id}
+              href={`/get-service?service=${encodeURIComponent(name)}`}
+              key={_id}
               className="relative group block max-w-screen h-[450px] md:w-auto 2xl:h-[500px] overflow-hidden shadow-lg"
             >
               {/* Background image */}
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                style={{ backgroundImage: `url(${imageUrl.src})` }}
+                style={{ backgroundImage: `url(${baseUriBackend}${image})` }}
                 aria-hidden="true"
               />
               <div className="absolute inset-0 bg-black/30 group-hover:bg-primary/0 transition-all duration-300"></div>
@@ -93,7 +53,7 @@ export const HomeService = () => {
 
                   {/* Title */}
                   <h4 className="absolute _h4 opacity-0 group-hover:opacity-100 group-hover:text-2xl font-semibold z-10 text-right bottom-10 right-10 transition-all duration-300 ml-20">
-                    {title}
+                    {name}
                   </h4>
                 </div>
               </div>
