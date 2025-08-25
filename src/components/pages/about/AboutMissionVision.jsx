@@ -3,7 +3,6 @@
 
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Paragraph } from "@/components/custom/Paragraph";
-import { Eye, Target } from "lucide-react"; // Importing icons for Vision and Mission
 
 export const AboutMissionVision = () => {
   const visionData = {
