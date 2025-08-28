@@ -10,13 +10,6 @@ import { BookingStepper } from "@/components/pages/get-service/BookingStepper";
 import { baseUriBackend } from "@/redux/endPoints/url";
 import { useGetAllServicesQuery } from "@/redux/features/servicesApi";
 
-import expert_factory_workforce from "@/resource/home_banner/expert_factory_workforce.jpg";
-import professional_leaning_services from "@/resource/home_banner/professional_leaning_services.jpg";
-import trusted_security_personnel from "@/resource/home_banner/trusted_security_personnel.jpg";
-import hotel_catering_taffing from "@/resource/home_banner/hotel_catering_taffing.jpg";
-import certified_safety_officers from "@/resource/home_banner/certified_safety_officers.jpg";
-import permanent_staffing_solutions from "@/resource/home_banner/permanent_staffing_solutions.jpg";
-
 export const GetServicePage = () => {
   const searchParams = useSearchParams();
   const { data, error, isLoading } = useGetAllServicesQuery();

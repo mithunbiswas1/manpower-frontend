@@ -6,7 +6,7 @@ import { AboutMissionVision } from "@/components/pages/about/AboutMissionVision"
 import { SharedAbout } from "@/components/shared/SharedAbout";
 import { SharedAbout2 } from "@/components/shared/SharedAbout2";
 import { SharedBanner } from "@/components/shared/SharedBanner";
-import banner_image from "@/resource/home_banner/flexible_temporary_staffing.jpg";
+import banner_image from "@/resource/contact-backgeound.jpg";
 
 import { useGetAllAboutQuery } from "@/redux/features/aboutApi";
 

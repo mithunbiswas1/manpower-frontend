@@ -2,7 +2,7 @@
 
 import { ClientsComponents } from "@/components/pages/clients/ClientsComponents";
 import { SharedBanner } from "@/components/shared/SharedBanner";
-import banner_image from "@/resource/home_banner/flexible_temporary_staffing.jpg";
+import banner_image from "@/resource/contact-backgeound.jpg";
 
 export default function ClientsPage() {
   const bannerData = {
