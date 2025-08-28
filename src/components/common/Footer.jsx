@@ -167,7 +167,7 @@ const Footer = () => {
                   whileInView="show"
                   className="space-y-2 text-gray-400 flex flex-col items-center md:items-start"
                 >
-                  {services.map(({ name, _id }) => (
+                  {services.slice(0, 6).map(({ name, _id }) => (
                     <li
                       key={_id}
                       className="flex items-center gap-2 hover:text-white transition-all"

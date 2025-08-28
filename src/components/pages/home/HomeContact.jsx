@@ -1,4 +1,4 @@
-import { PhoneCall, Mail, FileText } from "lucide-react";
+import { PhoneCall, Mail, FileText, FilePenIcon, FileDown } from "lucide-react";
 import Link from "next/link";
 
 export const HomeContact = () => {
@@ -7,7 +7,7 @@ export const HomeContact = () => {
       {/* <div className="flex justify-center mb-12">
         <ButtonPrimary link="/about">Know More</ButtonPrimary>
       </div> */}
-      <div className="_max_width pb-16 grid grid-cols-1 lg:grid-cols-3">
+      <div className="_max_width pb-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="flex flex-col items-center">
           <PhoneCall className="w-10 h-10  mb-2 text-gray-500" />
           <p className="text-lg">Call Us</p>
@@ -39,6 +39,18 @@ export const HomeContact = () => {
             className="font-semibold text-xl text-gray-500 mt-1 tracking-wide hover:underline"
           >
             Book Online
+          </Link>
+        </div>
+
+        <div className="flex flex-col items-center mt-8 md:mt-0">
+          <FileDown className="w-10 h-10  mb-2 text-gray-500" />
+          <p className="text-lg">Download Profile</p>
+          <Link
+            href="#"
+            rel="noopener noreferrer"
+            className="font-semibold text-xl text-gray-500 mt-1 tracking-wide hover:underline"
+          >
+            Download
           </Link>
         </div>
       </div>

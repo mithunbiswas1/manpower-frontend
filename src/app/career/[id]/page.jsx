@@ -1,11 +1,11 @@
 // app/career/[id]/page.jsx
-"use client"; // This MUST be the very first line of code
 
-import { useState, use } from "react"; // Add 'use' to the imports
+"use client";
+
+import { use, useState } from "react";
 import { notFound } from "next/navigation";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Paragraph } from "@/components/custom/Paragraph";
-import { ButtonPrimary } from "@/components/custom/ButtonPrimary";
 import {
   MapPin,
   DollarSign,
@@ -19,28 +19,36 @@ import {
   FileText,
 } from "lucide-react";
 import { SharedBanner } from "@/components/shared/SharedBanner";
-import { jobListings } from "@/data/jobListings"; // Ensure this path is correct
 import { ApplyModal } from "@/components/pages/career/ApplyModal";
 import { ButtonDefault } from "@/components/custom/ButtonDefault";
 
-export default function JobDetailsPage({ params }) {
-  // Unwrap the params promise using use()
-  const { id } = use(params); // This is the key change needed
+import { useGetSingleJobQuery } from "@/redux/features/jobsApi";
+import { baseUriBackend } from "@/redux/endPoints/url";
 
-  // Find the job in the local data
-  const job = jobListings.find((j) => j.id === id);
+export default function JobDetailsPage({ params }) {
+  const { id } = use(params);
+
+  const { data, isLoading, isError } = useGetSingleJobQuery(id);
 
   // State to control modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (!job) {
+  if (isLoading) {
+    return <p className="text-center py-20 text-lg">Loading job details...</p>;
+  }
+
+  if (isError || !data?.data) {
     notFound();
   }
+
+  const job = data.data;
 
   const bannerData = {
     title: job.title,
     description: `Department: ${job.department} | ${job.site}`,
-    image: job.image,
+    image: job.image
+      ? { src: `${baseUriBackend}${job.image}` }
+      : { src: "/default-job-banner.jpg" },
   };
 
   return (
@@ -50,6 +58,7 @@ export default function JobDetailsPage({ params }) {
         description={bannerData.description}
         bgImage={bannerData.image.src}
       />
+
       <section className="py-20 bg-white">
         <div className="max-w-screen-lg mx-auto px-4 md:px-8">
           <SectionTitle className="mb-6 text-gray-900">
@@ -96,6 +105,7 @@ export default function JobDetailsPage({ params }) {
             )}
           </div>
 
+          {/* Job Overview */}
           <h3 className="text-2xl font-semibold text-gray-800 mb-4">
             Job Overview
           </h3>
@@ -103,7 +113,8 @@ export default function JobDetailsPage({ params }) {
             {job.fullDescription || job.description}
           </Paragraph>
 
-          {job.responsibilities && job.responsibilities.length > 0 && (
+          {/* Responsibilities */}
+          {job.responsibilities?.length > 0 && (
             <div className="mb-8">
               <h4 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                 <ListTodo size={24} className="mr-2 text-primary" />
@@ -117,7 +128,8 @@ export default function JobDetailsPage({ params }) {
             </div>
           )}
 
-          {job.qualifications && job.qualifications.length > 0 && (
+          {/* Qualifications */}
+          {job.qualifications?.length > 0 && (
             <div className="mb-8">
               <h4 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                 <ListTodo size={24} className="mr-2 text-primary" />
@@ -131,7 +143,8 @@ export default function JobDetailsPage({ params }) {
             </div>
           )}
 
-          {job.education && job.education.length > 0 && (
+          {/* Education */}
+          {job.education?.length > 0 && (
             <div className="mb-8">
               <h4 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                 <BookOpen size={24} className="mr-2 text-primary" />
@@ -145,7 +158,8 @@ export default function JobDetailsPage({ params }) {
             </div>
           )}
 
-          {job.benefits && job.benefits.length > 0 && (
+          {/* Benefits */}
+          {job.benefits?.length > 0 && (
             <div className="mb-8">
               <h4 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
                 <Sparkles size={24} className="mr-2 text-primary" />
@@ -159,6 +173,7 @@ export default function JobDetailsPage({ params }) {
             </div>
           )}
 
+          {/* How to Apply */}
           {job.applyInstructions && (
             <div className="mb-8">
               <h4 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
@@ -171,23 +186,22 @@ export default function JobDetailsPage({ params }) {
             </div>
           )}
 
+          {/* Apply Button */}
           <div className="mt-10 flex justify-center">
-            {/* The ButtonPrimary now opens the modal */}
-            {/* Make sure this is your custom ButtonPrimary component */}
-            <ButtonDefault
-              onClick={() => setIsModalOpen(true)} // Set state to open modal
-            >
+            <ButtonDefault onClick={() => setIsModalOpen(true)}>
               Apply Now
             </ButtonDefault>
           </div>
         </div>
       </section>
 
-      {/* The Apply Modal component */}
+      {/* Apply Modal */}
+      {/* Apply Modal */}
       <ApplyModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         jobTitle={job.title}
+        positions={[job.title]}
       />
     </>
   );

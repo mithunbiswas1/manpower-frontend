@@ -2,6 +2,7 @@
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Paragraph } from "@/components/custom/Paragraph";
 import { SectionSubHeading } from "@/components/custom/SectionSubHeading";
+import Link from "next/link";
 
 export const HomeAbout = () => {
   return (
@@ -9,7 +10,10 @@ export const HomeAbout = () => {
       <SectionTitle className="mb-4 text-center">
         Welcome to Box Craft Packing Services
       </SectionTitle>
-      <SectionSubHeading className="justify-center -mt-2 mb-5" icon={null}>
+      <SectionSubHeading
+        className="justify-center -mt-2 lg:mt-0 mb-5"
+        icon={null}
+      >
         Reliable Manpower Solutions in the UAE
       </SectionSubHeading>
       <Paragraph className="text-center md:max-w-8/10 mx-auto">
@@ -17,7 +21,10 @@ export const HomeAbout = () => {
         UAE, dedicated to delivering skilled, semi-skilled, and unskilled labor
         to a wide range of industries. With a commitment to excellence, safety,
         and productivity, we help businesses achieve operational efficiency
-        through cost-effective workforce solutions.
+        through cost-effective workforce solutions.{" "}
+        <Link href="/about" className="text-primary hover:underline">
+          Learn more
+        </Link>
       </Paragraph>
     </div>
   );

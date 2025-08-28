@@ -3,7 +3,7 @@ import banner_image_1 from "@/resource/banner_image_3.jpg"; // Example image 1
 
 export const jobListings = [
   {
-    id: "marketing-specialist-101",
+    id: "68ad774379b87546ccd58f8c",
     title: "Marketing Specialist",
     department: "Marketing",
     site: "Remote",

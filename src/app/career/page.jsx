@@ -14,6 +14,7 @@ import { Linkedin } from "lucide-react";
 import { Paragraph } from "@/components/custom/Paragraph";
 import { useCreateCvApiMutation } from "@/redux/features/cvApi";
 import { useGetAllJobsQuery } from "@/redux/features/jobsApi";
+import Link from "next/link";
 
 export default function CareerPage() {
   const [activeTab, setActiveTab] = useState("");
@@ -133,9 +134,12 @@ export default function CareerPage() {
               ) : jobs.length > 0 ? (
                 jobs.map((job, index) => (
                   <div key={job._id}>
-                    <h5 className="_h5 text-gray-500">
+                    <Link
+                      href={`/career/${job._id}`}
+                      className="_h5 text-gray-500 hover:underline"
+                    >
                       {index + 1}. {job.title}
-                    </h5>
+                    </Link>
                     <p className="_p mt-2 !text-gray-500 !font-semibold">
                       Requirements:
                     </p>
