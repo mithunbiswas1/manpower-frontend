@@ -3,21 +3,15 @@
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { CheckCircle } from "lucide-react";
 
-export const SharedAbout2 = () => {
-  const highlights = [
-    "Integrity & Transparency",
-    "Quality & Efficiency",
-    "Safety & Compliance",
-    "Client Satisfaction",
-  ];
-
+export const SharedAbout2 = ({ points = [] }) => {
+  console.log(points, "points");
   return (
     <section>
       <div className="bg-gray-100">
         <div className="_max_width pt-20 pb-16">
           <SectionTitle className="mb-4 text-center">Core Values:</SectionTitle>
           <ul className="space-y-4 max-w-60 mx-auto">
-            {highlights.map((item, index) => (
+            {points.map((item, index) => (
               <li
                 key={index}
                 className="flex items-start gap-3 text-gray-700 leading-relaxed"

@@ -31,3 +31,5 @@ export const CREATE_BOOKING_URL = API_BASE_URL + "create-booking";
 export const BUSINESS_SETTINGS = API_BASE_URL + "get-bs";
 
 export const SERVICES_URL = API_BASE_URL + "get-all-service";
+
+export const ABOUT_URL = API_BASE_URL + "get-about";
