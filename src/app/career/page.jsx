@@ -8,7 +8,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import { SharedBanner } from "@/components/shared/SharedBanner";
-import banner_image from "@/resource/banner_image_3.jpg";
+import banner_image from "@/resource/banner_image_4.png";
 import { SectionTitle } from "@/components/custom/SectionTitle";
 import { Linkedin } from "lucide-react";
 import { Paragraph } from "@/components/custom/Paragraph";

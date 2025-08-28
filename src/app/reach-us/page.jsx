@@ -3,7 +3,7 @@
 import { Map } from "@/components/pages/reachUs/Map";
 import { SharedBanner } from "@/components/shared/SharedBanner";
 import { SharedContact } from "@/components/shared/SharedContact";
-import banner_image from "@/resource/banner_image_3.jpg";
+import banner_image from "@/resource/banner_image_1.jpg";
 
 export default function ReachUsPage() {
   const bannerData = {
